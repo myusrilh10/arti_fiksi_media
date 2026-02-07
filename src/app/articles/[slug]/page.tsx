@@ -87,13 +87,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                         </div>
                     </div>
 
-                    <div className="aspect-video w-full bg-gray-800 rounded-lg overflow-hidden mb-8 relative">
-                        <div className="absolute inset-0 flex items-center justify-center text-gray-600">
+                    <div className="aspect-video w-full bg-gray-200 rounded-lg overflow-hidden mb-8 relative">
+                        <div className="absolute inset-0 flex items-center justify-center text-gray-400">
                             Article Image Placeholder
                         </div>
                     </div>
 
-                    <article className="prose prose-invert prose-lg max-w-none text-gray-300">
+                    <article className="prose prose-lg max-w-none text-gray-800">
                         <div dangerouslySetInnerHTML={{ __html: displayArticle.content || '' }} />
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

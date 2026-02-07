@@ -16,10 +16,10 @@ export default function AdBanner({ size = 'medium-rectangle', className = '' }: 
     return (
         <div className={`flex justify-center my-8 ${className}`}>
             <div
-                className={`${dimensions} ${mobileDimensions} bg-gray-800 flex flex-col items-center justify-center border border-gray-700 relative overflow-hidden`}
+                className={`${dimensions} ${mobileDimensions} bg-gray-50 flex flex-col items-center justify-center border border-gray-200 relative overflow-hidden`}
             >
-                <span className="text-xs text-gray-500 uppercase tracking-widest absolute top-1 left-2">Advertisement</span>
-                <div className="text-gray-600 font-bold text-lg">ADS PLACEHOLDER</div>
+                <span className="text-xs text-gray-400 uppercase tracking-widest absolute top-1 left-2">Advertisement</span>
+                <div className="text-gray-300 font-bold text-lg">ADS PLACEHOLDER</div>
                 <div className="absolute bottom-0 right-0 w-4 h-4 bg-primary/20 rounded-tl-lg"></div>
             </div>
         </div>

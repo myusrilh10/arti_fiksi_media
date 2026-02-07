@@ -3,7 +3,7 @@ import { Search, Menu } from 'lucide-react';
 
 export default function Header() {
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black text-white backdrop-blur-md">
+        <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 text-black backdrop-blur-md">
             <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
@@ -32,11 +32,11 @@ export default function Header() {
                         <Menu className="h-6 w-6" />
                     </button>
                     <div className="relative hidden md:block">
-                        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
+                        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />
                         <input
                             type="search"
                             placeholder="Search..."
-                            className="h-9 w-64 rounded-md border border-gray-800 bg-gray-900 pl-9 pr-4 text-sm focus:border-primary focus:outline-hidden"
+                            className="h-9 w-64 rounded-md border border-gray-200 bg-gray-100 pl-9 pr-4 text-sm focus:border-primary focus:outline-hidden"
                         />
                     </div>
                     <button className="hidden rounded-md bg-primary px-4 py-2 text-sm font-semibold text-black hover:bg-yellow-500 md:block">

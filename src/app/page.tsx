@@ -1,9 +1,11 @@
+'use client';
 
 import Link from "next/link";
 import SectionHeader from "@/components/ui/SectionHeader";
 import ArticleCard from "@/components/ui/ArticleCard";
 import AdBanner from "@/components/ui/AdBanner";
 import HeroCarousel from "@/components/ui/HeroCarousel";
+import { motion } from "framer-motion";
 
 // Mock Data
 const ARTICLES = [
@@ -69,6 +71,28 @@ const ARTICLES = [
   }
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100
+    }
+  }
+};
+
 export default function Home() {
   // Use first 3 articles for carousel
   const carouselArticles = ARTICLES.slice(0, 3);
@@ -91,15 +115,25 @@ export default function Home() {
       <section className="my-12">
         <SectionHeader title="Latest News" subtitle="Update terkini dari dunia kreatif" />
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+        >
           {latestArticles.map((article) => (
-            <ArticleCard key={article.id} article={article} />
+            <motion.div key={article.id} variants={itemVariants} className="h-full">
+              <ArticleCard article={article} />
+            </motion.div>
           ))}
           {/* Add some more to fill grid if needed (simulating more content) */}
           {ARTICLES.slice(0, 2).map((article) => (
-            <ArticleCard key={`repeat-${article.id}`} article={article} />
+            <motion.div key={`repeat-${article.id}`} variants={itemVariants} className="h-full">
+              <ArticleCard article={article} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* Secondary Ad Slot */}

@@ -13,7 +13,7 @@ const ARTICLES = [
         category: "Teknologi",
         author: "Rizky Ramadhan",
         date: "7 Feb 2026",
-        imageUrl: "/images/tech.jpg",
+        imageUrl: "/images/tech.png",
         slug: "masa-depan-industri-kreatif",
         content: `
       <p>Industri kreatif di Indonesia sedang mengalami revolusi besar-besaran. Dengan adopsi teknologi seperti Artificial Intelligence (AI) dan Blockchain, para kreator kini memiliki alat baru untuk mengekspresikan diri dan memonetisasi karya mereka.</p>
@@ -31,7 +31,7 @@ const ARTICLES = [
         category: "Gaya Hidup",
         author: "Sarah Amalia",
         date: "6 Feb 2026",
-        imageUrl: "/images/cafe.jpg",
+        imageUrl: "/images/cafe.png",
         excerpt: "Tempat nongkrong asik dengan suasana vintage...",
         content: "<p>Jakarta Selatan tidak pernah kehabisan tempat nongkrong...</p>"
     }
@@ -116,7 +116,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                         <SectionHeader title="Popular" className="mb-4" />
                         <div className="space-y-4">
                             {ARTICLES.slice(0, 3).map(a => (
-                                <ArticleCard key={a.id} article={a} />
+                                <ArticleCard key={a.id} article={{ ...a, imageUrl: a.imageUrl || '/images/tech.png' }} />
                             ))}
                         </div>
                     </div>

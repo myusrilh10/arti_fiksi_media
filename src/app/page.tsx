@@ -16,7 +16,7 @@ const ARTICLES = [
     category: "Teknologi",
     author: "Rizky Ramadhan",
     date: "7 Feb 2026",
-    imageUrl: "/images/tech.jpg",
+    imageUrl: "/images/tech.png",
     slug: "masa-depan-industri-kreatif"
   },
   {
@@ -26,7 +26,7 @@ const ARTICLES = [
     category: "Gaya Hidup",
     author: "Sarah Amalia",
     date: "6 Feb 2026",
-    imageUrl: "/images/cafe.jpg",
+    imageUrl: "/images/cafe.png",
     slug: "kafe-tersembunyi-jakarta"
   },
   {
@@ -36,7 +36,7 @@ const ARTICLES = [
     category: "Fashion",
     author: "Dimas Anggara",
     date: "5 Feb 2026",
-    imageUrl: "/images/fashion.jpg",
+    imageUrl: "/images/fashion.png",
     slug: "filosofi-slow-living"
   },
   {
@@ -46,7 +46,7 @@ const ARTICLES = [
     category: "Film",
     author: "Dinda Kirana",
     date: "4 Feb 2026",
-    imageUrl: "/images/film.jpg",
+    imageUrl: "/images/film.png",
     slug: "review-film-modern"
   },
   {
@@ -56,7 +56,7 @@ const ARTICLES = [
     category: "Kreatif",
     author: "Aldi Taher",
     date: "3 Feb 2026",
-    imageUrl: "/images/podcast.jpg",
+    imageUrl: "/images/podcast.png",
     slug: "panduan-podcasting"
   },
   {
@@ -66,7 +66,7 @@ const ARTICLES = [
     category: "Musik",
     author: "Citra Scholastika",
     date: "2 Feb 2026",
-    imageUrl: "/images/music.jpg",
+    imageUrl: "/images/music.png",
     slug: "sejarah-musik-indie"
   }
 ];

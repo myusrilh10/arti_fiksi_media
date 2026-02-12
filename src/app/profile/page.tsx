@@ -94,13 +94,13 @@ export default function ProfilePage() {
                     {/* Member 1 - With generated image */}
                     <div className="group">
                         <div className="relative aspect-[3/4] bg-gray-200 mb-5 overflow-hidden rounded-xl">
-                            <Image
+                            {/* <Image
                                 src="/images/team1.png"
                                 alt="Creative Director"
                                 fill
                                 className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                                 sizes="(max-width: 768px) 50vw, 25vw"
-                            />
+                            /> */}
                         </div>
                         <div className="border-l-2 border-primary pl-4">
                             <h4 className="font-bold text-lg text-black group-hover:text-primary transition-colors">Andi Pratama</h4>

@@ -85,7 +85,7 @@ export default function HeroCarousel({ articles }: HeroCarouselProps) {
     };
 
     return (
-        <div className="relative w-full aspect-[16/10] md:aspect-[2.35/1] overflow-hidden rounded-2xl bg-gray-900 group shadow-2xl">
+        <div className="relative w-full aspect-[4/5] md:aspect-[2.35/1] overflow-hidden rounded-2xl bg-gray-900 group shadow-2xl">
             {/* Background Image Slider */}
             <AnimatePresence initial={false} custom={direction}>
                 <motion.div
@@ -113,20 +113,20 @@ export default function HeroCarousel({ articles }: HeroCarouselProps) {
                     )}
 
                     {/* Cinematic Gradient Overlays */}
-                    <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/95 via-black/50 to-transparent" />
                     <div className="absolute inset-0 bg-linear-to-r from-black/60 via-transparent to-transparent" />
                 </motion.div>
             </AnimatePresence>
 
             {/* Content Content - Re-renders on slide change to trigger animations */}
-            <div className="absolute inset-0 flex items-end p-6 md:p-12 lg:p-16 z-20 pointer-events-none">
+            <div className="absolute inset-0 flex items-end p-8 md:p-12 lg:p-16 z-20 pointer-events-none">
                 <div className="max-w-4xl w-full pointer-events-auto">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={`content-${currentIndex}`}
                             initial="hidden"
                             animate="visible"
-                            className="space-y-4"
+                            className="space-y-4 md:space-y-6"
                         >
                             {/* Category & Date */}
                             <motion.div variants={contentVariants} custom={1} className="flex items-center gap-3">
@@ -139,14 +139,18 @@ export default function HeroCarousel({ articles }: HeroCarouselProps) {
                             </motion.div>
 
                             {/* Title */}
-                            <motion.h2 variants={contentVariants} custom={2} className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight drop-shadow-lg">
+                            <motion.h2
+                                variants={contentVariants}
+                                custom={2}
+                                className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.2] md:leading-[1.1] tracking-tight drop-shadow-xl"
+                            >
                                 <Link href={`/articles/${currentArticle.slug}`} className="hover:text-[#FACC15] transition-colors duration-300">
                                     {currentArticle.title}
                                 </Link>
                             </motion.h2>
 
                             {/* Excerpt */}
-                            <motion.p variants={contentVariants} custom={3} className="text-gray-300 text-sm md:text-lg line-clamp-2 max-w-2xl leading-relaxed drop-shadow-md font-light">
+                            <motion.p variants={contentVariants} custom={3} className="text-gray-300 text-sm md:text-lg line-clamp-3 md:line-clamp-2 max-w-2xl leading-relaxed drop-shadow-md font-light">
                                 {currentArticle.excerpt}
                             </motion.p>
 

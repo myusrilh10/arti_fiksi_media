@@ -4,38 +4,7 @@ import AdBanner from "@/components/ui/AdBanner";
 import ArticleCard from "@/components/ui/ArticleCard";
 import { notFound } from "next/navigation";
 
-// Mock Data (duplicated for now, normally would be fetched)
-const ARTICLES = [
-    {
-        id: "1",
-        title: "Masa Depan Industri Kreatif Indonesia di Era Digital",
-        excerpt: "Bagaimana teknologi AI dan blockchain mengubah cara kita menikmati seni dan budaya pop lokal.",
-        category: "Teknologi",
-        author: "Rizky Ramadhan",
-        date: "7 Feb 2026",
-        imageUrl: "/images/tech.png",
-        slug: "masa-depan-industri-kreatif",
-        content: `
-      <p>Industri kreatif di Indonesia sedang mengalami revolusi besar-besaran. Dengan adopsi teknologi seperti Artificial Intelligence (AI) dan Blockchain, para kreator kini memiliki alat baru untuk mengekspresikan diri dan memonetisasi karya mereka.</p>
-      <br/>
-      <p>Salah satu contoh paling nyata adalah penggunaan AI dalam pembuatan musik dan seni visual. Meskipun menuai pro dan kontra, tidak dapat dipungkiri bahwa teknologi ini membuka peluang baru bagi mereka yang sebelumnya terkendala masalah teknis.</p>
-      <br/>
-      <h3>Dampak pada Ekonomi Kreatif</h3>
-      <p>Menurut data terbaru, sektor ini menyumbang signifikan terhadap PDB nasional. Dengan adanya platform digital, batasan geografis semakin pudar, memungkinkan karya anak bangsa dinikmati oleh audiens global.</p>
-    `
-    },
-    {
-        id: "2",
-        title: "5 Kafe Tersembunyi di Jakarta Selatan",
-        slug: "kafe-tersembunyi-jakarta",
-        category: "Gaya Hidup",
-        author: "Sarah Amalia",
-        date: "6 Feb 2026",
-        imageUrl: "/images/cafe.png",
-        excerpt: "Tempat nongkrong asik dengan suasana vintage...",
-        content: "<p>Jakarta Selatan tidak pernah kehabisan tempat nongkrong...</p>"
-    }
-];
+import { ARTICLES } from "@/lib/data";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;

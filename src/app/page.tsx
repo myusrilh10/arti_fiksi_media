@@ -7,69 +7,9 @@ import AdBanner from "@/components/ui/AdBanner";
 import HeroCarousel from "@/components/ui/HeroCarousel";
 import { motion } from "framer-motion";
 
-// Mock Data
-const ARTICLES = [
-  {
-    id: "1",
-    title: "Masa Depan Industri Kreatif Indonesia di Era Digital",
-    excerpt: "Bagaimana teknologi AI dan blockchain mengubah cara kita menikmati seni dan budaya pop lokal.",
-    category: "Teknologi",
-    author: "Rizky Ramadhan",
-    date: "7 Feb 2026",
-    imageUrl: "/images/tech.png",
-    slug: "masa-depan-industri-kreatif"
-  },
-  {
-    id: "2",
-    title: "5 Kafe Tersembunyi di Jakarta Selatan yang Wajib Dikunjungi",
-    excerpt: "Tempat nongkrong asik dengan suasana vintage yang cocok untuk WFC atau sekadar bersantai.",
-    category: "Gaya Hidup",
-    author: "Sarah Amalia",
-    date: "6 Feb 2026",
-    imageUrl: "/images/cafe.png",
-    slug: "kafe-tersembunyi-jakarta"
-  },
-  {
-    id: "3",
-    title: "Mengulik Filosofi di Balik Tren Fashion 'Slow Living'",
-    excerpt: "Kenapa semakin banyak brand lokal beralih ke metode produksi yang lebih ramah lingkungan?",
-    category: "Fashion",
-    author: "Dimas Anggara",
-    date: "5 Feb 2026",
-    imageUrl: "/images/fashion.png",
-    slug: "filosofi-slow-living"
-  },
-  {
-    id: "4",
-    title: "Review Film: Eksplorasi Emosi dalam Sinema Modern",
-    excerpt: "Sebuah tinjauan mendalam tentang bagaimana sutradara muda mengangkat isu kesehatan mental.",
-    category: "Film",
-    author: "Dinda Kirana",
-    date: "4 Feb 2026",
-    imageUrl: "/images/film.png",
-    slug: "review-film-modern"
-  },
-  {
-    id: "5",
-    title: "Panduan Memulai Podcasting untuk Pemula",
-    excerpt: "Alat, tips, dan trik untuk membuat podcast yang didengar ribuan orang.",
-    category: "Kreatif",
-    author: "Aldi Taher",
-    date: "3 Feb 2026",
-    imageUrl: "/images/podcast.png",
-    slug: "panduan-podcasting"
-  },
-  {
-    id: "6",
-    title: "Sejarah Musik Indie di Indonesia: Dari Garasi ke Panggung Besar",
-    excerpt: "Perjalanan panjang musisi independen menaklukkan industri musik tanah air.",
-    category: "Musik",
-    author: "Citra Scholastika",
-    date: "2 Feb 2026",
-    imageUrl: "/images/music.png",
-    slug: "sejarah-musik-indie"
-  }
-];
+import { ARTICLES, EVENTS } from "@/lib/data";
+import { Mail, Calendar, MapPin, TrendingUp, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -93,51 +33,166 @@ const itemVariants = {
   }
 };
 
+const TOPICS = [
+  "Teknologi", "Gaya Hidup", "Fashion", "Film", "Kreatif", "Musik", "Seni", "Kultur"
+];
+
 export default function Home() {
   // Use first 3 articles for carousel
   const carouselArticles = ARTICLES.slice(0, 3);
   // Use the rest for the latest news
   const latestArticles = ARTICLES.slice(3);
+  // Trending articles (simulated)
+  const trendingArticles = ARTICLES.slice(0, 4);
 
   return (
-    <div className="container mx-auto px-4 py-8 md:px-6">
+    <div className="container mx-auto px-4 py-6 md:py-8 md:px-6">
 
       {/* Hero Section - Carousel */}
-      <section className="mb-12">
+      <section className="mb-10">
         <HeroCarousel articles={carouselArticles} />
       </section>
 
-      {/* Leaderboard Ad */}
-      <AdBanner size="leaderboard" className="hidden md:flex" />
-      <AdBanner size="medium-rectangle" className="md:hidden" />
-
-      {/* Latest News */}
-      <section className="my-12">
-        <SectionHeader title="Latest News" subtitle="Update terkini dari dunia kreatif" />
-
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-        >
-          {latestArticles.map((article) => (
-            <motion.div key={article.id} variants={itemVariants} className="h-full">
-              <ArticleCard article={article} />
-            </motion.div>
+      {/* Topics Bar */}
+      <section className="mb-12 border-y border-gray-100 py-4 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-8 min-w-max justify-center px-4">
+          <span className="text-xs font-black uppercase tracking-tighter text-gray-400">Explore Topics:</span>
+          {TOPICS.map((topic) => (
+            <Link
+              key={topic}
+              href={`/search?q=${topic}`}
+              className="text-sm font-bold text-gray-800 hover:text-primary transition-colors uppercase tracking-widest whitespace-nowrap"
+            >
+              {topic}
+            </Link>
           ))}
-          {/* Add some more to fill grid if needed (simulating more content) */}
-          {ARTICLES.slice(0, 2).map((article) => (
-            <motion.div key={`repeat-${article.id}`} variants={itemVariants} className="h-full">
-              <ArticleCard article={article} />
-            </motion.div>
-          ))}
-        </motion.div>
+        </div>
       </section>
 
+      <div className="grid lg:grid-cols-4 gap-12">
+        <div className="lg:col-span-3">
+          {/* Latest News */}
+          <section className="mb-16">
+            <SectionHeader title="Latest Stories" subtitle="Update terkini dari dunia kreatif" />
+
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid gap-8 md:grid-cols-2"
+            >
+              {latestArticles.map((article) => (
+                <motion.div key={article.id} variants={itemVariants} className="h-full">
+                  <ArticleCard article={article} />
+                </motion.div>
+              ))}
+            </motion.div>
+          </section>
+
+          {/* Leaderboard Ad */}
+          <div className="mb-16">
+            <AdBanner size="leaderboard" className="hidden md:flex" />
+            <AdBanner size="medium-rectangle" className="md:hidden" />
+          </div>
+
+          {/* Upcoming Events */}
+          <section className="mb-16">
+            <div className="flex items-center justify-between mb-8">
+              <SectionHeader title="Upcoming Events" subtitle="Jangan lewatkan momen seru" className="mb-0" />
+              <Link href="#" className="hidden md:flex items-center gap-2 text-sm font-bold text-primary uppercase tracking-widest hover:translate-x-1 transition-transform">
+                View All <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 whitespace-normal">
+              {EVENTS.map((event) => (
+                <motion.div
+                  key={event.id}
+                  whileHover={{ y: -5 }}
+                  className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all group"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image src={event.imageUrl} alt={event.title} fill className="object-cover transition-transform group-hover:scale-110 duration-500" />
+                    <div className="absolute top-3 left-3">
+                      <span className="bg-black/80 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tighter">
+                        {event.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <h4 className="font-bold text-gray-900 leading-tight mb-2 line-clamp-2 h-10 group-hover:text-primary transition-colors">
+                      {event.title}
+                    </h4>
+                    <div className="space-y-1.5">
+                      <div className="flex items-center gap-2 text-gray-500 text-[11px] font-medium uppercase tracking-wider">
+                        <Calendar className="w-3 h-3 text-primary" />
+                        {event.date}
+                      </div>
+                      <div className="flex items-center gap-2 text-gray-400 text-[11px] font-medium truncate">
+                        <MapPin className="w-3 h-3 text-gray-300" />
+                        {event.location}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </section>
+        </div>
+
+        {/* Sidebar */}
+        <aside className="space-y-12">
+          {/* Trending Now */}
+          <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100">
+            <div className="flex items-center gap-2 mb-6 text-primary">
+              <TrendingUp className="w-5 h-5" />
+              <h3 className="font-black uppercase tracking-tighter text-black text-xl leading-none">Trending<span className="text-gray-300">.</span></h3>
+            </div>
+            <div className="space-y-6">
+              {trendingArticles.map((article, idx) => (
+                <Link key={article.id} href={`/articles/${article.slug}`} className="flex gap-4 group">
+                  <span className="text-3xl font-black text-gray-200 group-hover:text-primary/50 transition-colors tabular-nums leading-none">
+                    0{idx + 1}
+                  </span>
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-primary mb-1 block">{article.category}</span>
+                    <h4 className="text-sm font-bold text-gray-900 leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                      {article.title}
+                    </h4>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Ad Slot */}
+          <AdBanner size="medium-rectangle" className="!my-0" />
+
+          {/* Newsletter Box */}
+          <div className="bg-black text-white p-8 rounded-2xl shadow-xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-1000"></div>
+            <Mail className="w-8 h-8 text-primary mb-4" />
+            <h3 className="text-xl font-bold mb-2">The Weekly Arti</h3>
+            <p className="text-gray-400 text-xs mb-6 leading-relaxed">
+              Dapatkan kurasi konten terbaik mingguan langsung di inbox kamu.
+            </p>
+            <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="email"
+                placeholder="email@kamu.com"
+                className="w-full bg-white/10 border border-white/20 rounded-md py-2 px-3 text-sm focus:outline-none focus:border-primary transition-colors"
+              />
+              <button className="w-full bg-primary text-black font-bold py-2 rounded-md transition-transform hover:scale-[1.02] active:scale-95">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </aside>
+      </div>
+
       {/* Secondary Ad Slot */}
-      <AdBanner size="large-leaderboard" className="hidden lg:flex" />
+      <AdBanner size="large-leaderboard" className="hidden lg:flex mt-12" />
 
     </div>
   );

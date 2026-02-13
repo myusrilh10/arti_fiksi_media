@@ -1,8 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+
+const montserratBlack = Montserrat({
+  variable: "--font-montserrat-black",
+  subsets: ["latin"],
+  weight: "900",
+});
+
+const montserratRegular = Montserrat({
+  variable: "--font-montserrat-regular",
+  subsets: ["latin"],
+  weight: "400",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased flex flex-col min-h-screen bg-white text-black`}
+        className={`${montserratBlack.variable} ${montserratRegular.variable} ${geistMono.variable} ${playfair.variable} font-montserrat-regular antialiased flex flex-col min-h-screen bg-white text-black`}
       >
         <Header />
         <main className="flex-1">{children}</main>

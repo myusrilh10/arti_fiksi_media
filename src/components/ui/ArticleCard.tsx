@@ -24,20 +24,18 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
     return (
         <Link href={`/articles/${article.slug}`} className="group block h-full">
             <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="flex flex-col h-full bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex flex-col h-full group"
             >
-                {/* Image Container */}
-                <div className={`relative overflow-hidden ${featured ? 'aspect-video w-full' : 'aspect-[4/3]'} bg-gray-100`}>
+                {/* Image Frame */}
+                <div className={`relative overflow-hidden ${featured ? 'aspect-video' : 'aspect-[3/2]'} bg-gray-50 border border-gray-100 shadow-sm group-hover:shadow-md transition-shadow duration-500`}>
                     <motion.div
                         className="w-full h-full relative"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        {/* Gradient Overlay for depth */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
                         {article.imageUrl ? (
                             <Image
                                 src={article.imageUrl}
@@ -48,43 +46,43 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             />
                         ) : (
-                            <div className="absolute inset-0 flex items-center justify-center text-gray-300 bg-gray-200">
-                                <span className="text-xs font-medium uppercase tracking-widest">Image Placeholder</span>
+                            <div className="absolute inset-0 flex items-center justify-center text-gray-300">
+                                <span className="text-xs font-medium uppercase tracking-widest">ARTI FIKSI</span>
                             </div>
                         )}
                     </motion.div>
 
-                    {/* Category Badge */}
+                    {/* Minimalist Category */}
                     <div className="absolute top-4 left-4 z-20">
-                        <span className="inline-block bg-white/90 backdrop-blur-md text-black text-[10px] font-extrabold px-3 py-1 uppercase tracking-wider shadow-sm rounded-sm">
+                        <span className="bg-white/90 backdrop-blur-sm text-gray-900 text-[9px] font-black font-montserrat-black px-2 py-1 uppercase tracking-[0.2em] rounded-sm">
                             {article.category}
                         </span>
                     </div>
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 p-6 flex flex-col">
+                <div className="pt-6 flex flex-col items-center text-center px-2">
                     {/* Metadata */}
-                    <div className="flex items-center gap-2 text-xs text-gray-500 mb-3 font-medium uppercase tracking-wide">
-                        <span className="text-gray-900 font-bold">{article.author}</span>
-                        <span className="text-gray-300">•</span>
+                    <div className="flex items-center justify-center gap-3 text-[9px] text-gray-400 mb-3 font-black font-montserrat-black uppercase tracking-[0.2em]">
+                        <span>{article.author}</span>
+                        <span className="h-0.5 w-4 bg-gray-100" />
                         <span>{article.date}</span>
                     </div>
 
                     {/* Title */}
-                    <h3 className={`font-serif font-bold leading-tight mb-3 text-gray-900 decoration-primary decoration-2 underline-offset-4 group-hover:underline transition-all duration-200 ${featured ? 'text-2xl md:text-3xl tracking-tight' : 'text-xl tracking-tight'}`}>
+                    <h3 className={`font-playfair text-gray-900 group-hover:text-dark-green transition-colors leading-snug mb-3 ${featured ? 'text-2xl md:text-3xl' : 'text-xl'}`}>
                         {article.title}
                     </h3>
 
                     {/* Excerpt */}
-                    <p className="text-gray-500 text-sm line-clamp-2 mb-6 flex-1 leading-relaxed">
+                    <p className="text-gray-500 text-xs md:text-sm line-clamp-2 leading-relaxed max-w-sm">
                         {article.excerpt}
                     </p>
 
-                    {/* Footer / Action */}
-                    <div className="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
-                        <span className="text-xs font-bold text-black border-b-2 border-primary pb-0.5 uppercase tracking-widest group-hover:border-black transition-colors duration-300">
-                            Read Article
+                    {/* Read More Link */}
+                    <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span className="text-[10px] font-black font-montserrat-black text-gray-900 border-b-2 border-lemon-lime pb-1 uppercase tracking-widest">
+                            Read Story
                         </span>
                     </div>
                 </div>

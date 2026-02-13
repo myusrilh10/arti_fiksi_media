@@ -128,29 +128,37 @@ export default function HeroCarousel({ articles }: HeroCarouselProps) {
                             animate="visible"
                             className="space-y-4 md:space-y-6"
                         >
-                            {/* Category & Date */}
-                            <motion.div variants={contentVariants} custom={1} className="flex items-center gap-3">
-                                <span className="inline-block bg-[#FACC15] text-black text-[10px] md:text-xs font-extrabold px-3 py-1 uppercase tracking-widest rounded-sm shadow-lg">
-                                    {currentArticle.category}
-                                </span>
-                                <span className="text-gray-300 text-xs md:text-sm font-medium tracking-wide uppercase">
-                                    {currentArticle.date}
-                                </span>
+                            {/* Category, Author & Date */}
+                            <motion.div variants={contentVariants} custom={1} className="flex items-center flex-wrap gap-3">
+                                {currentArticle.category && (
+                                    <span className="inline-block bg-lemon-lime text-black text-[10px] md:text-xs font-black font-montserrat-black px-3 py-1 uppercase tracking-widest rounded-sm shadow-lg">
+                                        {currentArticle.category}
+                                    </span>
+                                )}
+                                <div className="flex items-center gap-2">
+                                    <span className="text-lemon-lime text-[10px] md:text-xs font-black font-montserrat-black uppercase tracking-wider">
+                                        By {currentArticle.author}
+                                    </span>
+                                    <span className="text-gray-400 text-xs">•</span>
+                                    <span className="text-gray-300 text-[10px] md:text-xs font-medium tracking-wide uppercase">
+                                        {currentArticle.date}
+                                    </span>
+                                </div>
                             </motion.div>
 
                             {/* Title */}
                             <motion.h2
                                 variants={contentVariants}
                                 custom={2}
-                                className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.2] md:leading-[1.1] tracking-tight drop-shadow-xl"
+                                className="font-montserrat-black text-2xl md:text-4xl lg:text-5xl font-black text-white leading-[1.2] md:leading-[1.1] tracking-tight drop-shadow-xl shadow-black/20"
                             >
-                                <Link href={`/articles/${currentArticle.slug}`} className="hover:text-[#FACC15] transition-colors duration-300">
+                                <Link href={`/articles/${currentArticle.slug}`} className="hover:text-lemon-lime transition-colors duration-300">
                                     {currentArticle.title}
                                 </Link>
                             </motion.h2>
 
                             {/* Excerpt */}
-                            <motion.p variants={contentVariants} custom={3} className="text-gray-300 text-sm md:text-lg line-clamp-3 md:line-clamp-2 max-w-2xl leading-relaxed drop-shadow-md font-light">
+                            <motion.p variants={contentVariants} custom={3} className="text-gray-300 text-xs md:text-base line-clamp-3 md:line-clamp-2 max-w-2xl leading-relaxed drop-shadow-md font-medium">
                                 {currentArticle.excerpt}
                             </motion.p>
 
@@ -158,7 +166,7 @@ export default function HeroCarousel({ articles }: HeroCarouselProps) {
                             <motion.div variants={contentVariants} custom={4} className="pt-4">
                                 <Link
                                     href={`/articles/${currentArticle.slug}`}
-                                    className="inline-flex items-center gap-2 text-white font-bold uppercase tracking-widest text-xs md:text-sm border-b-2 border-[#FACC15] pb-1 hover:text-[#FACC15] transition-colors"
+                                    className="inline-flex items-center gap-2 text-white font-black font-montserrat-black uppercase tracking-widest text-xs md:text-sm border-b-2 border-lemon-lime pb-1 hover:text-lemon-lime transition-colors"
                                 >
                                     Read Full Story <ArrowRight className="w-4 h-4" />
                                 </Link>
@@ -168,40 +176,40 @@ export default function HeroCarousel({ articles }: HeroCarouselProps) {
                 </div>
             </div>
 
-            {/* Navigation Controls */}
-            <div className="absolute bottom-6 right-6 md:bottom-12 md:right-12 z-30 flex items-center gap-4">
-                {/* Custom Dots */}
-                <div className="flex gap-2 mr-4">
-                    {articles.map((_, idx) => (
-                        <button
-                            key={idx}
-                            onClick={() => {
-                                setDirection(idx > currentIndex ? 1 : -1);
-                                setCurrentIndex(idx);
-                            }}
-                            className={`h-1 transition-all duration-300 rounded-full ${idx === currentIndex ? 'w-8 bg-[#FACC15]' : 'w-4 bg-white/30 hover:bg-white/60'
-                                }`}
-                            aria-label={`Go to slide ${idx + 1}`}
-                        />
-                    ))}
-                </div>
+            {/* Side Navigation Buttons */}
+            <div className="absolute inset-y-0 left-0 flex items-center z-30 px-4 md:px-8 pointer-events-none">
+                <button
+                    onClick={prevSlide}
+                    className="p-3 md:p-4 rounded-full bg-black/10 backdrop-blur-md text-white border border-white/10 hover:bg-lemon-lime hover:text-black hover:border-lemon-lime transition-all duration-300 pointer-events-auto opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0"
+                    aria-label="Previous slide"
+                >
+                    <ChevronLeft className="w-6 h-6" />
+                </button>
+            </div>
+            <div className="absolute inset-y-0 right-0 flex items-center z-30 px-4 md:px-8 pointer-events-none">
+                <button
+                    onClick={nextSlide}
+                    className="p-3 md:p-4 rounded-full bg-black/10 backdrop-blur-md text-white border border-white/10 hover:bg-lemon-lime hover:text-black hover:border-lemon-lime transition-all duration-300 pointer-events-auto opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0"
+                    aria-label="Next slide"
+                >
+                    <ChevronRight className="w-6 h-6" />
+                </button>
+            </div>
 
-                <div className="flex gap-2">
+            {/* Bottom Progress/Dots */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 z-30 bg-black/20 backdrop-blur-md px-6 py-3 rounded-full border border-white/5">
+                {articles.map((_, idx) => (
                     <button
-                        onClick={prevSlide}
-                        className="p-3 rounded-full border border-white/20 bg-black/20 backdrop-blur-sm text-white hover:bg-[#FACC15] hover:border-[#FACC15] hover:text-black transition-all active:scale-95"
-                        aria-label="Previous slide"
-                    >
-                        <ChevronLeft className="w-5 h-5" />
-                    </button>
-                    <button
-                        onClick={nextSlide}
-                        className="p-3 rounded-full border border-white/20 bg-black/20 backdrop-blur-sm text-white hover:bg-[#FACC15] hover:border-[#FACC15] hover:text-black transition-all active:scale-95"
-                        aria-label="Next slide"
-                    >
-                        <ChevronRight className="w-5 h-5" />
-                    </button>
-                </div>
+                        key={idx}
+                        onClick={() => {
+                            setDirection(idx > currentIndex ? 1 : -1);
+                            setCurrentIndex(idx);
+                        }}
+                        className={`transition-all duration-500 rounded-full ${idx === currentIndex ? 'w-8 bg-lemon-lime' : 'w-2 bg-white/20 hover:bg-white/50'
+                            } h-1.5`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                    />
+                ))}
             </div>
         </div>
     );

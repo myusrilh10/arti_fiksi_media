@@ -27,14 +27,12 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="flex flex-col h-full group"
             >
-                {/* Image Frame */}
-                <div className={`relative overflow-hidden ${featured ? 'aspect-video' : 'aspect-[3/2]'} bg-gray-50 border border-gray-100 shadow-sm group-hover:shadow-md transition-shadow duration-500`}>
+                <div className={`relative overflow-hidden w-full ${featured ? 'aspect-[21/9]' : 'aspect-[4/3]'} group-hover:shadow-xl transition-all duration-500 rounded-t-xl`}>
                     <motion.div
                         className="w-full h-full relative"
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
                     >
                         {article.imageUrl ? (
                             <Image
@@ -46,47 +44,47 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             />
                         ) : (
-                            <div className="absolute inset-0 flex items-center justify-center text-gray-300">
-                                <span className="text-xs font-medium uppercase tracking-widest">ARTI FIKSI</span>
+                            <div className="absolute inset-0 flex items-center justify-center bg-gray-200 text-gray-400">
+                                <span className="text-xs font-bold uppercase tracking-widest">No Image</span>
                             </div>
                         )}
+                        {/* Gradient Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#203627] via-transparent to-transparent opacity-80" />
                     </motion.div>
 
-                    {/* Minimalist Category */}
+                    {/* Category Label - Floating */}
                     <div className="absolute top-4 left-4 z-20">
-                        <span className="bg-white/90 backdrop-blur-sm text-gray-900 text-[9px] font-black font-montserrat-black px-2 py-1 uppercase tracking-[0.2em] rounded-sm">
+                        <span className="bg-white/95 backdrop-blur-md text-[#203627] text-[10px] font-black font-montserrat-black px-3 py-1.5 uppercase tracking-wider rounded-full shadow-sm">
                             {article.category}
                         </span>
                     </div>
                 </div>
 
-                {/* Content */}
-                <div className="pt-6 flex flex-col items-center text-center px-2">
+                {/* Content - Dark Green Background */}
+                <div className="flex-grow flex flex-col bg-[#203627] p-6 rounded-b-xl relative z-10 border-t-0 -mt-1">
                     {/* Metadata */}
-                    <div className="flex items-center justify-center gap-3 text-[9px] text-gray-400 mb-3 font-black font-montserrat-black uppercase tracking-[0.2em]">
+                    <div className="flex items-center gap-3 text-[10px] text-gray-300/80 mb-3 font-medium font-montserrat-regular tracking-wide">
                         <span>{article.author}</span>
-                        <span className="h-0.5 w-4 bg-gray-100" />
+                        <span className="w-1 h-1 bg-lemon-lime rounded-full" />
                         <span>{article.date}</span>
                     </div>
 
                     {/* Title */}
-                    <h3 className={`font-playfair text-gray-900 group-hover:text-dark-green transition-colors leading-snug mb-3 ${featured ? 'text-2xl md:text-3xl' : 'text-xl'}`}>
+                    <h3 className={`font-playfair text-white font-bold leading-tight mb-3 group-hover:text-lemon-lime transition-colors duration-300 ${featured ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'}`}>
                         {article.title}
                     </h3>
 
                     {/* Excerpt */}
-                    <p className="text-gray-500 text-xs md:text-sm line-clamp-2 leading-relaxed max-w-sm">
+                    <p className="text-gray-300 text-sm leading-relaxed line-clamp-2 mt-auto">
                         {article.excerpt}
                     </p>
 
-                    {/* Read More Link */}
-                    <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span className="text-[10px] font-black font-montserrat-black text-gray-900 border-b-2 border-lemon-lime pb-1 uppercase tracking-widest">
-                            Read Story
-                        </span>
+                    {/* Hover Indicator */}
+                    <div className="w-full h-1 bg-white/10 mt-6 rounded-full overflow-hidden">
+                        <div className="w-0 h-full bg-lemon-lime group-hover:w-full transition-all duration-500 ease-out" />
                     </div>
                 </div>
             </motion.div>
-        </Link>
+        </Link >
     );
 }

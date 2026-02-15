@@ -1,5 +1,5 @@
 
-import SectionHeader from "@/components/ui/SectionHeader";
+
 import ArticleCard from "@/components/ui/ArticleCard";
 import AdBanner from "@/components/ui/AdBanner";
 
@@ -73,34 +73,60 @@ const ARTICLES = [
 ];
 
 export default function ArticlesIndexPage() {
+    // Group articles by category
+    const articlesByCategory = ARTICLES.reduce((acc, article) => {
+        const category = article.category;
+        if (!acc[category]) {
+            acc[category] = [];
+        }
+        acc[category].push(article);
+        return acc;
+    }, {} as Record<string, typeof ARTICLES>);
+
+    // Get categories in defined order or just sorted
+    const categories = Object.keys(articlesByCategory);
+
     return (
-        <div className="container mx-auto px-4 py-12 md:px-6">
+        <div className="min-h-screen bg-white">
+            <div className="container mx-auto px-4 py-16 md:px-6">
 
-            <SectionHeader title="All Articles" subtitle="Jelajahi semua cerita kami" />
+                <div className="mb-16 text-center max-w-2xl mx-auto">
+                    <h1 className="text-4xl md:text-5xl font-black font-montserrat-black mb-4 tracking-tighter uppercase">
+                        Stories
+                    </h1>
+                    <p className="text-gray-500 text-sm md:text-base">
+                        Explore the latest from our writers across technology, lifestyle, and culture.
+                    </p>
+                </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
-                {ARTICLES.map((article) => (
-                    <div key={article.id} className="h-full">
-                        <ArticleCard article={article} />
-                    </div>
-                ))}
-                {/* Duplicate simply to fill page */}
-                {ARTICLES.map((article) => (
-                    <div key={`dup-${article.id}`} className="h-full">
-                        <ArticleCard article={article} />
-                    </div>
-                ))}
+                <div className="space-y-24">
+                    {categories.map((category, index) => (
+                        <section key={category} className="relative">
+                            <div className="flex items-end justify-between mb-10 border-b border-black/10 pb-4">
+                                <h2 className="text-3xl md:text-4xl font-playfair text-black">
+                                    {category}
+                                </h2>
+                                <span className="text-xs font-black font-montserrat-black uppercase tracking-widest text-gray-400 hidden md:block">
+                                    0{index + 1} /
+                                </span>
+                            </div>
+
+                            <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+                                {articlesByCategory[category].map((article) => (
+                                    <div key={article.id} className="h-full">
+                                        <ArticleCard article={article} />
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    ))}
+                </div>
+
+                <div className="mt-24">
+                    <AdBanner size="leaderboard" className="hidden md:flex" />
+                    <AdBanner size="medium-rectangle" className="md:hidden" />
+                </div>
             </div>
-
-            <div className="flex justify-center mb-12">
-                <button className="px-6 py-3 border border-gray-300 text-gray-600 rounded-md hover:bg-primary hover:text-black hover:border-primary transition-colors font-medium">
-                    Load More Articles
-                </button>
-            </div>
-
-            <AdBanner size="leaderboard" className="hidden md:flex" />
-            <AdBanner size="medium-rectangle" className="md:hidden" />
-
         </div>
     );
 }

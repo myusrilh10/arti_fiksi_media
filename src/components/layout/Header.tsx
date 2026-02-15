@@ -9,12 +9,14 @@ export default function Header() {
     const router = useRouter();
     const [searchQuery, setSearchQuery] = useState('');
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         if (searchQuery.trim()) {
             router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
             setIsMenuOpen(false);
+            setIsSearchOpen(false);
         }
     };
 
@@ -31,15 +33,76 @@ export default function Header() {
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-6 text-sm font-black font-montserrat-black uppercase tracking-widest">
+                <nav className="hidden md:flex items-center gap-8 text-sm font-black font-montserrat-black uppercase tracking-widest relative">
                     <Link href="/" className="hover:text-lemon-lime transition-colors">
                         Home
                     </Link>
-                    <Link href="/articles" className="hover:text-lemon-lime transition-colors">
-                        Stories
+
+                    {/* Insight Dropdown */}
+                    <div className="relative group">
+                        <Link href="/categories/insight" className="hover:text-lemon-lime transition-colors flex items-center gap-1">
+                            Insight
+                        </Link>
+                        <div className="absolute top-full left-0 w-48 pt-4 transition-all duration-200 opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
+                            <div className="bg-white border border-gray-100 shadow-xl rounded-md overflow-hidden py-2">
+                                {['Science', 'General Knowledge', 'Business & Career'].map((topic) => (
+                                    <Link
+                                        key={topic}
+                                        href={`/categories/insight/${topic.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}
+                                        className="block px-4 py-2 text-xs hover:bg-lemon-lime hover:text-black transition-colors"
+                                    >
+                                        {topic}
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Inspire Dropdown */}
+                    <div className="relative group">
+                        <Link href="/categories/inspire" className="hover:text-lemon-lime transition-colors flex items-center gap-1">
+                            Inspire
+                        </Link>
+                        <div className="absolute top-full left-0 w-48 pt-4 transition-all duration-200 opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
+                            <div className="bg-white border border-gray-100 shadow-xl rounded-md overflow-hidden py-2">
+                                {['Human Stories', 'Love & Relationships'].map((topic) => (
+                                    <Link
+                                        key={topic}
+                                        href={`/categories/inspire/${topic.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}
+                                        className="block px-4 py-2 text-xs hover:bg-lemon-lime hover:text-black transition-colors"
+                                    >
+                                        {topic}
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Interest Dropdown */}
+                    <div className="relative group">
+                        <Link href="/categories/interest" className="hover:text-lemon-lime transition-colors flex items-center gap-1">
+                            Interest
+                        </Link>
+                        <div className="absolute top-full left-0 w-48 pt-4 transition-all duration-200 opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
+                            <div className="bg-white border border-gray-100 shadow-xl rounded-md overflow-hidden py-2">
+                                {['Fashion', 'Wellness', 'Art & Culture', 'Home'].map((topic) => (
+                                    <Link
+                                        key={topic}
+                                        href={`/categories/interest/${topic.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}
+                                        className="block px-4 py-2 text-xs hover:bg-lemon-lime hover:text-black transition-colors"
+                                    >
+                                        {topic}
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    <Link href="/events" className="hover:text-lemon-lime transition-colors">
+                        Events
                     </Link>
                     <Link href="#" className="hover:text-lemon-lime transition-colors">
-                        Events
+                        Videos
                     </Link>
                     <Link href="/profile" className="hover:text-lemon-lime transition-colors">
                         About
@@ -48,19 +111,30 @@ export default function Header() {
 
                 {/* Actions */}
                 <div className="flex items-center gap-4">
-                    {/* Search - Desktop */}
-                    <form onSubmit={handleSearch} className="relative hidden md:block">
-                        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />
-                        <input
-                            type="search"
-                            placeholder="Search articles..."
-                            className="h-9 w-64 rounded-md border border-gray-200 bg-gray-100 pl-9 pr-4 text-sm focus:border-lemon-lime focus:outline-none transition-all focus:bg-white focus:ring-2 focus:ring-lemon-lime/20"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                    </form>
+                    {/* Search - Desktop Toggle */}
+                    <div className="relative hidden md:flex items-center">
+                        <div className={`overflow-hidden transition-all duration-300 ${isSearchOpen ? 'w-64 opacity-100 mr-2' : 'w-0 opacity-0'}`}>
+                            <form onSubmit={handleSearch}>
+                                <input
+                                    type="search"
+                                    placeholder="Search..."
+                                    className="h-9 w-full rounded-md border border-gray-200 bg-gray-50 px-3 text-sm focus:border-lemon-lime focus:outline-none"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    autoFocus={isSearchOpen}
+                                    onBlur={() => !searchQuery && setIsSearchOpen(false)}
+                                />
+                            </form>
+                        </div>
+                        <button
+                            onClick={() => setIsSearchOpen(!isSearchOpen)}
+                            className="text-black hover:text-lemon-lime transition-colors"
+                        >
+                            <Search className="h-5 w-5" />
+                        </button>
+                    </div>
 
-                    <button className="hidden rounded-md bg-lemon-lime px-4 py-2 text-sm font-black font-montserrat-black text-black hover:bg-lemon-lime/80 md:block transition-colors uppercase tracking-wider">
+                    <button className="hidden rounded-md bg-lemon-lime px-5 py-2 text-sm font-black font-montserrat-black text-black hover:bg-lemon-lime/80 md:block transition-colors uppercase tracking-wider">
                         Subscribe
                     </button>
 
@@ -98,19 +172,51 @@ export default function Header() {
                             >
                                 Home
                             </Link>
+
+                            {/* Mobile Categories Accordion - Simplified for now */}
+                            <div className="px-2 space-y-2">
+                                {/* Insight */}
+                                <div>
+                                    <Link href="/categories/insight" className="block text-sm font-black font-montserrat-black uppercase tracking-widest text-gray-800 hover:text-lemon-lime mb-1" onClick={() => setIsMenuOpen(false)}>Insight</Link>
+                                    <div className="pl-3 text-xs text-gray-500 space-y-1">
+                                        {['Science', 'General Knowledge', 'Business & Career'].map(t => (
+                                            <Link key={t} href={`/categories/insight/${t.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} className="block hover:text-lemon-lime" onClick={() => setIsMenuOpen(false)}>{t}</Link>
+                                        ))}
+                                    </div>
+                                </div>
+                                {/* Inspire */}
+                                <div>
+                                    <Link href="/categories/inspire" className="block text-sm font-black font-montserrat-black uppercase tracking-widest text-gray-800 hover:text-lemon-lime mb-1" onClick={() => setIsMenuOpen(false)}>Inspire</Link>
+                                    <div className="pl-3 text-xs text-gray-500 space-y-1">
+                                        {['Human Stories', 'Love & Relationships'].map(t => (
+                                            <Link key={t} href={`/categories/inspire/${t.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} className="block hover:text-lemon-lime" onClick={() => setIsMenuOpen(false)}>{t}</Link>
+                                        ))}
+                                    </div>
+                                </div>
+                                {/* Interest */}
+                                <div>
+                                    <Link href="/categories/interest" className="block text-sm font-black font-montserrat-black uppercase tracking-widest text-gray-800 hover:text-lemon-lime mb-1" onClick={() => setIsMenuOpen(false)}>Interest</Link>
+                                    <div className="pl-3 text-xs text-gray-500 space-y-1">
+                                        {['Fashion', 'Wellness', 'Art & Culture', 'Home'].map(t => (
+                                            <Link key={t} href={`/categories/interest/${t.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} className="block hover:text-lemon-lime" onClick={() => setIsMenuOpen(false)}>{t}</Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
                             <Link
-                                href="/articles"
+                                href="/events"
                                 className="text-sm font-black font-montserrat-black uppercase tracking-widest p-2 hover:bg-lemon-lime hover:text-black rounded-md"
                                 onClick={() => setIsMenuOpen(false)}
                             >
-                                Stories
+                                Events
                             </Link>
                             <Link
                                 href="#"
                                 className="text-sm font-black font-montserrat-black uppercase tracking-widest p-2 hover:bg-lemon-lime hover:text-black rounded-md"
                                 onClick={() => setIsMenuOpen(false)}
                             >
-                                Events
+                                Videos
                             </Link>
                             <Link
                                 href="/profile"

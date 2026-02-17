@@ -60,28 +60,25 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
                     </div>
                 </div>
 
-                {/* Content - Dark Green Background */}
-                <div className="flex-grow flex flex-col bg-[#203627] p-6 rounded-b-xl relative z-10 border-t-0 -mt-1">
+                {/* Content - Sky Blue Background */}
+                <div className="flex-grow flex flex-col bg-[#9cc4d4] p-6 rounded-b-xl relative z-10 border-t-0 -mt-1 group-hover:bg-[#8bb3c3] transition-colors duration-300">
                     {/* Metadata */}
-                    <div className="flex items-center gap-3 text-[10px] text-gray-300/80 mb-3 font-medium font-montserrat-regular tracking-wide">
+                    <div className="flex items-center gap-3 text-[10px] text-[#203627]/70 mb-3 font-bold font-montserrat-regular tracking-wide uppercase">
                         <span>{article.author}</span>
-                        <span className="w-1 h-1 bg-lemon-lime rounded-full" />
+                        <span className="w-1 h-1 bg-[#203627] rounded-full" />
                         <span>{article.date}</span>
                     </div>
 
                     {/* Title */}
-                    <h3 className={`font-playfair text-white font-bold leading-tight mb-3 group-hover:text-lemon-lime transition-colors duration-300 ${featured ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'}`}>
+                    <h3 className={`font-playfair text-[#203627] font-bold leading-tight mb-3 group-hover:text-white transition-colors duration-300 ${featured ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'}`}>
                         {article.title}
                     </h3>
 
-                    {/* Excerpt */}
-                    <p className="text-gray-300 text-sm leading-relaxed line-clamp-2 mt-auto">
-                        {article.excerpt}
-                    </p>
+
 
                     {/* Hover Indicator */}
-                    <div className="w-full h-1 bg-white/10 mt-6 rounded-full overflow-hidden">
-                        <div className="w-0 h-full bg-lemon-lime group-hover:w-full transition-all duration-500 ease-out" />
+                    <div className="w-full h-1 bg-[#203627]/10 mt-6 rounded-full overflow-hidden">
+                        <div className="w-0 h-full bg-[#203627] group-hover:w-full transition-all duration-500 ease-out" />
                     </div>
                 </div>
             </motion.div>

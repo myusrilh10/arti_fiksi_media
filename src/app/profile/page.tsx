@@ -1,148 +1,168 @@
-import SectionHeader from "@/components/ui/SectionHeader";
-import AdBanner from "@/components/ui/AdBanner";
-import Image from "next/image";
+'use client';
 
-export const metadata = {
-    title: "Profile | Arti Fiksi Media",
-    description: "Tentang Arti Fiksi Media, visi, misi, dan tim kami.",
-};
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
+import { useRef } from 'react';
+import AdBanner from "@/components/ui/AdBanner";
 
 export default function ProfilePage() {
-    return (
-        <div className="container mx-auto px-4 py-12 md:px-6">
+    const containerRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end end"]
+    });
 
-            {/* About Us / Hero */}
-            <section className="mb-20 grid gap-12 lg:grid-cols-2 items-center">
-                <div className="order-2 lg:order-1">
-                    <SectionHeader title="About Us" subtitle="Siapa Kami" />
-                    <div className="prose prose-lg text-gray-700">
-                        <p className="text-xl font-medium text-black mb-6 leading-relaxed">
-                            Arti Fiksi Media adalah platform media digital yang berfokus pada eksplorasi budaya kreatif, gaya hidup, dan teknologi modern.
-                        </p>
-                        <p className="leading-relaxed mb-4">
-                            Kami percaya bahwa setiap cerita memiliki arti, dan fiksi bisa menjadi cerminan realitas yang menginspirasi. Didirikan pada tahun 2026, kami berkomitmen untuk menjadi wadah bagi suara-suara baru dan ide-ide liar yang membentuk masa depan industri kreatif di Indonesia.
-                        </p>
-                        <p className="leading-relaxed">
-                            Di balik setiap artikel, ada tim yang berdedikasi untuk menggali kedalaman, bukan sekadar permukaan. Kami hadir untuk menantang status quo dan merayakan orisinalitas dalam segala bentuknya.
-                        </p>
-                    </div>
-                </div>
-                <div className="relative aspect-[4/3] w-full bg-gray-100 rounded-2xl overflow-hidden shadow-xl order-1 lg:order-2 group">
+    const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
+    return (
+        <div className="bg-[#efefef] min-h-screen text-[#203627] font-sans selection:bg-lemon-lime selection:text-[#203627]">
+            {/* Hero Section with Parallax */}
+            <section ref={containerRef} className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+                <motion.div
+                    style={{ y }}
+                    className="absolute inset-0 z-0"
+                >
                     <Image
                         src="/images/office.png"
-                        alt="Suasana kantor Arti Fiksi Media"
+                        alt="Office Aesthetic"
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover opacity-80"
                         priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-60"></div>
+                    <div className="absolute inset-0 bg-[#203627]/30 mix-blend-multiply" />
+                </motion.div>
+
+                <div className="relative z-10 text-center px-4">
+                    <motion.h1
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                        className="text-6xl md:text-9xl font-playfair font-black text-[#e7fe41] mb-6 tracking-tighter drop-shadow-lg"
+                    >
+                        ARTI FIKSI
+                    </motion.h1>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                        className="text-white text-xl md:text-2xl font-montserrat-regular tracking-widest uppercase max-w-2xl mx-auto"
+                    >
+                        Reimagining Media for the Creative Soul
+                    </motion.p>
                 </div>
+
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1, duration: 1 }}
+                    className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white flex flex-col items-center gap-2"
+                >
+                    <span className="text-[10px] uppercase tracking-[0.2em]">Scroll to Discover</span>
+                    <div className="w-[1px] h-12 bg-gradient-to-b from-white to-transparent" />
+                </motion.div>
             </section>
 
-            <AdBanner size="leaderboard" className="hidden md:flex mb-20" />
+            <div className="bg-[#efefef] relative z-20 rounded-t-[3rem] -mt-20 pt-20 shadow-2xl">
+                <div className="container mx-auto px-4 md:px-6">
 
-            {/* Vision & Mission */}
-            <section className="mb-20">
-                <div className="grid gap-8 md:grid-cols-2">
-                    <div className="bg-white p-8 md:p-10 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                        <div className="w-12 h-1 bg-primary mb-6"></div>
-                        <h3 className="text-2xl font-serif font-bold text-black mb-4 uppercase tracking-tight">Visi</h3>
-                        <p className="text-gray-700 text-lg leading-relaxed">
-                            Menjadi ekosistem media terdepan yang menghubungkan kreator, inovator, dan audiens melalui konten berkualitas tinggi yang tidak hanya menghibur, tetapi juga bermakna dan memicu perubahan positif.
-                        </p>
-                    </div>
-                    <div className="bg-black text-white p-8 md:p-10 rounded-2xl shadow-lg relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl -mr-16 -mt-16"></div>
-                        <div className="w-12 h-1 bg-primary mb-6 relative z-10"></div>
-                        <h3 className="text-2xl font-serif font-bold text-white mb-4 uppercase tracking-tight relative z-10">Misi</h3>
-                        <ul className="space-y-4 text-gray-300 relative z-10 text-lg">
-                            <li className="flex items-start gap-3">
-                                <span className="text-primary mt-1.5">•</span>
-                                <span>Menyajikan jurnalisme gaya hidup yang mendalam, akurat, dan relevan dengan zaman.</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                                <span className="text-primary mt-1.5">•</span>
-                                <span>Mendukung pertumbuhan komunitas kreatif lokal dengan memberikan panggung layak.</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                                <span className="text-primary mt-1.5">•</span>
-                                <span>Menghadirkan pengalaman visual yang estetik, inovatif, dan memanjakan mata.</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
+                    {/* Manifesto / About */}
+                    <section className="py-20 max-w-4xl mx-auto text-center">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        >
+                            <h2 className="text-3xl md:text-5xl font-playfair font-bold mb-12 leading-tight">
+                                We are a digital sanctuary for <span className="italic text-[#9cc4d4]">tastemakers</span>, <span className="italic text-[#9cc4d4]">storytellers</span>, and <span className="italic text-[#9cc4d4]">visionaries</span>.
+                            </h2>
+                            <div className="grid md:grid-cols-2 gap-12 text-left text-lg leading-relaxed text-gray-600 font-medium">
+                                <p>
+                                    Founded in 2026, Arti Fiksi Media was born from a desire to cut through the noise. We believe that media shouldn't just inform—it should inspire. It should provoke thought and ignite the creative spark within.
+                                </p>
+                                <p>
+                                    From deep dives into emerging subcultures to the latest in sustainable fashion and tech, we curate stories that matter. We don't just follow trends; we explore the *why* behind them.
+                                </p>
+                            </div>
+                        </motion.div>
+                    </section>
 
-            {/* Team */}
-            <section>
-                <div className="flex flex-col md:flex-row items-end justify-between mb-8 pb-4 border-b border-gray-200">
-                    <div>
-                        <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-black leading-none">
-                            Our Team<span className="text-primary">.</span>
+                    {/* Ad Break */}
+                    <div className="mb-20">
+                        <AdBanner size="leaderboard" className="hidden md:flex justify-center" />
+                    </div>
+
+                    {/* Values - Aesthetic Grid */}
+                    <section className="py-20">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {[
+                                { title: "Authenticity", desc: "Real stories, real people. No fluff.", color: "bg-[#203627]", text: "text-[#e7fe41]" },
+                                { title: "Curation", desc: "Quality over quantity, always.", color: "bg-[#9cc4d4]", text: "text-[#203627]" },
+                                { title: "Innovation", desc: "Pushing boundaries in digital storytelling.", color: "bg-[#e7fe41]", text: "text-[#203627]" }
+                            ].map((item, idx) => (
+                                <motion.div
+                                    key={idx}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: idx * 0.1, duration: 0.6 }}
+                                    className={`${item.color} ${item.text} p-10 rounded-2xl aspect-square flex flex-col justify-between group hover:scale-[1.02] transition-transform duration-500`}
+                                >
+                                    <span className="text-6xl font-playfair font-black">{idx + 1}.</span>
+                                    <div>
+                                        <h3 className="text-2xl font-black font-montserrat-black uppercase tracking-tighter mb-2">{item.title}</h3>
+                                        <p className="font-medium opacity-80">{item.desc}</p>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Team Section */}
+                    <section className="py-20 border-t border-gray-200">
+                        <div className="flex flex-col md:flex-row items-baseline justify-between mb-16">
+                            <h2 className="text-5xl md:text-7xl font-playfair font-black text-[#203627]">The Minds.</h2>
+                            <p className="text-gray-500 font-bold uppercase tracking-widest mt-4 md:mt-0">Behind the scenes</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+                            {[
+                                { name: "Andi Pratama", role: "Creative Director", img: "/images/team1.png" },
+                                { name: "Sarah Wijaya", role: "Editor in Chief", img: null },
+                                { name: "Budi Santoso", role: "Head of Tech", img: null },
+                                { name: "Dina Kusuma", role: "Senior Writer", img: null },
+                            ].map((member, idx) => (
+                                <div key={idx} className="group cursor-pointer">
+                                    <div className="relative overflow-hidden mb-6 aspect-[3/4] rounded-sm bg-gray-200">
+                                        {member.img ? (
+                                            <div className="w-full h-full bg-gray-300 animate-pulse" />
+                                            // Placeholder for actual image if available
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400 font-bold uppercase tracking-widest text-xs">
+                                                [Image]
+                                            </div>
+                                        )}
+                                        <div className="absolute inset-0 bg-[#203627]/0 group-hover:bg-[#203627]/20 transition-colors duration-500" />
+                                    </div>
+                                    <h4 className="text-xl font-bold font-playfair text-[#203627] group-hover:text-[#9cc4d4] transition-colors">{member.name}</h4>
+                                    <p className="text-xs font-black font-montserrat-black uppercase tracking-widest text-gray-400 mt-1">{member.role}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Newsletter / Footer CTA */}
+                    <section className="py-32 text-center">
+                        <h2 className="text-4xl md:text-6xl font-black font-montserrat-black uppercase tracking-tighter text-[#203627] mb-8">
+                            Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#203627] to-[#9cc4d4]">Movement</span>
                         </h2>
-                        <p className="text-gray-500 text-sm font-bold tracking-widest uppercase mt-2">
-                            Orang-orang di balik layar
-                        </p>
-                    </div>
-                    <p className="text-gray-400 text-sm mt-4 md:mt-0 font-medium">
-                        Meet the brilliant minds driving our vision.
-                    </p>
+                        <button className="bg-[#203627] text-[#e7fe41] px-10 py-4 rounded-full font-black uppercase tracking-widest hover:bg-[#e7fe41] hover:text-[#203627] transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1">
+                            Subscribe Now
+                        </button>
+                    </section>
+
                 </div>
-
-                <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-4">
-                    {/* Member 1 - With generated image */}
-                    <div className="group">
-                        <div className="relative aspect-[3/4] bg-gray-200 mb-5 overflow-hidden rounded-xl">
-                            {/* <Image
-                                src="/images/team1.png"
-                                alt="Creative Director"
-                                fill
-                                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                                sizes="(max-width: 768px) 50vw, 25vw"
-                            /> */}
-                        </div>
-                        <div className="border-l-2 border-primary pl-4">
-                            <h4 className="font-bold text-lg text-black group-hover:text-primary transition-colors">Andi Pratama</h4>
-                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Creative Director</p>
-                        </div>
-                    </div>
-
-                    {/* Member 2 - Placeholder */}
-                    <div className="group opacity-60 hover:opacity-100 transition-opacity">
-                        <div className="relative aspect-[3/4] bg-gray-100 mb-5 overflow-hidden rounded-xl flex items-center justify-center border-2 border-dashed border-gray-300">
-                            <span className="text-gray-400 font-medium text-sm">Add Member Photo</span>
-                        </div>
-                        <div className="border-l-2 border-gray-200 pl-4 group-hover:border-primary transition-colors">
-                            <h4 className="font-bold text-lg text-black">Sarah Wijaya</h4>
-                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Editor in Chief</p>
-                        </div>
-                    </div>
-
-                    {/* Member 3 - Placeholder */}
-                    <div className="group opacity-60 hover:opacity-100 transition-opacity">
-                        <div className="relative aspect-[3/4] bg-gray-100 mb-5 overflow-hidden rounded-xl flex items-center justify-center border-2 border-dashed border-gray-300">
-                            <span className="text-gray-400 font-medium text-sm">Add Member Photo</span>
-                        </div>
-                        <div className="border-l-2 border-gray-200 pl-4 group-hover:border-primary transition-colors">
-                            <h4 className="font-bold text-lg text-black">Budi Santoso</h4>
-                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Head of Technology</p>
-                        </div>
-                    </div>
-
-                    {/* Member 4 - Placeholder */}
-                    <div className="group opacity-60 hover:opacity-100 transition-opacity">
-                        <div className="relative aspect-[3/4] bg-gray-100 mb-5 overflow-hidden rounded-xl flex items-center justify-center border-2 border-dashed border-gray-300">
-                            <span className="text-gray-400 font-medium text-sm">Add Member Photo</span>
-                        </div>
-                        <div className="border-l-2 border-gray-200 pl-4 group-hover:border-primary transition-colors">
-                            <h4 className="font-bold text-lg text-black">Dina Kusuma</h4>
-                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Senior Writer</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
+            </div>
         </div>
     );
 }

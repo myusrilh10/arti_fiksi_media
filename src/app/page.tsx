@@ -55,12 +55,14 @@ export default function Home() {
 
       {/* Main Categories Section - Full Width */}
       {/* Main Categories Section - Full Width with Partitions */}
+      {/* Main Categories Section - Full Width with Partitions */}
       <section className="mb-20">
-        <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+        <SectionHeader title="Newest Article" subtitle="Ikuti perkembangan terkini" className="mb-10" />
+        <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#203627]">
           {/* Insight Column */}
           <div className="space-y-6 md:pr-8 py-8 md:py-0">
             <Link href="/categories/insight" className="block group">
-              <div className="flex items-center gap-3 mb-6 border-b border-gray-200 pb-3">
+              <div className="flex items-center gap-3 mb-6 border-b-2 border-[#203627] pb-3">
                 <span className="w-3 h-3 bg-lemon-lime rounded-full" />
                 <h2 className="font-black font-montserrat-black text-2xl uppercase tracking-tighter text-[#203627]">Insight</h2>
               </div>
@@ -75,7 +77,7 @@ export default function Home() {
           {/* Inspire Column */}
           <div className="space-y-6 md:px-8 py-8 md:py-0">
             <Link href="/categories/inspire" className="block group">
-              <div className="flex items-center gap-3 mb-6 border-b border-gray-200 pb-3">
+              <div className="flex items-center gap-3 mb-6 border-b-2 border-[#203627] pb-3">
                 <span className="w-3 h-3 bg-lemon-lime rounded-full" />
                 <h2 className="font-black font-montserrat-black text-2xl uppercase tracking-tighter text-[#203627]">Inspire</h2>
               </div>
@@ -90,7 +92,7 @@ export default function Home() {
           {/* Interest Column */}
           <div className="space-y-6 md:pl-8 py-8 md:py-0">
             <Link href="/categories/interest" className="block group">
-              <div className="flex items-center gap-3 mb-6 border-b border-gray-200 pb-3">
+              <div className="flex items-center gap-3 mb-6 border-b-2 border-[#203627] pb-3">
                 <span className="w-3 h-3 bg-lemon-lime rounded-full" />
                 <h2 className="font-black font-montserrat-black text-2xl uppercase tracking-tighter text-[#203627]">Interest</h2>
               </div>
@@ -206,6 +208,6 @@ export default function Home() {
       {/* Secondary Ad Slot */}
       <AdBanner size="large-leaderboard" className="hidden lg:flex mt-12" />
 
-    </div>
+    </div >
   );
 }

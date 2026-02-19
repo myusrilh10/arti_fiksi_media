@@ -37,16 +37,19 @@ export default function Home() {
   // Use first 3 articles for carousel
   const carouselArticles = ARTICLES.slice(0, 3);
 
-  // Filter for 3 columns
-  const insightArticles = ARTICLES.filter(a => a.mainCategory === 'Insight').slice(0, 3);
-  const inspireArticles = ARTICLES.filter(a => a.mainCategory === 'Inspire').slice(0, 3);
-  const interestArticles = ARTICLES.filter(a => a.mainCategory === 'Interest').slice(0, 3);
+  // Filter for 3 columns - Only 1 highlighted article per category
+  const lensaLokalArticle = ARTICLES.find(a => a.mainCategory === 'Lensa Lokal');
+  const lifestyleArticle = ARTICLES.find(a => a.mainCategory === 'Lifestyle');
+  const publicInterestArticle = ARTICLES.find(a => a.mainCategory === 'Public Interest');
 
   // Trending articles (simulated)
   const trendingArticles = ARTICLES.slice(0, 4);
 
   return (
     <div className="container mx-auto px-4 py-6 md:py-8 md:px-6">
+
+      {/* Top Ad Banner */}
+      <AdBanner size="large-leaderboard" className="mb-8" />
 
       {/* Hero Section - Carousel */}
       <section className="mb-12">
@@ -59,48 +62,42 @@ export default function Home() {
       <section className="mb-20">
         <SectionHeader title="Newest Article" subtitle="Ikuti perkembangan terkini" className="mb-10" />
         <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#203627]">
-          {/* Insight Column */}
+          {/* Lensa Lokal Column */}
           <div className="space-y-6 md:pr-8 py-8 md:py-0">
-            <Link href="/categories/insight" className="block group">
+            <Link href="/categories/lensa-lokal" className="block group">
               <div className="flex items-center gap-3 mb-6 border-b-2 border-[#203627] pb-3">
                 <span className="w-3 h-3 bg-lemon-lime rounded-full" />
-                <h2 className="font-black font-montserrat-black text-2xl uppercase tracking-tighter text-[#203627]">Insight</h2>
+                <h2 className="font-black font-montserrat-black text-2xl uppercase tracking-tighter text-[#203627]">Lensa Lokal</h2>
               </div>
             </Link>
             <div className="space-y-8">
-              {insightArticles.map(article => (
-                <ArticleCard key={article.id} article={article} />
-              ))}
+              {lensaLokalArticle && <ArticleCard article={lensaLokalArticle} />}
             </div>
           </div>
 
-          {/* Inspire Column */}
+          {/* Lifestyle Column */}
           <div className="space-y-6 md:px-8 py-8 md:py-0">
-            <Link href="/categories/inspire" className="block group">
+            <Link href="/categories/lifestyle" className="block group">
               <div className="flex items-center gap-3 mb-6 border-b-2 border-[#203627] pb-3">
                 <span className="w-3 h-3 bg-lemon-lime rounded-full" />
-                <h2 className="font-black font-montserrat-black text-2xl uppercase tracking-tighter text-[#203627]">Inspire</h2>
+                <h2 className="font-black font-montserrat-black text-2xl uppercase tracking-tighter text-[#203627]">Lifestyle</h2>
               </div>
             </Link>
             <div className="space-y-8">
-              {inspireArticles.map(article => (
-                <ArticleCard key={article.id} article={article} />
-              ))}
+              {lifestyleArticle && <ArticleCard article={lifestyleArticle} />}
             </div>
           </div>
 
-          {/* Interest Column */}
+          {/* Public Interest Column */}
           <div className="space-y-6 md:pl-8 py-8 md:py-0">
-            <Link href="/categories/interest" className="block group">
+            <Link href="/categories/public-interest" className="block group">
               <div className="flex items-center gap-3 mb-6 border-b-2 border-[#203627] pb-3">
                 <span className="w-3 h-3 bg-lemon-lime rounded-full" />
-                <h2 className="font-black font-montserrat-black text-2xl uppercase tracking-tighter text-[#203627]">Interest</h2>
+                <h2 className="font-black font-montserrat-black text-2xl uppercase tracking-tighter text-[#203627]">Public Interest</h2>
               </div>
             </Link>
             <div className="space-y-8">
-              {interestArticles.map(article => (
-                <ArticleCard key={article.id} article={article} />
-              ))}
+              {publicInterestArticle && <ArticleCard article={publicInterestArticle} />}
             </div>
           </div>
         </div>
@@ -179,29 +176,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Newsletter Section - Takes up 4 cols */}
-        <div className="lg:col-span-4">
-          {/* Newsletter Box - Dark Green Background */}
-          <div className="bg-[#203627] text-white p-8 rounded-2xl shadow-xl relative overflow-hidden group h-full flex flex-col justify-center">
-            <div className="absolute top-0 right-0 w-40 h-40 bg-lemon-lime/10 rounded-full blur-3xl -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-1000"></div>
-            <div className="relative z-10">
-              <Mail className="w-10 h-10 text-lemon-lime mb-6" />
-              <h3 className="text-2xl font-black font-montserrat-black mb-3 text-white">The Weekly Arti</h3>
-              <p className="text-gray-300 text-sm mb-8 leading-relaxed">
-                Dapatkan kurasi konten terbaik mingguan langsung di inbox kamu. Tak ada spam, hanya inspirasi.
-              </p>
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                <input
-                  type="email"
-                  placeholder="email@kamu.com"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-sm focus:outline-none focus:border-lemon-lime focus:bg-white/10 transition-colors text-white placeholder-gray-500"
-                />
-                <button className="w-full bg-lemon-lime text-[#203627] font-black font-montserrat-black py-3 rounded-lg transition-transform hover:scale-[1.02] active:scale-95 uppercase tracking-wider text-sm shadow-lg shadow-lemon-lime/20">
-                  Subscribe
-                </button>
-              </form>
-            </div>
-          </div>
+        {/* Newsletter Section Replaced with Ad Banner - Takes up 4 cols */}
+        <div className="lg:col-span-4 flex items-center justify-center">
+          <AdBanner size="medium-rectangle" className="w-full h-full my-0" />
         </div>
       </div>
 

@@ -10,13 +10,14 @@ export interface Article {
   imageUrl: string;
   slug: string;
   content?: string;
-  mainCategory: 'Insight' | 'Inspire' | 'Interest';
+  mainCategory: 'Lensa Lokal' | 'Lifestyle' | 'Public Interest';
 }
 
+
 export const CATEGORY_MAPPING = {
-  Insight: ['Science', 'General Knowledge', 'Business & Career'],
-  Inspire: ['Human Stories', 'Love & Relationships'],
-  Interest: ['Fashion', 'Wellness', 'Art & Culture', 'Home']
+  'Lensa Lokal': [],
+  'Lifestyle': [],
+  'Public Interest': []
 };
 
 export const ARTICLES: Article[] = [
@@ -25,7 +26,7 @@ export const ARTICLES: Article[] = [
     title: "Masa Depan Industri Kreatif Indonesia di Era Digital",
     excerpt: "Bagaimana teknologi AI dan blockchain mengubah cara kita menikmati seni dan budaya pop lokal.",
     category: "Business & Career",
-    mainCategory: "Insight",
+    mainCategory: "Public Interest",
     author: "Rizky Ramadhan",
     date: "7 Feb 2026",
     imageUrl: "/images/tech.png",
@@ -37,7 +38,7 @@ export const ARTICLES: Article[] = [
     title: "5 Kafe Tersembunyi di Jakarta Selatan",
     excerpt: "Tempat nongkrong asik dengan suasana vintage yang cocok untuk WFC atau sekadar bersantai.",
     category: "Home", // Using 'Home' as closest match for Lifestyle/Spaces
-    mainCategory: "Interest",
+    mainCategory: "Lifestyle",
     author: "Sarah Amalia",
     date: "6 Feb 2026",
     imageUrl: "/images/cafe.png",
@@ -49,7 +50,7 @@ export const ARTICLES: Article[] = [
     title: "Filosofi di Balik Tren Fashion 'Slow Living'",
     excerpt: "Kenapa semakin banyak brand lokal beralih ke metode produksi yang ramah lingkungan?",
     category: "Fashion",
-    mainCategory: "Interest",
+    mainCategory: "Lifestyle",
     author: "Dimas Anggara",
     date: "5 Feb 2026",
     imageUrl: "/images/fashion.png",
@@ -61,7 +62,7 @@ export const ARTICLES: Article[] = [
     title: "Eksplorasi Emosi dalam Sinema Modern",
     excerpt: "Sebuah tinjauan mendalam tentang bagaimana sutradara muda mengangkat isu kesehatan mental.",
     category: "Art & Culture",
-    mainCategory: "Interest",
+    mainCategory: "Lensa Lokal",
     author: "Dinda Kirana",
     date: "4 Feb 2026",
     imageUrl: "/images/film.png",
@@ -73,7 +74,7 @@ export const ARTICLES: Article[] = [
     title: "Panduan Memulai Podcasting untuk Pemula",
     excerpt: "Alat, tips, dan trik untuk membuat podcast yang didengar ribuan orang.",
     category: "Business & Career",
-    mainCategory: "Insight",
+    mainCategory: "Public Interest",
     author: "Aldi Taher",
     date: "3 Feb 2026",
     imageUrl: "/images/podcast.png",
@@ -85,7 +86,7 @@ export const ARTICLES: Article[] = [
     title: "Sejarah Musik Indie di Indonesia",
     excerpt: "Perjalanan panjang musisi independen menaklukkan industri musik tanah air.",
     category: "Human Stories",
-    mainCategory: "Inspire",
+    mainCategory: "Lensa Lokal",
     author: "Citra Scholastika",
     date: "2 Feb 2026",
     imageUrl: "/images/music.png",
@@ -97,7 +98,7 @@ export const ARTICLES: Article[] = [
     title: "Science Behind Sleep",
     excerpt: "Mengapa tidur berkualitas sangat penting untuk produktivitas dan kesehatan mental.",
     category: "Science",
-    mainCategory: "Insight",
+    mainCategory: "Public Interest",
     author: "Dr. Sleep",
     date: "1 Feb 2026",
     imageUrl: "/images/tech.png",
@@ -109,7 +110,7 @@ export const ARTICLES: Article[] = [
     title: "Love in the Time of AI",
     excerpt: "Bagaimana teknologi mempengaruhi cara kita menjalin hubungan di masa kini.",
     category: "Love & Relationships",
-    mainCategory: "Inspire",
+    mainCategory: "Lifestyle",
     author: "Samantha",
     date: "31 Jan 2026",
     imageUrl: "/images/cafe.png",
@@ -121,7 +122,7 @@ export const ARTICLES: Article[] = [
     title: "Wellness Retreats in Bali",
     excerpt: "Menemukan ketenangan batin di pulau dewata.",
     category: "Wellness",
-    mainCategory: "Interest",
+    mainCategory: "Lifestyle",
     author: "Bali Spirit",
     date: "30 Jan 2026",
     imageUrl: "/images/fashion.png",
@@ -133,7 +134,7 @@ export const ARTICLES: Article[] = [
     title: "General Knowledge Quiz",
     excerpt: "Seberapa luas wawasanmu tentang dunia? Coba tes di sini.",
     category: "General Knowledge",
-    mainCategory: "Insight",
+    mainCategory: "Public Interest",
     author: "Quiz Master",
     date: "29 Jan 2026",
     imageUrl: "/images/film.png",

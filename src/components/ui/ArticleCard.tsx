@@ -74,6 +74,11 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
                         {article.title}
                     </h3>
 
+                    {/* Excerpt */}
+                    <p className="text-sm text-[#203627]/80 line-clamp-2 leading-relaxed font-medium">
+                        {article.excerpt}
+                    </p>
+
 
 
                     {/* Hover Indicator */}

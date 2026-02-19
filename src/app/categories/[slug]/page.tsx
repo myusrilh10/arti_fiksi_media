@@ -33,11 +33,17 @@ export default function CategoryPage() {
     const params = useParams();
     const slug = params.slug as string;
 
-    // Capitalize slug to match Main Category keys (e.g., 'insight' -> 'Insight')
-    const mainCategory = slug.charAt(0).toUpperCase() + slug.slice(1) as keyof typeof CATEGORY_MAPPING;
+    // Map slug to exactly match Main Category keys
+    const slugToCategory: Record<string, keyof typeof CATEGORY_MAPPING> = {
+        'lensa-lokal': 'Lensa Lokal',
+        'lifestyle': 'Lifestyle',
+        'public-interest': 'Public Interest'
+    };
+
+    const mainCategory = slugToCategory[slug];
 
     // Validate if category exists
-    if (!CATEGORY_MAPPING[mainCategory]) {
+    if (!mainCategory) {
         return (
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
@@ -58,25 +64,6 @@ export default function CategoryPage() {
 
     return (
         <div className="min-h-screen bg-white">
-            {/* Sub-Navigation Header */}
-            <div className="bg-gray-50 border-b border-gray-200 sticky top-16 z-40">
-                <div className="container mx-auto px-4 py-4 md:px-6 overflow-x-auto">
-                    <div className="flex items-center justify-start md:justify-center gap-6 md:gap-12 min-w-max">
-                        <Link href={`/categories/${slug}`} className="font-black font-montserrat-black uppercase tracking-widest text-[#203627] text-lg mr-4 border-r-2 border-gray-300 pr-6 underline decoration-2 decoration-lemon-lime underline-offset-4">
-                            {mainCategory}
-                        </Link>
-                        {subCategories.map((sub, idx) => (
-                            <Link
-                                key={sub}
-                                href={`/categories/${slug}/${sub.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}
-                                className="text-xs md:text-sm font-bold font-montserrat-regular uppercase tracking-wider text-gray-500 hover:text-lemon-lime transition-colors"
-                            >
-                                {sub}
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-            </div>
 
             <div className="container mx-auto px-4 py-12 md:px-6">
                 <div className="mb-12 text-center">

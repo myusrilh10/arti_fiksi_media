@@ -151,14 +151,20 @@ export default function ProfilePage() {
                         </div>
                     </section>
 
-                    {/* Newsletter / Footer CTA */}
+                    {/* Collaboration / Contact CTA */}
                     <section className="py-32 text-center">
-                        <h2 className="text-4xl md:text-6xl font-black font-montserrat-black uppercase tracking-tighter text-[#203627] mb-8">
-                            Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#203627] to-[#9cc4d4]">Movement</span>
+                        <h2 className="text-4xl md:text-6xl font-black font-montserrat-black uppercase tracking-tighter text-[#203627] mb-6">
+                            Have an <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#203627] to-[#9cc4d4]">Idea?</span>
                         </h2>
-                        <button className="bg-[#203627] text-[#e7fe41] px-10 py-4 rounded-full font-black uppercase tracking-widest hover:bg-[#e7fe41] hover:text-[#203627] transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1">
-                            Subscribe Now
-                        </button>
+                        <p className="text-gray-600 max-w-xl mx-auto mb-10 text-lg font-medium">
+                            Kami selalu terbuka untuk ide-ide segar, kolaborasi artistik, atau kritik yang membangun. Berikan percikan inspirasi kamu sekarang.
+                        </p>
+                        <a
+                            href="mailto:contact@artifiksi.com"
+                            className="inline-block bg-[#203627] text-[#e7fe41] px-10 py-4 rounded-full font-black uppercase tracking-widest hover:bg-[#e7fe41] hover:text-[#203627] transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1"
+                        >
+                            Contact Us
+                        </a>
                     </section>
 
                 </div>

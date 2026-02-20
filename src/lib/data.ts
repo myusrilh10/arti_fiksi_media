@@ -151,6 +151,7 @@ export interface Event {
   category: string;
   imageUrl: string;
   slug: string;
+  description?: string;
 }
 
 export const EVENTS: Event[] = [
@@ -161,7 +162,8 @@ export const EVENTS: Event[] = [
     location: "Galeri Nasional Indonesia",
     category: "Art & Culture",
     imageUrl: "/images/tech.png",
-    slug: "jakarta-art-week-2026"
+    slug: "jakarta-art-week-2026",
+    description: "Jakarta Art Week 2026 kembali hadir dengan kurasi karya seni kontemporer terbaik dari seniman lokal dan mancanegara. Tahun ini mengusung tema 'Resonansi Urban' yang mengeksplorasi hubungan antara manusia dan ruang kota yang dinamis. Nikmati pameran instalasi, workshop seni, dan diskusi panel eksklusif."
   },
   {
     id: "e2",
@@ -170,7 +172,8 @@ export const EVENTS: Event[] = [
     location: "Stadion Madya GBK",
     category: "Art & Culture",
     imageUrl: "/images/music.png",
-    slug: "indie-music-fest"
+    slug: "indie-music-fest",
+    description: "Rayakan keberagaman musik independen Indonesia di Indie Music Fest. Menampilkan lebih dari 20 musisi lintas genre, festival ini menjadi wadah bagi musisi pendatang baru untuk bersinar dan musisi senior untuk kembali menyapa penggemarnya. Area kreatif dan bazaar merchandise juga tersedia."
   },
   {
     id: "e3",
@@ -179,7 +182,8 @@ export const EVENTS: Event[] = [
     location: "Ubud, Bali",
     category: "Business & Career",
     imageUrl: "/images/cafe.png",
-    slug: "digital-nomad-summit"
+    slug: "digital-nomad-summit",
+    description: "Bergabunglah dengan ratusan digital nomad dari seluruh dunia dalam konferensi tiga hari di jantung budaya Bali. Temukan strategi terbaru dalam remote work, investasi digital, dan gaya hidup berpindah-pindah. Sesi networking eksklusif dan petualangan outdoor menantimu."
   },
   {
     id: "e4",
@@ -188,7 +192,8 @@ export const EVENTS: Event[] = [
     location: "SCBD Park, Jakarta",
     category: "Fashion",
     imageUrl: "/images/fashion.png",
-    slug: "fashion-fusion-night"
+    slug: "fashion-fusion-night",
+    description: "Malam puncak perayaan fashion yang memadukan elemen tradisional Indonesia dengan gaya street-wear modern. Menampilkan runway show dari desainer kenamaan dan koleksi terbatas kolaborasi brand lokal. Dihadiri oleh para fashion enthusiast dan influencers ternama."
   }
 ];
 

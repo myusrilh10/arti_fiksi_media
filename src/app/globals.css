@@ -22,6 +22,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-playfair);
+  --font-playfair: var(--font-playfair);
   --font-montserrat-black: var(--font-montserrat-black);
   --font-montserrat-regular: var(--font-montserrat-regular);
 }

@@ -69,10 +69,10 @@ export default function Footer() {
                             <Link href="https://www.instagram.com/artifiksi/" aria-label="Instagram" className="rounded-full bg-[#e7fe41]/10 p-2 text-[#e7fe41] hover:bg-[#e7fe41] hover:text-[#203627] transition-colors">
                                 <Instagram className="h-5 w-5" />
                             </Link>
-                            <Link href="#" aria-label="TikTok" className="rounded-full bg-[#e7fe41]/10 p-2 text-[#e7fe41] hover:bg-[#e7fe41] hover:text-[#203627] transition-colors">
+                            <Link href="https://www.tiktok.com/@artifiksi?_r=1&_t=ZS-9453xP5Emwx" aria-label="TikTok" className="rounded-full bg-[#e7fe41]/10 p-2 text-[#e7fe41] hover:bg-[#e7fe41] hover:text-[#203627] transition-colors">
                                 <TiktokIcon className="h-5 w-5" />
                             </Link>
-                            <Link href="#" aria-label="Threads" className="rounded-full bg-[#e7fe41]/10 p-2 text-[#e7fe41] hover:bg-[#e7fe41] hover:text-[#203627] transition-colors">
+                            <Link href="https://www.threads.com/@artifiksi?igshid=NTc4MTIwNjQ2YQ==" aria-label="Threads" className="rounded-full bg-[#e7fe41]/10 p-2 text-[#e7fe41] hover:bg-[#e7fe41] hover:text-[#203627] transition-colors">
                                 <ThreadsIcon className="h-5 w-5" />
                             </Link>
                         </div>

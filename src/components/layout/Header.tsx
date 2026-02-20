@@ -26,7 +26,7 @@ export default function Header() {
                 {/* Logo */}
                 <Link href="/" className="flex items-center">
                     <img
-                        src="/images/logo.png"
+                        src="/images/logo_artifiksi.png"
                         alt="Arti Fiksi Logo"
                         className="h-10 w-auto object-contain"
                     />
@@ -53,7 +53,7 @@ export default function Header() {
                     <Link href="/events" className="hover:text-lemon-lime transition-colors">
                         Events
                     </Link>
-                    <Link href="#" className="hover:text-lemon-lime transition-colors">
+                    <Link href="/videos" className="hover:text-lemon-lime transition-colors">
                         Videos
                     </Link>
                     <Link href="/profile" className="hover:text-lemon-lime transition-colors">
@@ -136,7 +136,7 @@ export default function Header() {
                                 Events
                             </Link>
                             <Link
-                                href="#"
+                                href="/videos"
                                 className="text-sm font-black font-montserrat-black uppercase tracking-widest p-2 hover:bg-lemon-lime hover:text-black rounded-md"
                                 onClick={() => setIsMenuOpen(false)}
                             >

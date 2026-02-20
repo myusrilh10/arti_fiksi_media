@@ -1,7 +1,20 @@
 'use client';
 
 import Link from 'next/link';
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Facebook, Instagram } from 'lucide-react';
+
+const TiktokIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+    </svg>
+);
+
+const ThreadsIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M16 16a4 4 0 0 1-8 0c0-2.2 1.8-4 4-4s4 1.8 4 4v2.5a2.5 2.5 0 0 1-5 0" />
+        <path d="M12 21a9 9 0 1 0-9-9c0 1.5.4 3 1.2 4.2" />
+    </svg>
+);
 
 export default function Footer() {
     return (
@@ -48,20 +61,24 @@ export default function Footer() {
                     {/* Socials */}
                     <div className="space-y-4">
                         <h3 className="text-sm font-black text-[#e7fe41] uppercase tracking-wider font-montserrat-black drop-shadow-sm">Follow Us</h3>
+                        {/* UPDATE YOUR SOCIAL MEDIA LINKS IN THE HREF ATTRIBUTES BELOW */}
                         <div className="flex gap-4">
-                            <Link href="#" className="rounded-full bg-[#e7fe41]/10 p-2 text-[#e7fe41] hover:bg-[#e7fe41] hover:text-[#203627] transition-colors">
+                            <Link href="#" aria-label="Facebook" className="rounded-full bg-[#e7fe41]/10 p-2 text-[#e7fe41] hover:bg-[#e7fe41] hover:text-[#203627] transition-colors">
                                 <Facebook className="h-5 w-5" />
                             </Link>
-                            <Link href="#" className="rounded-full bg-[#e7fe41]/10 p-2 text-[#e7fe41] hover:bg-[#e7fe41] hover:text-[#203627] transition-colors">
-                                <Twitter className="h-5 w-5" />
-                            </Link>
-                            <Link href="#" className="rounded-full bg-[#e7fe41]/10 p-2 text-[#e7fe41] hover:bg-[#e7fe41] hover:text-[#203627] transition-colors">
+                            <Link href="https://www.instagram.com/artifiksi/" aria-label="Instagram" className="rounded-full bg-[#e7fe41]/10 p-2 text-[#e7fe41] hover:bg-[#e7fe41] hover:text-[#203627] transition-colors">
                                 <Instagram className="h-5 w-5" />
                             </Link>
-                            <Link href="#" className="rounded-full bg-[#e7fe41]/10 p-2 text-[#e7fe41] hover:bg-[#e7fe41] hover:text-[#203627] transition-colors">
-                                <Linkedin className="h-5 w-5" />
+                            <Link href="#" aria-label="TikTok" className="rounded-full bg-[#e7fe41]/10 p-2 text-[#e7fe41] hover:bg-[#e7fe41] hover:text-[#203627] transition-colors">
+                                <TiktokIcon className="h-5 w-5" />
+                            </Link>
+                            <Link href="#" aria-label="Threads" className="rounded-full bg-[#e7fe41]/10 p-2 text-[#e7fe41] hover:bg-[#e7fe41] hover:text-[#203627] transition-colors">
+                                <ThreadsIcon className="h-5 w-5" />
                             </Link>
                         </div>
+                        <p className="text-xs text-gray-400 mt-4 hidden">
+                            {/* Helper comment: Update links in Footer.tsx */}
+                        </p>
                     </div>
                 </div>
 

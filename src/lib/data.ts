@@ -150,6 +150,7 @@ export interface Event {
   location: string;
   category: string;
   imageUrl: string;
+  slug: string;
 }
 
 export const EVENTS: Event[] = [
@@ -159,7 +160,8 @@ export const EVENTS: Event[] = [
     date: "15-22 Maret 2026",
     location: "Galeri Nasional Indonesia",
     category: "Art & Culture",
-    imageUrl: "/images/tech.png"
+    imageUrl: "/images/tech.png",
+    slug: "jakarta-art-week-2026"
   },
   {
     id: "e2",
@@ -167,7 +169,8 @@ export const EVENTS: Event[] = [
     date: "5 April 2026",
     location: "Stadion Madya GBK",
     category: "Art & Culture",
-    imageUrl: "/images/music.png"
+    imageUrl: "/images/music.png",
+    slug: "indie-music-fest"
   },
   {
     id: "e3",
@@ -175,7 +178,8 @@ export const EVENTS: Event[] = [
     date: "10-12 Mei 2026",
     location: "Ubud, Bali",
     category: "Business & Career",
-    imageUrl: "/images/cafe.png"
+    imageUrl: "/images/cafe.png",
+    slug: "digital-nomad-summit"
   },
   {
     id: "e4",
@@ -183,6 +187,51 @@ export const EVENTS: Event[] = [
     date: "20 Juni 2026",
     location: "SCBD Park, Jakarta",
     category: "Fashion",
-    imageUrl: "/images/fashion.png"
+    imageUrl: "/images/fashion.png",
+    slug: "fashion-fusion-night"
+  }
+];
+
+export interface Video {
+  id: string;
+  title: string;
+  duration: string;
+  date: string;
+  category: string;
+  imageUrl: string;
+  videoUrl: string;
+  slug: string;
+}
+
+export const VIDEOS: Video[] = [
+  {
+    id: "v1",
+    title: "Exploring the Streets of Palu",
+    duration: "10:24",
+    date: "10 Feb 2026",
+    category: "City Tour",
+    imageUrl: "/images/tech.png",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    slug: "exploring-streets-palu"
+  },
+  {
+    id: "v2",
+    title: "How to Brew Perfect Coffee",
+    duration: "05:15",
+    date: "8 Feb 2026",
+    category: "Lifestyle",
+    imageUrl: "/images/cafe.png",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    slug: "how-to-brew-perfect-coffee"
+  },
+  {
+    id: "v3",
+    title: "Interview with Local Artist",
+    duration: "15:30",
+    date: "5 Feb 2026",
+    category: "Art & Culture",
+    imageUrl: "/images/music.png",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    slug: "interview-local-artist"
   }
 ];

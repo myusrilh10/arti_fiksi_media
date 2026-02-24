@@ -17,20 +17,18 @@ export default function VideoCard({ video }: VideoCardProps) {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="flex flex-col h-full"
+                className="flex flex-col h-full transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
             >
-                <div className="relative overflow-hidden w-full aspect-video group-hover:shadow-xl transition-all duration-500 rounded-t-xl">
+                <div className="relative overflow-hidden w-full aspect-video rounded-t-xl">
                     <motion.div
                         className="w-full h-full relative"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
                     >
                         {video.imageUrl ? (
                             <Image
                                 src={video.imageUrl}
                                 alt={video.title}
                                 fill
-                                className="object-cover"
+                                className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             />
                         ) : (

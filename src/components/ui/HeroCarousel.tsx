@@ -103,7 +103,7 @@ export default function HeroCarousel({ articles }: HeroCarouselProps) {
                             alt={currentArticle.title}
                             fill
                             priority
-                            className="object-cover"
+                            className="object-cover transition-transform duration-[8000ms] ease-out scale-100 group-hover:scale-[1.02]"
                             sizes="100vw"
                         />
                     ) : (
@@ -112,9 +112,9 @@ export default function HeroCarousel({ articles }: HeroCarouselProps) {
                         </div>
                     )}
 
-                    {/* Cinematic Gradient Overlays */}
-                    <div className="absolute inset-0 bg-linear-to-t from-black/95 via-black/50 to-transparent" />
-                    <div className="absolute inset-0 bg-linear-to-r from-black/60 via-transparent to-transparent" />
+                    {/* Cinematic Gradient Overlays — strengthened for headline contrast */}
+                    <div className="absolute inset-0 bg-linear-to-t from-black/[0.92] via-black/60 to-black/10" />
+                    <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/20 to-transparent" />
                 </motion.div>
             </AnimatePresence>
 
@@ -150,7 +150,7 @@ export default function HeroCarousel({ articles }: HeroCarouselProps) {
                             <motion.h2
                                 variants={contentVariants}
                                 custom={2}
-                                className="font-montserrat-black text-2xl md:text-4xl lg:text-5xl font-black text-white leading-[1.2] md:leading-[1.1] tracking-tight drop-shadow-xl shadow-black/20"
+                                className="font-montserrat-black text-2xl md:text-4xl lg:text-5xl font-black text-white leading-[1.15] md:leading-[1.08] tracking-tight drop-shadow-2xl"
                             >
                                 <Link href={`/articles/${currentArticle.slug}`} className="hover:text-lemon-lime transition-colors duration-300">
                                     {currentArticle.title}
@@ -162,11 +162,11 @@ export default function HeroCarousel({ articles }: HeroCarouselProps) {
                                 {currentArticle.excerpt}
                             </motion.p>
 
-                            {/* Read More Link */}
+                            {/* Read More Link — stronger CTA */}
                             <motion.div variants={contentVariants} custom={4} className="pt-4">
                                 <Link
                                     href={`/articles/${currentArticle.slug}`}
-                                    className="inline-flex items-center gap-2 text-white font-black font-montserrat-black uppercase tracking-widest text-xs md:text-sm border-b-2 border-lemon-lime pb-1 hover:text-lemon-lime transition-colors"
+                                    className="inline-flex items-center gap-2 text-black font-black font-montserrat-black uppercase tracking-widest text-xs md:text-sm bg-lemon-lime px-4 py-2 hover:bg-white hover:text-black transition-all duration-200"
                                 >
                                     Read Full Story <ArrowRight className="w-4 h-4" />
                                 </Link>

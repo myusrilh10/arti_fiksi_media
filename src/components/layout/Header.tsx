@@ -21,7 +21,7 @@ export default function Header() {
     };
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 text-black backdrop-blur-md">
+        <header className="sticky top-0 z-50 w-full border-b border-gray-200/60 bg-white/90 text-black backdrop-blur-lg shadow-sm">
             <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
                 {/* Logo */}
                 <Link href="/" className="flex items-center">
@@ -33,32 +33,24 @@ export default function Header() {
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-8 text-sm font-black font-montserrat-black uppercase tracking-widest relative">
-                    <Link href="/" className="hover:text-lemon-lime transition-colors">
-                        Home
-                    </Link>
-
-                    <Link href="/categories/lensa-lokal" className="hover:text-lemon-lime transition-colors">
-                        Lensa Lokal
-                    </Link>
-
-                    <Link href="/categories/lifestyle" className="hover:text-lemon-lime transition-colors">
-                        Lifestyle
-                    </Link>
-
-                    <Link href="/categories/public-interest" className="hover:text-lemon-lime transition-colors">
-                        Public Interest
-                    </Link>
-
-                    <Link href="/events" className="hover:text-lemon-lime transition-colors">
-                        Events
-                    </Link>
-                    <Link href="/videos" className="hover:text-lemon-lime transition-colors">
-                        Videos
-                    </Link>
-                    <Link href="/profile" className="hover:text-lemon-lime transition-colors">
-                        About
-                    </Link>
+                <nav className="hidden md:flex items-center gap-8 text-[11px] font-black font-montserrat-black uppercase tracking-[0.12em] relative">
+                    {[
+                        { href: '/', label: 'Home' },
+                        { href: '/categories/lensa-lokal', label: 'Lensa Lokal' },
+                        { href: '/categories/lifestyle', label: 'Lifestyle' },
+                        { href: '/categories/public-interest', label: 'Public Interest' },
+                        { href: '/events', label: 'Events' },
+                        { href: '/videos', label: 'Videos' },
+                        { href: '/profile', label: 'About' },
+                    ].map(({ href, label }) => (
+                        <Link
+                            key={href}
+                            href={href}
+                            className="relative pb-0.5 text-gray-700 hover:text-black transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-lemon-lime after:transition-all after:duration-300 hover:after:w-full"
+                        >
+                            {label}
+                        </Link>
+                    ))}
                 </nav>
 
                 {/* Actions */}

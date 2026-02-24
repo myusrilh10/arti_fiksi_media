@@ -5,22 +5,39 @@ interface AdBannerProps {
 }
 
 export default function AdBanner({ size = 'medium-rectangle', className = '' }: AdBannerProps) {
-    let dimensions = 'w-[300px] h-[250px]'; // medium-rectangle default
+    let dimensions = 'w-[300px] h-[250px]';
 
     if (size === 'leaderboard') dimensions = 'w-[728px] h-[90px]';
     if (size === 'large-leaderboard') dimensions = 'w-[970px] h-[90px]';
 
-    // For mobile responsiveness, we might want to override width
     const mobileDimensions = size === 'medium-rectangle' ? 'w-full max-w-[300px]' : 'w-full';
 
     return (
-        <div className={`flex justify-center my-8 ${className}`}>
+        <div className={`flex justify-center my-6 ${className}`}>
             <div
-                className={`${dimensions} ${mobileDimensions} bg-gray-50 flex flex-col items-center justify-center border border-gray-200 relative overflow-hidden`}
+                className={`${dimensions} ${mobileDimensions} relative flex flex-col items-center justify-center overflow-hidden`}
+                style={{
+                    backgroundImage: `radial-gradient(circle, #e5e5e5 1px, transparent 1px)`,
+                    backgroundSize: '16px 16px',
+                    backgroundColor: '#fafafa',
+                    border: '1.5px dashed #d1d5db',
+                }}
             >
-                <span className="text-xs text-gray-400 uppercase tracking-widest absolute top-1 left-2">Advertisement</span>
-                <div className="text-gray-300 font-bold text-lg">ADS PLACEHOLDER</div>
-                <div className="absolute bottom-0 right-0 w-4 h-4 bg-primary/20 rounded-tl-lg"></div>
+                {/* Top label */}
+                <span className="absolute top-2 left-3 text-[9px] font-black font-montserrat-black uppercase tracking-[0.2em] text-gray-400">
+                    Advertisement
+                </span>
+
+                {/* Placeholder content */}
+                <div className="flex flex-col items-center gap-1 opacity-30">
+                    <div className="w-6 h-6 border-2 border-gray-400 rounded-sm" />
+                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Ad Slot</span>
+                </div>
+
+                {/* Dimensions hint */}
+                <span className="absolute bottom-2 right-3 text-[9px] text-gray-300 font-mono">
+                    {size === 'medium-rectangle' ? '300×250' : size === 'leaderboard' ? '728×90' : '970×90'}
+                </span>
             </div>
         </div>
     );

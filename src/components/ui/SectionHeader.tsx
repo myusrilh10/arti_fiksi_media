@@ -7,14 +7,17 @@ interface SectionHeaderProps {
 
 export default function SectionHeader({ title, subtitle, className = '' }: SectionHeaderProps) {
     return (
-        <div className={`mb-16 flex flex-col items-center text-center ${className}`}>
-            <div className="flex flex-col items-center gap-3">
-                <div className="h-0.5 w-12 bg-lemon-lime mb-2" />
-                <h2 className="text-3xl md:text-5xl font-playfair text-gray-900 leading-tight">
+        <div className={`flex flex-col items-center text-center ${className}`}>
+            <div className="flex flex-col items-center gap-4">
+                {/* Accent line — thicker and more intentional */}
+                <div className="h-[3px] w-10 bg-lemon-lime" />
+
+                <h2 className="text-3xl md:text-[2.75rem] font-playfair text-gray-900 leading-[1.1] tracking-tight">
                     {title}
                 </h2>
+
                 {subtitle && (
-                    <p className="text-gray-400 text-[10px] md:text-xs font-black font-montserrat-black tracking-[0.3em] uppercase max-w-lg">
+                    <p className="text-gray-400 text-[10px] md:text-[11px] font-black font-montserrat-black tracking-[0.28em] uppercase max-w-sm leading-relaxed">
                         {subtitle}
                     </p>
                 )}

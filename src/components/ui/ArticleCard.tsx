@@ -27,30 +27,25 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                className="transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
             >
-                <div className={`relative overflow-hidden w-full ${featured ? 'aspect-[21/9]' : 'aspect-[4/3]'} group-hover:shadow-xl transition-all duration-500 rounded-t-xl`}>
-                    <motion.div
-                        className="w-full h-full relative"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-                    >
-                        {article.imageUrl ? (
-                            <Image
-                                src={article.imageUrl}
-                                alt={article.title}
-                                fill
-                                priority={featured}
-                                className="object-cover"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            />
-                        ) : (
-                            <div className="absolute inset-0 flex items-center justify-center bg-gray-200 text-gray-400">
-                                <span className="text-xs font-bold uppercase tracking-widest">No Image</span>
-                            </div>
-                        )}
-                        {/* Gradient Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#203627] via-transparent to-transparent opacity-80" />
-                    </motion.div>
+                <div className={`relative overflow-hidden w-full ${featured ? 'aspect-[21/9]' : 'aspect-[4/3]'} rounded-t-xl`}>
+                    {article.imageUrl ? (
+                        <Image
+                            src={article.imageUrl}
+                            alt={article.title}
+                            fill
+                            priority={featured}
+                            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                    ) : (
+                        <div className="absolute inset-0 flex items-center justify-center bg-gray-200 text-gray-400">
+                            <span className="text-xs font-bold uppercase tracking-widest">No Image</span>
+                        </div>
+                    )}
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#203627] via-transparent to-transparent opacity-80" />
 
                     {/* Category Label - Floating */}
                     <div className="absolute top-4 left-4 z-20">

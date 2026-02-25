@@ -12,7 +12,7 @@ interface VideoCardProps {
 
 export default function VideoCard({ video }: VideoCardProps) {
     return (
-        <div className="group block h-full">
+        <Link href={`/videos/${video.slug}`} className="group block h-full cursor-pointer">
             <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -71,15 +71,12 @@ export default function VideoCard({ video }: VideoCardProps) {
                     </h3>
 
                     <div className="mt-auto">
-                        <a
-                            href={video.videoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs font-black font-montserrat-black uppercase tracking-widest text-[#e7fe41] hover:underline flex items-center gap-2"
+                        <span
+                            className="text-xs font-black font-montserrat-black uppercase tracking-widest text-[#e7fe41] group-hover:underline flex items-center gap-2"
                         >
                             Watch Now
                             <Play className="h-3 w-3" />
-                        </a>
+                        </span>
                     </div>
 
                     <div className="w-full h-1 bg-white/10 mt-6 rounded-full overflow-hidden">
@@ -87,6 +84,6 @@ export default function VideoCard({ video }: VideoCardProps) {
                     </div>
                 </div>
             </motion.div>
-        </div>
+        </Link>
     );
 }

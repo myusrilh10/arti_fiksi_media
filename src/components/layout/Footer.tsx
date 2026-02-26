@@ -22,18 +22,18 @@ export default function Footer() {
             <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
                 <div className="grid gap-12 md:grid-cols-4">
                     {/* Brand */}
-                    <div className="space-y-4">
-                        <Link href="/" className="inline-block">
+                    <div className="flex flex-col">
+                        <Link href="/" className="inline-block -mt-1">
                             <img
                                 src="/images/logo.png"
                                 alt="Arti Fiksi Logo"
-                                className="h-16 w-auto object-contain"
+                                className="h-10 w-auto object-contain"
                                 onError={(e) => {
                                     e.currentTarget.src = "https://placehold.co/400x120/203627/e7fe41.png?text=ARTI+FIKSI&font=playfair";
                                 }}
                             />
                         </Link>
-                        <p className="text-sm text-gray-300">
+                        <p className="text-sm text-gray-300 mt-0 md:mt-[-4px]">
                             Media yang menemanimu simak dunia dan sekitar. Mulai dari kota Palu, sampai entah di belahan dunia mana
                         </p>
                     </div>

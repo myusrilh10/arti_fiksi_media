@@ -39,7 +39,7 @@ export default function ProfilePage() {
 
                 {/* 1. Deskripsi Singkat */}
                 <section className="bg-white p-10 md:p-16 lg:p-24 shadow-2xl max-w-5xl mx-auto relative mt-8 border-t-8 border-[#203627]">
-                    <div className="text-center max-w-3xl mx-auto">
+                    <div className="text-left max-w-3xl mx-auto">
                         <span className="text-gray-400 font-bold font-montserrat-black uppercase tracking-[0.3em] text-xs mb-6 block">Tentang Kami</span>
                         <h2 className="text-3xl md:text-5xl font-playfair font-bold mb-10 text-[#203627] leading-tight">
                             Arti Fiksi Media
@@ -167,27 +167,26 @@ export default function ProfilePage() {
                         ))}
                     </div>
                 </section>
-
-                {/* Interactive Navigation Menu */}
-                <InteractiveMenu />
-
-                {/* 5. Collaboration Block */}
-                <section className="py-24 md:py-32 text-center border-t border-gray-900">
-                    <h2 className="text-4xl md:text-6xl font-black font-montserrat-black uppercase tracking-tighter text-[#203627] mb-6">
-                        Have an <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#203627] to-[#9cc4d4]">Idea?</span>
-                    </h2>
-                    <p className="text-gray-600 max-w-xl mx-auto mb-10 text-lg md:text-xl font-medium leading-relaxed">
-                        Kami selalu terbuka untuk ide-ide segar, kolaborasi artistik, atau kritik yang membangun. Berikan percikan inspirasi kamu sekarang.
-                    </p>
-                    <a
-                        href="mailto:artifiksimedia@gmail.com"
-                        className="inline-block bg-[#203627] text-[#e7fe41] px-12 py-5 rounded-full font-black font-montserrat-black uppercase tracking-widest hover:bg-[#e7fe41] hover:text-[#203627] transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-2"
-                    >
-                        Contact Us
-                    </a>
-                </section>
-
             </div>
+
+            {/* Interactive Navigation Menu */}
+            <InteractiveMenu />
+
+            {/* 5. Collaboration Block */}
+            <section className="py-24 md:py-32 text-center border-t border-gray-900 bg-white px-4">
+                <h2 className="text-4xl md:text-6xl font-black font-montserrat-black uppercase tracking-tighter text-[#203627] mb-6">
+                    Have an <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#203627] to-[#9cc4d4]">Idea?</span>
+                </h2>
+                <p className="text-gray-600 max-w-xl mx-auto mb-10 text-lg md:text-xl font-medium leading-relaxed">
+                    Kami selalu terbuka untuk ide-ide segar, kolaborasi artistik, atau kritik yang membangun. Berikan percikan inspirasi kamu sekarang.
+                </p>
+                <a
+                    href="mailto:artifiksimedia@gmail.com"
+                    className="inline-block bg-[#203627] text-[#e7fe41] px-12 py-5 rounded-full font-black font-montserrat-black uppercase tracking-widest hover:bg-[#e7fe41] hover:text-[#203627] transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-2"
+                >
+                    Contact Us
+                </a>
+            </section>
         </div>
     );
 }

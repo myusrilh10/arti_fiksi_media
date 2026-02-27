@@ -10,7 +10,7 @@ export interface Article {
   imageUrl: string;
   slug: string;
   content?: string;
-  mainCategory: 'Lensa Lokal' | 'Lifestyle' | 'Public Interest';
+  mainCategory: string;
 }
 
 

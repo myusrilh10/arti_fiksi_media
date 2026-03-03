@@ -1,6 +1,7 @@
 import VideoCard from "@/components/ui/VideoCard";
 import AdBanner from "@/components/ui/AdBanner";
 import { getVideos } from "@/lib/api";
+import { Video } from "@/lib/data";
 
 export const metadata = {
     title: "Videos | Arti Fiksi Media",
@@ -29,7 +30,7 @@ export default async function VideosPage() {
                     </div>
                 ) : (
                     <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-                        {videos.map((video) => (
+                        {videos.map((video: Video) => (
                             <div key={video.id} className="h-full">
                                 <VideoCard video={video} />
                             </div>

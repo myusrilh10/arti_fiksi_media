@@ -9,6 +9,7 @@ import HeroCarousel from "@/components/ui/HeroCarousel";
 import VideoCard from "@/components/ui/VideoCard";
 
 import { getArticles, getEvents, getVideos } from "@/lib/api";
+import { Article, Event, Video } from "@/lib/data";
 
 export default async function Home() {
   // Parallel fetch for better performance
@@ -22,15 +23,15 @@ export default async function Home() {
   const carouselArticles = articles.slice(0, 3);
 
   // One featured article per main category
-  const lensaLokalArticle = articles.find((a) => a.mainCategory === "Lensa Lokal");
-  const lifestyleArticle = articles.find((a) => a.mainCategory === "Lifestyle");
-  const publicInterestArticle = articles.find((a) => a.mainCategory === "Public Interest")
-    ?? articles.find((a) => a.mainCategory === "News"); // fallback for "News" category
+  const lensaLokalArticle = articles.find((a: Article) => a.mainCategory === "Lensa Lokal");
+  const lifestyleArticle = articles.find((a: Article) => a.mainCategory === "Lifestyle");
+  const publicInterestArticle = articles.find((a: Article) => a.mainCategory === "Public Interest")
+    ?? articles.find((a: Article) => a.mainCategory === "News"); // fallback for "News" category
 
   // Trending — is_trending flag first, then latest
   const trendingArticles = [
-    ...articles.filter((a) => a.isTrending),
-    ...articles.filter((a) => !a.isTrending),
+    ...articles.filter((a: Article) => a.isTrending),
+    ...articles.filter((a: Article) => !a.isTrending),
   ].slice(0, 4);
 
   // Featured Videos
@@ -122,7 +123,7 @@ export default async function Home() {
               </div>
 
               <div className="grid sm:grid-cols-2 gap-x-8 gap-y-8">
-                {trendingArticles.map((article, idx) => (
+                {trendingArticles.map((article: Article, idx: number) => (
                   <Link key={article.id} href={`/articles/${article.slug}`} className="flex gap-4 group items-start">
                     <span className="text-[2.5rem] font-black font-montserrat-black text-gray-200 group-hover:text-lemon-lime transition-colors duration-200 tabular-nums leading-none select-none">
                       {String(idx + 1).padStart(2, '0')}
@@ -165,7 +166,7 @@ export default async function Home() {
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {homepageEvents.map((event) => (
+              {homepageEvents.map((event: Event) => (
                 <Link key={event.id} href={`/events/${event.slug}`} className="block group">
                   <div className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
                     <div className="relative aspect-[4/3] overflow-hidden">
@@ -214,7 +215,7 @@ export default async function Home() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {homepageVideos.map((video) => (
+              {homepageVideos.map((video: Video) => (
                 <div key={video.id} className="h-[300px]">
                   <VideoCard video={video} />
                 </div>

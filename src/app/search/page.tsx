@@ -1,4 +1,5 @@
 import { getArticles } from "@/lib/api";
+import { Article } from "@/lib/data";
 import ArticleCard from "@/components/ui/ArticleCard";
 import SectionHeader from "@/components/ui/SectionHeader";
 
@@ -12,7 +13,7 @@ export default async function SearchPage({
 
     const articles = await getArticles();
 
-    const results = articles.filter((article) => {
+    const results = articles.filter((article: Article) => {
         const titleMatch = article.title.toLowerCase().includes(query);
         const categoryMatch = article.category.toLowerCase().includes(query);
         const excerptMatch = article.excerpt.toLowerCase().includes(query);
@@ -28,7 +29,7 @@ export default async function SearchPage({
 
             {results.length > 0 ? (
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {results.map(article => (
+                    {results.map((article: Article) => (
                         <ArticleCard key={article.id} article={article} />
                     ))}
                 </div>

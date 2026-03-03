@@ -5,9 +5,9 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const menuItems = [
-    { title: "Layanan Kami", subtitle: "Our Services", href: "/services", img: "/images/cafe.png" },
-    { title: "Klien & Mitra", subtitle: "Advertisement", href: "/advertisement", img: "/images/tech.png" },
-    { title: "Tim & Kreator", subtitle: "Our Team", href: "/team", img: "/images/team1.png" }
+    { title: "Layanan Kami", subtitle: "Our Services", href: "/services", img: "/images/layanan.png" },
+    { title: "Klien & Mitra", subtitle: "Advertisement", href: "/advertisement", img: "/images/service.png" },
+    { title: "Tim & Kreator", subtitle: "Our Team", href: "/team", img: "/images/team.png" }
 ];
 
 export default function InteractiveMenu() {

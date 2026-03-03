@@ -5,6 +5,7 @@ import ArticleCard from "@/components/ui/ArticleCard";
 import { notFound } from "next/navigation";
 
 import { getArticleBySlug, getArticles } from "@/lib/api";
+import { Article } from "@/lib/data";
 
 // Strapi rich-text is an array of block nodes. This renders them as plain HTML.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -58,13 +59,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
     // Related articles: up to 3 others in the same category, excluding current
     const relatedArticles = allArticles
-        .filter((a) => a.slug !== slug && a.category === article.category)
+        .filter((a: Article) => a.slug !== slug && a.category === article.category)
         .slice(0, 3);
 
     // Fallback to latest articles if no related
     const sidebarArticles = relatedArticles.length > 0
         ? relatedArticles
-        : allArticles.filter((a) => a.slug !== slug).slice(0, 3);
+        : allArticles.filter((a: Article) => a.slug !== slug).slice(0, 3);
 
     const htmlContent = Array.isArray(article.content)
         ? renderRichText(article.content)
@@ -144,7 +145,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                     <div>
                         <SectionHeader title="Artikel Terkait" className="mb-4" />
                         <div className="space-y-4">
-                            {sidebarArticles.map((a) => (
+                            {sidebarArticles.map((a: Article) => (
                                 <ArticleCard key={a.id} article={a} />
                             ))}
                         </div>

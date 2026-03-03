@@ -6,6 +6,7 @@ import EventCard from "@/components/ui/EventCard";
 import AdBanner from "@/components/ui/AdBanner";
 import { notFound } from "next/navigation";
 import { getEventBySlug, getEvents } from "@/lib/api";
+import { Event } from "@/lib/data";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
@@ -27,7 +28,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
     }
 
     const allEvents = await getEvents();
-    const otherEvents = allEvents.filter(e => e.id !== event.id).slice(0, 3);
+    const otherEvents = allEvents.filter((e: Event) => e.id !== event.id).slice(0, 3);
 
     return (
         <div className="min-h-screen bg-white pb-20">
@@ -150,7 +151,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                         <div>
                             <SectionHeader title="Event Lainnya" className="mb-8" />
                             <div className="space-y-8">
-                                {otherEvents.map(e => (
+                                {otherEvents.map((e: Event) => (
                                     <div key={e.id}>
                                         <EventCard event={e} />
                                     </div>

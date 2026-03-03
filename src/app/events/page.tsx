@@ -1,6 +1,7 @@
 import EventCard from "@/components/ui/EventCard";
 import AdBanner from "@/components/ui/AdBanner";
 import { getEvents } from "@/lib/api";
+import { Event } from "@/lib/data";
 
 export const metadata = {
     title: "Events | Arti Fiksi Media",
@@ -29,7 +30,7 @@ export default async function EventsPage() {
                     </div>
                 ) : (
                     <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-                        {events.map((event) => (
+                        {events.map((event: Event) => (
                             <div key={event.id} className="h-full">
                                 <EventCard event={event} />
                             </div>

@@ -11,6 +11,8 @@ export interface Article {
   slug: string;
   content?: string;
   mainCategory: string;
+  isTrending?: boolean;
+  readingTime?: number | null;
 }
 
 

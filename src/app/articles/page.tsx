@@ -1,6 +1,8 @@
+import Link from "next/link";
 import ArticleCard from "@/components/ui/ArticleCard";
 import AdBanner from "@/components/ui/AdBanner";
 import { getArticles } from "@/lib/api";
+import { Article } from "@/lib/data";
 
 export const metadata = {
     title: "Latest Articles | Arti Fiksi Media",
@@ -8,15 +10,15 @@ export const metadata = {
 };
 
 export default async function ArticlesIndexPage() {
-    const articles = await getArticles();
+    const articles = await getArticles() as Article[];
 
     // Group articles by their main category
-    const articlesByCategory = articles.reduce((acc, article) => {
+    const articlesByCategory = articles.reduce((acc: Record<string, Article[]>, article: Article) => {
         const category = article.mainCategory || article.category || "Uncategorized";
         if (!acc[category]) acc[category] = [];
         acc[category].push(article);
         return acc;
-    }, {} as Record<string, typeof articles>);
+    }, {});
 
     const categories = Object.keys(articlesByCategory);
 
@@ -51,7 +53,7 @@ export default async function ArticlesIndexPage() {
                                 </div>
 
                                 <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-                                    {articlesByCategory[category].map((article) => (
+                                    {articlesByCategory[category].map((article: Article) => (
                                         <div key={article.id} className="h-full">
                                             <ArticleCard article={article} />
                                         </div>

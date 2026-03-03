@@ -1,3 +1,5 @@
+import { Article, Event, Video } from "./data";
+
 const API_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337';
 
 /**
@@ -58,22 +60,22 @@ async function fetchAPI(path: string, options: RequestInit = {}) {
  * This normalizes a raw Strapi article item into our app's Article shape.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function normalizeArticle(item: any) {
+function normalizeArticle(item: any): Article {
     return {
         id: String(item.id),
         title: item.title ?? '',
         slug: item.slug ?? '',
         excerpt: item.excerpt ?? '',
-        content: item.content ?? null,      // Rich text array from Strapi
+        content: item.content ?? null,
         author: item.Author ?? item.author ?? 'Unknown',
         date: item.date
             ? new Date(item.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
             : new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
-        imageUrl: getStrapiMedia(item.cover_image?.url ?? null),
-        mainCategory: item.category?.Name ?? 'Uncategorized',
-        category: item.category?.Name ?? 'Uncategorized',
-        isTrending: item.is_trending ?? false,
-        readingTime: item.reading_time ?? null,
+        imageUrl: getStrapiMedia(item.cover_image?.url ?? item.coverImage?.url ?? item.image?.url ?? null),
+        mainCategory: item.category?.Name ?? item.category?.name ?? 'Uncategorized',
+        category: item.category?.Name ?? item.category?.name ?? 'Uncategorized',
+        isTrending: item.is_trending ?? item.isTrending ?? false,
+        readingTime: item.reading_time ?? item.readingTime ?? null,
     };
 }
 
@@ -81,14 +83,14 @@ function normalizeArticle(item: any) {
  * Normalizes a raw Strapi event item into our app's Event shape.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function normalizeEvent(item: any) {
+function normalizeEvent(item: any): Event {
     return {
         id: String(item.id),
         title: item.title ?? '',
         date: item.date ?? '',
         location: item.location ?? '',
-        category: item.category?.Name ?? 'General',
-        imageUrl: getStrapiMedia(item.image?.url ?? null),
+        category: item.category?.Name ?? item.category?.name ?? 'General',
+        imageUrl: getStrapiMedia(item.image?.url ?? item.cover_image?.url ?? item.coverImage?.url ?? null),
         slug: item.slug ?? '',
         description: item.description ?? '',
     };
@@ -98,7 +100,7 @@ function normalizeEvent(item: any) {
  * Normalizes a raw Strapi video item into our app's Video shape.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function normalizeVideo(item: any) {
+function normalizeVideo(item: any): Video {
     return {
         id: String(item.id),
         title: item.title ?? '',
@@ -106,9 +108,9 @@ function normalizeVideo(item: any) {
         date: item.date
             ? new Date(item.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
             : new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
-        category: item.category?.Name ?? 'General',
-        imageUrl: getStrapiMedia(item.thumbnail?.url ?? null),
-        videoUrl: item.video_url ?? '',
+        category: item.category?.Name ?? item.category?.name ?? 'General',
+        imageUrl: getStrapiMedia(item.thumbnail?.url ?? item.image?.url ?? item.cover_image?.url ?? null),
+        videoUrl: item.video_url ?? item.videoUrl ?? '',
         slug: item.slug ?? '',
     };
 }
@@ -116,56 +118,83 @@ function normalizeVideo(item: any) {
 /**
  * Fetch all Articles from Strapi
  */
-export async function getArticles() {
-    const data = await fetchAPI("/articles?populate=*&sort=publishedAt:desc");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (data.data as any[]).map(normalizeArticle);
+export async function getArticles(): Promise<Article[]> {
+    try {
+        const data = await fetchAPI("/articles?populate=*&sort=publishedAt:desc");
+        return (Array.isArray(data.data) ? data.data : []).map(normalizeArticle);
+    } catch (e) {
+        console.error("Error fetching articles:", e);
+        return [];
+    }
 }
 
 /**
  * Fetch a single Article by slug
  */
-export async function getArticleBySlug(slug: string) {
-    const data = await fetchAPI(`/articles?filters[slug][$eq]=${slug}&populate=*`);
-    const item = data.data?.[0];
-    if (!item) return null;
-    return normalizeArticle(item);
+export async function getArticleBySlug(slug: string): Promise<Article | null> {
+    try {
+        const data = await fetchAPI(`/articles?filters[slug][$eq]=${slug}&populate=*`);
+        const item = data.data?.[0];
+        if (!item) return null;
+        return normalizeArticle(item);
+    } catch (e) {
+        console.error(`Error fetching article [${slug}]:`, e);
+        return null;
+    }
 }
 
 /**
  * Fetch Events from Strapi
  */
-export async function getEvents() {
-    const data = await fetchAPI("/events?populate=*&sort=publishedAt:desc");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (data.data as any[]).map(normalizeEvent);
+export async function getEvents(): Promise<Event[]> {
+    try {
+        const data = await fetchAPI("/events?populate=*&sort=publishedAt:desc");
+        return (Array.isArray(data.data) ? data.data : []).map(normalizeEvent);
+    } catch (e) {
+        console.error("Error fetching events:", e);
+        return [];
+    }
 }
 
 /**
  * Fetch a single Event by slug
  */
-export async function getEventBySlug(slug: string) {
-    const data = await fetchAPI(`/events?filters[slug][$eq]=${slug}&populate=*`);
-    const item = data.data?.[0];
-    if (!item) return null;
-    return normalizeEvent(item);
+export async function getEventBySlug(slug: string): Promise<Event | null> {
+    try {
+        const data = await fetchAPI(`/events?filters[slug][$eq]=${slug}&populate=*`);
+        const item = data.data?.[0];
+        if (!item) return null;
+        return normalizeEvent(item);
+    } catch (e) {
+        console.error(`Error fetching event [${slug}]:`, e);
+        return null;
+    }
 }
 
 /**
  * Fetch Videos from Strapi
  */
-export async function getVideos() {
-    const data = await fetchAPI("/videos?populate=*&sort=publishedAt:desc");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (data.data as any[]).map(normalizeVideo);
+export async function getVideos(): Promise<Video[]> {
+    try {
+        const data = await fetchAPI("/videos?populate=*&sort=publishedAt:desc");
+        return (Array.isArray(data.data) ? data.data : []).map(normalizeVideo);
+    } catch (e) {
+        console.error("Error fetching videos:", e);
+        return [];
+    }
 }
 
 /**
  * Fetch a single Video by slug
  */
-export async function getVideoBySlug(slug: string) {
-    const data = await fetchAPI(`/videos?filters[slug][$eq]=${slug}&populate=*`);
-    const item = data.data?.[0];
-    if (!item) return null;
-    return normalizeVideo(item);
+export async function getVideoBySlug(slug: string): Promise<Video | null> {
+    try {
+        const data = await fetchAPI(`/videos?filters[slug][$eq]=${slug}&populate=*`);
+        const item = data.data?.[0];
+        if (!item) return null;
+        return normalizeVideo(item);
+    } catch (e) {
+        console.error(`Error fetching video [${slug}]:`, e);
+        return null;
+    }
 }

@@ -1,32 +1,42 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Clock, CalendarDays, Play } from "lucide-react";
-import { VIDEOS } from "@/lib/data";
 import AdBanner from "@/components/ui/AdBanner";
 import VideoCard from "@/components/ui/VideoCard";
+import { getVideoBySlug, getVideos } from "@/lib/api";
+import { Video } from "@/lib/data";
 
-export async function generateStaticParams() {
-    return VIDEOS.map((video) => ({
-        slug: video.slug,
-    }));
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
+    const video = await getVideoBySlug(slug);
+    if (!video) return { title: "Video Not Found" };
+
+    return {
+        title: `${video.title} | Arti Fiksi Media`,
+        description: `Watch ${video.title} on Arti Fiksi Media.`,
+    };
 }
 
-export default async function VideoDetailPage(props: { params: Promise<{ slug: string }> }) {
-    const params = await props.params;
-    const video = VIDEOS.find((v) => v.slug === params.slug);
+export default async function VideoDetailPage({ params: paramsPromise }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await paramsPromise;
+    const video = await getVideoBySlug(slug);
 
     if (!video) {
         notFound();
     }
 
-    // Related videos
-    const relatedVideos = VIDEOS.filter((v) => v.id !== video.id).slice(0, 3);
+    const allVideos = await getVideos();
+    const relatedVideos = (allVideos as Video[]).filter((v: Video) => v.id !== video.id).slice(0, 3);
 
     // Convert regular YouTube URL to embed URL
     const getEmbedUrl = (url: string) => {
+        if (!url) return "";
         if (url.includes('youtube.com/watch?v=')) {
             return url.replace('watch?v=', 'embed/');
+        }
+        if (url.includes('youtu.be/')) {
+            const id = url.split('youtu.be/')[1];
+            return `https://www.youtube.com/embed/${id}`;
         }
         return url;
     };
@@ -73,7 +83,7 @@ export default async function VideoDetailPage(props: { params: Promise<{ slug: s
 
                     {/* Video Player */}
                     <div className="aspect-video w-full bg-gray-900 rounded-2xl overflow-hidden shadow-2xl mb-12 relative flex items-center justify-center">
-                        {video.videoUrl.includes('youtube.com') ? (
+                        {(video.videoUrl.includes('youtube.com') || video.videoUrl.includes('youtu.be')) ? (
                             <iframe
                                 src={getEmbedUrl(video.videoUrl)}
                                 title={video.title}
@@ -90,7 +100,6 @@ export default async function VideoDetailPage(props: { params: Promise<{ slug: s
                         )}
                     </div>
 
-                    {/* Description area placeholder if they had description */}
                     <div className="prose prose-lg max-w-none prose-a:text-[#e7fe41] mb-16">
                         <p className="text-gray-600 leading-relaxed text-lg">
                             Watch our latest coverage of <strong>{video.title}</strong>, showcasing detailed insights, brilliant cinematography, and an exclusive look at the underlying stories. Stick around to explore more about our cultural deep dives and city tours.
@@ -104,7 +113,7 @@ export default async function VideoDetailPage(props: { params: Promise<{ slug: s
                                 More Videos
                             </h2>
                             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                                {relatedVideos.map((related) => (
+                                {relatedVideos.map((related: Video) => (
                                     <VideoCard key={related.id} video={related} />
                                 ))}
                             </div>

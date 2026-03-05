@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ArticleCard from "@/components/ui/ArticleCard";
 import AdBanner from "@/components/ui/AdBanner";
-import { getArticles } from "@/lib/api";
+import { getPaginatedArticles } from "@/lib/api";
 import { Article } from "@/lib/data";
 
 export const metadata = {
@@ -9,18 +9,10 @@ export const metadata = {
     description: "Temukan artikel terbaru seputar teknologi, gaya hidup, fashion, dan budaya pop.",
 };
 
-export default async function ArticlesIndexPage() {
-    const articles = await getArticles() as Article[];
-
-    // Group articles by their main category
-    const articlesByCategory = articles.reduce((acc: Record<string, Article[]>, article: Article) => {
-        const category = article.mainCategory || article.category || "Uncategorized";
-        if (!acc[category]) acc[category] = [];
-        acc[category].push(article);
-        return acc;
-    }, {});
-
-    const categories = Object.keys(articlesByCategory);
+export default async function ArticlesIndexPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+    const searchParamsData = await searchParams;
+    const currentPage = Number(searchParamsData.page) || 1;
+    const { articles, meta } = await getPaginatedArticles(currentPage, 12);
 
     return (
         <div className="min-h-screen bg-white">
@@ -35,32 +27,54 @@ export default async function ArticlesIndexPage() {
                     </p>
                 </div>
 
-                {categories.length === 0 ? (
+                {articles.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-24 text-gray-400">
                         <p className="text-lg font-semibold">Belum ada artikel yang dipublikasikan.</p>
                     </div>
                 ) : (
-                    <div className="space-y-24">
-                        {categories.map((category, index) => (
-                            <section key={category} className="relative">
-                                <div className="flex items-end justify-between mb-10 border-b border-black/10 pb-4">
-                                    <h2 className="text-3xl md:text-4xl font-playfair text-black">
-                                        {category}
-                                    </h2>
-                                    <span className="text-xs font-black font-montserrat-black uppercase tracking-widest text-gray-400 hidden md:block">
-                                        0{index + 1} /
-                                    </span>
+                    <div className="space-y-16">
+                        <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+                            {articles.map((article: Article) => (
+                                <div key={article.id} className="h-full">
+                                    <ArticleCard article={article} />
                                 </div>
+                            ))}
+                        </div>
 
-                                <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-                                    {articlesByCategory[category].map((article: Article) => (
-                                        <div key={article.id} className="h-full">
-                                            <ArticleCard article={article} />
-                                        </div>
-                                    ))}
-                                </div>
-                            </section>
-                        ))}
+                        {/* Pagination Controls */}
+                        {meta && meta.pageCount > 1 && (
+                            <div className="flex items-center justify-center gap-4 mt-16 pt-8 border-t border-black/10">
+                                {currentPage > 1 ? (
+                                    <Link
+                                        href={`/articles?page=${currentPage - 1}`}
+                                        className="px-6 py-2 border border-[#203627] text-[#203627] font-bold uppercase tracking-wider text-xs hover:bg-[#203627] hover:text-white transition-colors"
+                                    >
+                                        Previous
+                                    </Link>
+                                ) : (
+                                    <span className="px-6 py-2 border border-gray-200 text-gray-400 font-bold uppercase tracking-wider text-xs cursor-not-allowed">
+                                        Previous
+                                    </span>
+                                )}
+
+                                <span className="text-sm font-medium text-gray-500">
+                                    Page {currentPage} of {meta.pageCount}
+                                </span>
+
+                                {currentPage < meta.pageCount ? (
+                                    <Link
+                                        href={`/articles?page=${currentPage + 1}`}
+                                        className="px-6 py-2 border border-[#203627] text-[#203627] font-bold uppercase tracking-wider text-xs hover:bg-[#203627] hover:text-white transition-colors"
+                                    >
+                                        Next
+                                    </Link>
+                                ) : (
+                                    <span className="px-6 py-2 border border-gray-200 text-gray-400 font-bold uppercase tracking-wider text-xs cursor-not-allowed">
+                                        Next
+                                    </span>
+                                )}
+                            </div>
+                        )}
                     </div>
                 )}
 

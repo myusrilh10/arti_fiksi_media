@@ -14,17 +14,17 @@ export default function ProfilePage() {
             <section className="relative h-[70vh] md:h-[80vh] w-full flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/images/office.png"
+                        src="/images/sampul.webp"
                         alt="Office Aesthetic"
                         fill
                         className="object-cover"
                         priority
                     />
                     {/* Dark gradient overlay for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-black/30" />
+                    {/* <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-black/30" /> */}
                 </div>
 
-                <div className="relative z-10 text-center px-4 max-w-5xl mx-auto mt-20">
+                {/* <div className="relative z-10 text-center px-4 max-w-5xl mx-auto mt-20">
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-playfair font-black text-white mb-6 tracking-tight drop-shadow-lg">
                         ARTI FIKSI
                     </h1>
@@ -32,7 +32,7 @@ export default function ProfilePage() {
                     <p className="text-gray-200 text-lg md:text-2xl font-montserrat-regular tracking-[0.2em] uppercase max-w-2xl mx-auto drop-shadow-md font-medium">
                         Reimagining Media for the Creative Soul
                     </p>
-                </div>
+                </div> */}
             </section>
 
             <div className="container mx-auto px-4 md:px-6 relative z-20 -mt-20 md:-mt-32">

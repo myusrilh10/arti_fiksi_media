@@ -8,19 +8,23 @@ import AdBanner from "@/components/ui/AdBanner";
 import HeroCarousel from "@/components/ui/HeroCarousel";
 import VideoCard from "@/components/ui/VideoCard";
 
-import { getArticles, getEvents, getVideos } from "@/lib/api";
-import { Article, Event, Video } from "@/lib/data";
+import { getArticles, getEvents, getVideos, getAdvertisements } from "@/lib/api";
+import { Article, Event, Video, Advertisement } from "@/lib/data";
 
 export default async function Home() {
   // Parallel fetch for better performance
-  const [articles, events, videos] = await Promise.all([
+  const [articles, events, videos, advertisements] = await Promise.all([
     getArticles(),
     getEvents(),
-    getVideos()
+    getVideos(),
+    getAdvertisements()
   ]);
 
-  // Hero carousel — first 3 articles from Strapi
-  const carouselArticles = articles.slice(0, 3);
+  // Hero carousel — first 3 featured articles or fallback to latest 3
+  const featuredArticles = articles.filter((a: Article) => a.isFeatured);
+  const carouselArticles = featuredArticles.length > 0
+    ? featuredArticles.slice(0, 3)
+    : articles.slice(0, 3);
 
   // One featured article per main category
   const lensaLokalArticle = articles.find((a: Article) => a.mainCategory === "Lensa Lokal");
@@ -28,11 +32,19 @@ export default async function Home() {
   const publicInterestArticle = articles.find((a: Article) => a.mainCategory === "Public Interest")
     ?? articles.find((a: Article) => a.mainCategory === "News"); // fallback for "News" category
 
-  // Trending — is_trending flag first, then latest
-  const trendingArticles = [
-    ...articles.filter((a: Article) => a.isTrending),
-    ...articles.filter((a: Article) => !a.isTrending),
-  ].slice(0, 4);
+  // Trending — sort by views first, then is_trending/isFeatured, then latest
+  const trendingArticles = [...articles].sort((a, b) => {
+    // 1. Sort by views (descending)
+    const viewsA = a.views || 0;
+    const viewsB = b.views || 0;
+    if (viewsA !== viewsB) {
+      return viewsB - viewsA;
+    }
+    // 2. Fallback to isTrending or isFeatured
+    const aTrending = (a.isTrending || a.isFeatured) ? 1 : 0;
+    const bTrending = (b.isTrending || b.isFeatured) ? 1 : 0;
+    return bTrending - aTrending;
+  }).slice(0, 4);
 
   // Featured Videos
   const homepageVideos = videos.slice(0, 3);
@@ -40,12 +52,17 @@ export default async function Home() {
   // Upcoming Events
   const homepageEvents = events.slice(0, 4);
 
+  // Extract ads by position
+  const topAd = advertisements.find((ad: Advertisement) => ad.position === 'top');
+  const middleAd = advertisements.find((ad: Advertisement) => ad.position === 'middle');
+  const bottomAd = advertisements.find((ad: Advertisement) => ad.position === 'bottom');
+
   return (
     <div className="py-6 md:py-8">
 
       {/* Top Ad Banner */}
       <div className="container mx-auto px-4 md:px-6 mb-8">
-        <AdBanner size="large-leaderboard" />
+        <AdBanner size="large-leaderboard" ad={topAd} />
       </div>
 
       {/* Hero Carousel — Full Width */}
@@ -151,7 +168,7 @@ export default async function Home() {
           </div>
 
           <div className="lg:col-span-4 flex items-center justify-center">
-            <AdBanner size="medium-rectangle" className="w-full h-full my-0" />
+            <AdBanner size="medium-rectangle" className="w-full h-full my-0" ad={middleAd} />
           </div>
         </div>
 
@@ -225,7 +242,7 @@ export default async function Home() {
         )}
 
         {/* Bottom Ad */}
-        <AdBanner size="large-leaderboard" className="hidden lg:flex mt-4 mb-4" />
+        <AdBanner size="large-leaderboard" className="hidden lg:flex mt-4 mb-4" ad={bottomAd} />
 
       </div>
     </div>

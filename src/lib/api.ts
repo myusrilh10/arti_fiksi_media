@@ -1,4 +1,4 @@
-import { Article, Event, Video } from "./data";
+import { Article, Event, Video, Advertisement } from "./data";
 
 const API_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337';
 
@@ -75,6 +75,8 @@ function normalizeArticle(item: any): Article {
         mainCategory: item.category?.Name ?? item.category?.name ?? 'Uncategorized',
         category: item.category?.Name ?? item.category?.name ?? 'Uncategorized',
         isTrending: item.is_trending ?? item.isTrending ?? false,
+        isFeatured: item.is_featured ?? item.isFeatured ?? false,
+        views: item.views ?? 0,
         readingTime: item.reading_time ?? item.readingTime ?? null,
     };
 }
@@ -144,6 +146,22 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
 }
 
 /**
+ * Fetch Paginated Articles from Strapi
+ */
+export async function getPaginatedArticles(page = 1, pageSize = 12): Promise<{ articles: Article[], meta: any }> {
+    try {
+        const data = await fetchAPI(`/articles?populate=*&sort=publishedAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`);
+        return {
+            articles: (Array.isArray(data.data) ? data.data : []).map(normalizeArticle),
+            meta: data.meta?.pagination || { page: 1, pageSize, pageCount: 1, total: 0 }
+        };
+    } catch (e) {
+        console.error("Error fetching paginated articles:", e);
+        return { articles: [], meta: { page, pageSize, pageCount: 1, total: 0 } };
+    }
+}
+
+/**
  * Fetch Events from Strapi
  */
 export async function getEvents(): Promise<Event[]> {
@@ -196,5 +214,47 @@ export async function getVideoBySlug(slug: string): Promise<Video | null> {
     } catch (e) {
         console.error(`Error fetching video [${slug}]:`, e);
         return null;
+    }
+}
+
+/**
+ * Fetch Paginated Videos from Strapi
+ */
+export async function getPaginatedVideos(page = 1, pageSize = 12): Promise<{ videos: Video[], meta: any }> {
+    try {
+        const data = await fetchAPI(`/videos?populate=*&sort=publishedAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`);
+        return {
+            videos: (Array.isArray(data.data) ? data.data : []).map(normalizeVideo),
+            meta: data.meta?.pagination || { page: 1, pageSize, pageCount: 1, total: 0 }
+        };
+    } catch (e) {
+        console.error("Error fetching paginated videos:", e);
+        return { videos: [], meta: { page, pageSize, pageCount: 1, total: 0 } };
+    }
+}
+
+/**
+ * Normalizes a raw Strapi advertisement item into our app's Advertisement shape.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function normalizeAdvertisement(item: any): Advertisement {
+    return {
+        id: String(item.id),
+        imageUrl: getStrapiMedia(item.image?.url ?? item.imageUrl ?? null),
+        linkUrl: item.linkUrl ?? item.link_url ?? '#',
+        position: item.position ?? 'middle'
+    };
+}
+
+/**
+ * Fetch Advertisements from Strapi
+ */
+export async function getAdvertisements(): Promise<Advertisement[]> {
+    try {
+        const data = await fetchAPI("/advertisements?populate=*");
+        return (Array.isArray(data.data) ? data.data : []).map(normalizeAdvertisement);
+    } catch (e) {
+        console.error("Error fetching advertisements:", e);
+        return [];
     }
 }

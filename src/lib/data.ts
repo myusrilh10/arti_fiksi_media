@@ -11,8 +11,17 @@ export interface Article {
   slug: string;
   content?: string;
   mainCategory: string;
+  isFeatured?: boolean;
+  views?: number;
   isTrending?: boolean;
   readingTime?: number | null;
+}
+
+export interface Advertisement {
+  id: string;
+  imageUrl: string;
+  linkUrl: string;
+  position: string;
 }
 
 

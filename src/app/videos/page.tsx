@@ -1,6 +1,7 @@
+import Link from "next/link";
 import VideoCard from "@/components/ui/VideoCard";
 import AdBanner from "@/components/ui/AdBanner";
-import { getVideos } from "@/lib/api";
+import { getPaginatedVideos } from "@/lib/api";
 import { Video } from "@/lib/data";
 
 export const metadata = {
@@ -8,8 +9,10 @@ export const metadata = {
     description: "Watch the latest stories through our cinematic documentaries and interviews.",
 };
 
-export default async function VideosPage() {
-    const videos = await getVideos();
+export default async function VideosPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+    const searchParamsData = await searchParams;
+    const currentPage = Number(searchParamsData.page) || 1;
+    const { videos, meta } = await getPaginatedVideos(currentPage, 12);
 
     return (
         <div className="min-h-screen bg-white">
@@ -29,12 +32,49 @@ export default async function VideosPage() {
                         <p className="text-lg font-semibold">Belum ada video yang dipublikasikan.</p>
                     </div>
                 ) : (
-                    <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-                        {videos.map((video: Video) => (
-                            <div key={video.id} className="h-full">
-                                <VideoCard video={video} />
+                    <div className="space-y-16">
+                        <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+                            {videos.map((video: Video) => (
+                                <div key={video.id} className="h-full">
+                                    <VideoCard video={video} />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Pagination Controls */}
+                        {meta && meta.pageCount > 1 && (
+                            <div className="flex items-center justify-center gap-4 mt-16 pt-8 border-t border-black/10">
+                                {currentPage > 1 ? (
+                                    <Link
+                                        href={`/videos?page=${currentPage - 1}`}
+                                        className="px-6 py-2 border border-[#203627] text-[#203627] font-bold uppercase tracking-wider text-xs hover:bg-[#203627] hover:text-white transition-colors"
+                                    >
+                                        Previous
+                                    </Link>
+                                ) : (
+                                    <span className="px-6 py-2 border border-gray-200 text-gray-400 font-bold uppercase tracking-wider text-xs cursor-not-allowed">
+                                        Previous
+                                    </span>
+                                )}
+
+                                <span className="text-sm font-medium text-gray-500">
+                                    Page {currentPage} of {meta.pageCount}
+                                </span>
+
+                                {currentPage < meta.pageCount ? (
+                                    <Link
+                                        href={`/videos?page=${currentPage + 1}`}
+                                        className="px-6 py-2 border border-[#203627] text-[#203627] font-bold uppercase tracking-wider text-xs hover:bg-[#203627] hover:text-white transition-colors"
+                                    >
+                                        Next
+                                    </Link>
+                                ) : (
+                                    <span className="px-6 py-2 border border-gray-200 text-gray-400 font-bold uppercase tracking-wider text-xs cursor-not-allowed">
+                                        Next
+                                    </span>
+                                )}
                             </div>
-                        ))}
+                        )}
                     </div>
                 )}
 

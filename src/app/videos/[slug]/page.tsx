@@ -89,6 +89,7 @@ export default async function VideoDetailPage({ params: paramsPromise }: { param
                                 title={video.title}
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
+                                loading="lazy"
                                 className="w-full h-full border-0 absolute inset-0"
                             />
                         ) : (

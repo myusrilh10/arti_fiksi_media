@@ -68,12 +68,12 @@ function normalizeArticle(item: any): Article {
         excerpt: item.excerpt ?? '',
         content: item.content ?? null,
         author: item.Author ?? item.author ?? 'Unknown',
-        date: item.date
-            ? new Date(item.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
-            : new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
-        imageUrl: getStrapiMedia(item.cover_image?.url ?? item.coverImage?.url ?? item.image?.url ?? null),
-        mainCategory: item.category?.Name ?? item.category?.name ?? 'Uncategorized',
-        category: item.category?.Name ?? item.category?.name ?? 'Uncategorized',
+        date: item.publishedAt
+            ? new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+            : new Date(item.createdAt ?? new Date()).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
+        imageUrl: getStrapiMedia(item.cover_image?.url ?? item.coverImage?.url ?? item.image?.url ?? item.cover_image?.formats?.large?.url ?? item.image?.formats?.large?.url ?? null),
+        mainCategory: item.category?.category ?? item.Category?.category ?? item.category?.Name ?? item.category?.name ?? item.Category?.Name ?? item.Category?.name ?? 'Uncategorized',
+        category: item.category?.category ?? item.Category?.category ?? item.category?.Name ?? item.category?.name ?? item.Category?.Name ?? item.Category?.name ?? 'Uncategorized',
         isTrending: item.is_trending ?? item.isTrending ?? false,
         isFeatured: item.is_featured ?? item.isFeatured ?? false,
         views: item.views ?? 0,
@@ -86,15 +86,30 @@ function normalizeArticle(item: any): Article {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function normalizeEvent(item: any): Event {
+    // Handle Event Dates
+    let formattedDate = "";
+    if (item.start_date && item.end_date) {
+        const start = new Date(item.start_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+        const end = new Date(item.end_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+        formattedDate = `${start} - ${end}`;
+    } else if (item.start_date) {
+        formattedDate = new Date(item.start_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+    } else if (item.EventDate || item.eventDate || item.Date || item.date) {
+        // Fallback to older fields just in case
+        const rawDate = item.EventDate || item.eventDate || item.Date || item.date;
+        formattedDate = new Date(rawDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
     return {
         id: String(item.id),
         title: item.title ?? '',
-        date: item.date ?? '',
-        location: item.location ?? '',
-        category: item.category?.Name ?? item.category?.name ?? 'General',
-        imageUrl: getStrapiMedia(item.image?.url ?? item.cover_image?.url ?? item.coverImage?.url ?? null),
+        date: formattedDate,
+        location: item.location ?? item.Location ?? item.eventLocation ?? '',
+        category: item.category?.category ?? item.Category?.category ?? item.category?.Name ?? item.category?.name ?? item.Category?.Name ?? item.Category?.name ?? 'General',
+        imageUrl: getStrapiMedia(item.image?.url ?? item.cover_image?.url ?? item.coverImage?.url ?? item.image?.formats?.large?.url ?? null),
         slug: item.slug ?? '',
         description: item.description ?? '',
+        registrationLink: item.registration_link ?? item.registrationLink ?? null,
     };
 }
 
@@ -110,10 +125,11 @@ function normalizeVideo(item: any): Video {
         date: item.date
             ? new Date(item.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
             : new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
-        category: item.category?.Name ?? item.category?.name ?? 'General',
-        imageUrl: getStrapiMedia(item.thumbnail?.url ?? item.image?.url ?? item.cover_image?.url ?? null),
+        category: item.category?.category ?? item.Category?.category ?? item.category?.Name ?? item.category?.name ?? item.Category?.Name ?? item.Category?.name ?? 'General',
+        imageUrl: getStrapiMedia(item.thumbnail?.url ?? item.image?.url ?? item.cover_image?.url ?? item.thumbnail?.formats?.large?.url ?? null),
         videoUrl: item.video_url ?? item.videoUrl ?? '',
         slug: item.slug ?? '',
+        description: item.description ?? '',
     };
 }
 
@@ -240,7 +256,7 @@ export async function getPaginatedVideos(page = 1, pageSize = 12): Promise<{ vid
 function normalizeAdvertisement(item: any): Advertisement {
     return {
         id: String(item.id),
-        imageUrl: getStrapiMedia(item.image?.url ?? item.imageUrl ?? null),
+        imageUrl: getStrapiMedia(item.image?.url ?? item.imageUrl ?? item.image?.formats?.large?.url ?? null),
         linkUrl: item.linkUrl ?? item.link_url ?? '#',
         position: item.position ?? 'middle'
     };

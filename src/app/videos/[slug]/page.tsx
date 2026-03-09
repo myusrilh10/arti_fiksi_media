@@ -101,10 +101,15 @@ export default async function VideoDetailPage({ params: paramsPromise }: { param
                         )}
                     </div>
 
-                    <div className="prose prose-lg max-w-none prose-a:text-[#e7fe41] mb-16">
-                        <p className="text-gray-600 leading-relaxed text-lg">
-                            Watch our latest coverage of <strong>{video.title}</strong>, showcasing detailed insights, brilliant cinematography, and an exclusive look at the underlying stories. Stick around to explore more about our cultural deep dives and city tours.
-                        </p>
+                    {/* Video Description */}
+                    <div className="prose prose-lg max-w-none prose-a:text-[#e7fe41] mb-16 overflow-hidden break-words whitespace-pre-wrap">
+                        {video.description ? (
+                            <p className="text-gray-600 leading-relaxed text-lg">
+                                {video.description}
+                            </p>
+                        ) : (
+                            <p className="text-gray-400 italic border-l-4 border-gray-200 pl-4">Tidak ada deskripsi tersedia untuk video ini.</p>
+                        )}
                     </div>
 
                     {/* Related Videos */}

@@ -97,16 +97,16 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                         <span className="text-primary font-bold uppercase tracking-wider text-sm">
                             {article.category}
                         </span>
-                        <h1 className="text-3xl md:text-5xl font-bold mt-2 leading-tight">
+                        <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mt-2 leading-tight">
                             {article.title}
                         </h1>
-                        <div className="flex items-center gap-4 text-gray-500 mt-4 text-sm">
+                        <div className="flex flex-wrap items-center gap-2 md:gap-4 text-gray-500 mt-4 text-xs md:text-sm">
                             <span>By {article.author}</span>
-                            <span>•</span>
+                            <span className="hidden sm:inline">•</span>
                             <span>{article.date}</span>
                             {article.readingTime && (
                                 <>
-                                    <span>•</span>
+                                    <span className="hidden sm:inline">•</span>
                                     <span>{article.readingTime} min read</span>
                                 </>
                             )}

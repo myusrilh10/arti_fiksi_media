@@ -73,8 +73,8 @@ export default async function Home() {
       <div className="container mx-auto px-4 md:px-6">
 
         {/* Newest Articles by Category */}
-        <section className="mb-24">
-          <SectionHeader title="Newest Article" subtitle="Ikuti perkembangan terkini" className="mb-12" />
+        <section className="mb-16 md:mb-24">
+          <SectionHeader title="Newest Article" subtitle="Ikuti perkembangan terkini" className="mb-10 md:mb-12" />
           <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#203627]/20">
 
             {/* Lensa Lokal */}
@@ -126,10 +126,10 @@ export default async function Home() {
         </section>
 
         {/* Trending + Ad */}
-        <div className="grid lg:grid-cols-12 gap-12 mb-24">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 mb-16 md:mb-24">
           <div className="lg:col-span-8">
-            <div className="bg-gray-50/80 p-8 rounded-2xl border border-gray-100 h-full">
-              <div className="flex items-center gap-3 mb-8 pb-5 border-b border-gray-200">
+            <div className="bg-gray-50/80 p-5 md:p-8 rounded-2xl border border-gray-100 h-full">
+              <div className="flex items-center gap-3 mb-6 md:mb-8 pb-5 border-b border-gray-200">
                 <span className="w-1 h-7 bg-lemon-lime flex-shrink-0" />
                 <div className="flex items-center gap-2 text-[#203627]">
                   <TrendingUp className="w-5 h-5" />
@@ -139,7 +139,7 @@ export default async function Home() {
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-x-8 gap-y-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 md:gap-y-8">
                 {trendingArticles.map((article: Article, idx: number) => (
                   <Link key={article.id} href={`/articles/${article.slug}`} className="flex gap-4 group items-start">
                     <span className="text-[2.5rem] font-black font-montserrat-black text-gray-200 group-hover:text-lemon-lime transition-colors duration-200 tabular-nums leading-none select-none">
@@ -174,17 +174,18 @@ export default async function Home() {
 
         {/* Upcoming Events */}
         {homepageEvents.length > 0 && (
-          <section className="mb-24">
-            <div className="flex items-center justify-between mb-10">
+          <section className="mb-16 md:mb-24">
+            <div className="flex items-center justify-between mb-8 md:mb-10">
               <SectionHeader title="Upcoming Events" subtitle="Jangan lewatkan momen seru" className="mb-0" />
-              <Link href="/events" className="hidden md:flex items-center gap-2 text-[11px] font-black font-montserrat-black text-[#203627] uppercase tracking-[0.12em] hover:text-lemon-lime hover:translate-x-1 transition-all duration-200">
+              <Link href="/events" className="flex items-center gap-2 text-[11px] font-black font-montserrat-black text-[#203627] uppercase tracking-[0.12em] hover:text-lemon-lime hover:translate-x-1 transition-all duration-200">
                 View All <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Mobile: horizontal scroll, Desktop: grid */}
+            <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:gap-6 md:grid-cols-2 lg:grid-cols-4 md:overflow-visible md:pb-0">
               {homepageEvents.map((event: Event) => (
-                <Link key={event.id} href={`/events/${event.slug}`} className="block group">
+                <Link key={event.id} href={`/events/${event.slug}`} className="block group flex-none w-[75vw] sm:w-[55vw] md:w-auto snap-start">
                   <div className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
@@ -223,17 +224,18 @@ export default async function Home() {
 
         {/* Featured Videos */}
         {homepageVideos.length > 0 && (
-          <section className="mb-24">
-            <div className="flex items-center justify-between mb-10">
+          <section className="mb-16 md:mb-24">
+            <div className="flex items-center justify-between mb-8 md:mb-10">
               <SectionHeader title="Featured Videos" subtitle="Tonton tayangan eksklusif kami" className="mb-0" />
-              <Link href="/videos" className="hidden md:flex items-center gap-2 text-[11px] font-black font-montserrat-black text-[#203627] uppercase tracking-[0.12em] hover:text-lemon-lime hover:translate-x-1 transition-all duration-200">
+              <Link href="/videos" className="flex items-center gap-2 text-[11px] font-black font-montserrat-black text-[#203627] uppercase tracking-[0.12em] hover:text-lemon-lime hover:translate-x-1 transition-all duration-200">
                 View All <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {/* Mobile: horizontal scroll, Desktop: grid */}
+            <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:gap-6 md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0">
               {homepageVideos.map((video: Video) => (
-                <div key={video.id} className="h-[300px]">
+                <div key={video.id} className="flex-none w-[80vw] sm:w-[60vw] md:w-auto snap-start h-[280px] md:h-[300px]">
                   <VideoCard video={video} />
                 </div>
               ))}

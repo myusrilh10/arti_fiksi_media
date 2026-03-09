@@ -163,6 +163,7 @@ export interface Event {
   imageUrl: string;
   slug: string;
   description?: string;
+  registrationLink?: string | null;
 }
 
 export const EVENTS: Event[] = [
@@ -217,6 +218,7 @@ export interface Video {
   imageUrl: string;
   videoUrl: string;
   slug: string;
+  description?: string;
 }
 
 export const VIDEOS: Video[] = [

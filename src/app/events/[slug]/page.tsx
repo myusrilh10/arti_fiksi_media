@@ -33,7 +33,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
     return (
         <div className="min-h-screen bg-white pb-20">
             {/* Hero Section */}
-            <div className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden">
+            <div className="relative h-[45vh] md:h-[65vh] w-full overflow-hidden">
                 <Image
                     src={event.imageUrl}
                     alt={event.title}
@@ -41,23 +41,23 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                     className="object-cover"
                     priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
-                <div className="absolute bottom-0 left-0 w-full p-6 md:p-12">
+                <div className="absolute bottom-0 left-0 w-full p-4 md:p-12">
                     <div className="container mx-auto">
                         <Link
                             href="/events"
-                            className="inline-flex items-center gap-2 text-white/80 hover:text-[#e7fe41] transition-colors mb-6 text-sm font-medium"
+                            className="inline-flex items-center gap-2 text-white/80 hover:text-[#e7fe41] transition-colors mb-4 md:mb-6 text-sm font-medium"
                         >
                             <ArrowLeft className="h-4 w-4" />
                             Kembali ke Daftar Event
                         </Link>
 
-                        <div className="flex flex-col gap-4">
-                            <span className="bg-[#e7fe41] text-[#203627] text-xs font-black font-montserrat-black px-4 py-2 uppercase tracking-wider rounded-full self-start">
+                        <div className="flex flex-col gap-3">
+                            <span className="bg-[#e7fe41] text-[#203627] text-[10px] md:text-xs font-black font-montserrat-black px-4 py-1.5 uppercase tracking-wider rounded-full self-start">
                                 {event.category}
                             </span>
-                            <h1 className="text-4xl md:text-6xl font-playfair font-bold text-white leading-tight max-w-4xl">
+                            <h1 className="text-2xl sm:text-3xl md:text-5xl font-playfair font-bold text-white leading-tight max-w-4xl">
                                 {event.title}
                             </h1>
                         </div>
@@ -96,42 +96,28 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                             </button>
                         </div>
 
-                        <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed mb-12 font-serif">
-                            <p className="text-xl md:text-2xl text-[#203627] font-medium leading-relaxed italic mb-8">
-                                {event.description}
-                            </p>
+                        <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed overflow-hidden break-words font-serif whitespace-pre-wrap">
+                            {event.description ? (
+                                <p className="text-xl md:text-2xl text-[#203627] font-medium leading-relaxed mb-8">
+                                    {event.description}
+                                </p>
+                            ) : (
+                                <p className="text-gray-400 italic mb-8 border-l-4 border-gray-200 pl-4">Tidak ada deskripsi tersedia untuk event ini.</p>
+                            )}
+                        </div>
 
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id tellus ac sem elementum finibus.
-                                In hac habitasse platea dictumst. Curabitur sed vestibulum lacus. Nam aliquet turpis sit amet arcu
-                                volutpat, non elementum dui scelerisque. Phasellus vitae ante nec nisl varius fringilla.
-                            </p>
-
-                            <h3 className="text-2xl font-playfair text-[#203627] mt-10 mb-6">Tentang Acara</h3>
-                            <p>
-                                Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit. Vivamus sagittis lacus vel augue
-                                laoreet rutrum faucibus dolor auctor.
-                            </p>
-
-                            <div className="my-10 p-8 bg-gray-50 rounded-3xl border border-gray-100">
-                                <h4 className="text-xl font-bold text-[#203627] mb-4">Highlights:</h4>
-                                <ul className="space-y-3 list-none p-0">
-                                    {["Sesi Networking dengan Profesional", "Workshop Interaktif", "Merchandise Eksklusif", "Akses Prioritas untuk Event Berikutnya"].map((item, i) => (
-                                        <li key={i} className="flex items-center gap-3">
-                                            <div className="h-2 w-2 rounded-full bg-[#e7fe41]" />
-                                            <span className="text-gray-700">{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
+                        {event.registrationLink && (
+                            <div className="flex justify-center md:justify-start mt-12 mb-6">
+                                <a
+                                    href={event.registrationLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="bg-[#203627] text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-black transition-all transform hover:-translate-y-1 shadow-xl inline-block"
+                                >
+                                    Daftar Sekarang
+                                </a>
                             </div>
-                        </div>
-
-                        <div className="flex justify-center md:justify-start">
-                            <button className="bg-[#203627] text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-black transition-all transform hover:-translate-y-1 shadow-xl">
-                                Daftar Sekarang
-                            </button>
-                        </div>
+                        )}
                     </div>
 
                     {/* Right Column: Sidebar */}

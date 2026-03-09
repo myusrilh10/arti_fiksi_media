@@ -14,10 +14,10 @@ export default function ProfilePage() {
             <section className="relative h-[70vh] md:h-[80vh] w-full flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/images/sampul.webp"
+                        src="/images/bg.png"
                         alt="Office Aesthetic"
                         fill
-                        className="object-cover"
+                        className="object-contain"
                         priority
                     />
                     {/* Dark gradient overlay for text readability */}

@@ -44,7 +44,7 @@ export default function HeroCarousel({ articles }: HeroCarouselProps) {
         <div className="w-full pb-4 md:pb-8 group">
             <div className="relative w-full overflow-hidden">
                 {/* Dummy element to set proportional height based on the slide's desired aspect ratio and safe min-heights to prevent text cutoff */}
-                <div className="w-[85%] md:w-[80%] lg:w-[75%] aspect-[16/9] md:aspect-[21/9] lg:aspect-[24/9] min-h-[400px] md:min-h-[450px] lg:min-h-[500px] mx-auto pointer-events-none opacity-0" />
+                <div className="w-[85%] md:w-[80%] lg:w-[75%] aspect-[16/9] md:aspect-[21/9] lg:aspect-[24/9] min-h-[280px] md:min-h-[420px] lg:min-h-[480px] mx-auto pointer-events-none opacity-0" />
 
                 <div className="absolute top-2 bottom-2 left-0 right-0 flex justify-center items-center">
                     {articles.map((article, idx) => {
@@ -190,8 +190,8 @@ export default function HeroCarousel({ articles }: HeroCarouselProps) {
                             key={idx}
                             onClick={() => setCurrentIndex(idx)}
                             className={`rounded-full transition-all duration-300 ${currentIndex === idx
-                                    ? 'w-6 h-2 md:w-8 md:h-2.5 bg-[#203627]'
-                                    : 'w-2 h-2 md:w-2.5 md:h-2.5 bg-gray-300 hover:bg-gray-400'
+                                ? 'w-6 h-2 md:w-8 md:h-2.5 bg-[#203627]'
+                                : 'w-2 h-2 md:w-2.5 md:h-2.5 bg-gray-300 hover:bg-gray-400'
                                 }`}
                             aria-label={`Go to slide ${idx + 1}`}
                         />

@@ -5,9 +5,9 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const menuItems = [
-    { title: "Layanan Kami", subtitle: "Our Services", href: "/services", img: "/images/layanan.png" },
-    { title: "Klien & Mitra", subtitle: "Advertisement", href: "/advertisement", img: "/images/service.png" },
-    { title: "Tim & Kreator", subtitle: "Our Team", href: "/team", img: "/images/team.png" }
+    { title: "Layanan Kami", subtitle: "Our Services", href: "/services", img: "/images/mesjidMamboro.jpeg" },
+    { title: "Klien & Mitra", subtitle: "Advertisement", href: "/advertisement", img: "/images/keren.jpeg" },
+    { title: "Tim & Kreator", subtitle: "Our Team", href: "/team", img: "/images/keren_sekali.jpeg" }
 ];
 
 export default function InteractiveMenu() {
@@ -23,7 +23,7 @@ export default function InteractiveMenu() {
                         src={item.img}
                         alt="Background"
                         fill
-                        className={`object-cover select-none pointer-events-none transition-all duration-1000 ${hoveredIndex === idx ? 'opacity-60 scale-105' : 'opacity-0 scale-100'}`}
+                        className={`object-cover select-none pointer-events-none transition-all duration-1000 ${hoveredIndex === idx ? 'opacity-60 scale-105' : 'opacity-0 scale-100'} md:opacity-0 md:group-hover:opacity-0 ${hoveredIndex === idx && 'md:opacity-60'} ${idx === 0 ? 'opacity-40 md:opacity-0' : ''}`}
                         priority
                     />
                 ))}
@@ -31,8 +31,8 @@ export default function InteractiveMenu() {
                 <div className="absolute inset-0 bg-black/40" />
             </div>
 
-            <div className="relative z-10 w-full h-full flex flex-col justify-center min-h-[50vh] px-4 md:px-12 lg:px-24">
-                <div className="flex flex-col space-y-10 md:space-y-16">
+            <div className="relative z-10 w-full h-full flex flex-col justify-center min-h-[40vh] md:min-h-[50vh] px-4 md:px-12 lg:px-24">
+                <div className="flex flex-col space-y-6 md:space-y-16">
                     {menuItems.map((item, idx) => (
                         <Link
                             key={idx}
@@ -40,7 +40,7 @@ export default function InteractiveMenu() {
                             onMouseEnter={() => setHoveredIndex(idx)}
                             className="block group/item relative text-left transition-transform duration-500 hover:translate-x-4"
                         >
-                            <h2 className="text-3xl md:text-5xl lg:text-7xl font-montserrat-black font-black uppercase tracking-[0.2em] text-white/50 group-hover/item:text-white transition-colors duration-500">
+                            <h2 className="text-3xl md:text-5xl lg:text-7xl font-montserrat-black font-black uppercase tracking-[0.2em] text-white md:text-white/50 group-hover/item:text-white transition-colors duration-500">
                                 {item.title}
                             </h2>
                         </Link>

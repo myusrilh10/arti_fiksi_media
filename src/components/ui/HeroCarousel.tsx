@@ -44,7 +44,7 @@ export default function HeroCarousel({ articles }: HeroCarouselProps) {
         <div className="w-full pb-4 md:pb-8 group">
             <div className="relative w-full overflow-hidden">
                 {/* Dummy element to set proportional height based on the slide's desired aspect ratio and safe min-heights to prevent text cutoff */}
-                <div className="w-[85%] md:w-[80%] lg:w-[75%] aspect-[16/9] md:aspect-[21/9] lg:aspect-[24/9] min-h-[280px] md:min-h-[420px] lg:min-h-[480px] mx-auto pointer-events-none opacity-0" />
+                <div className="w-full md:w-[80%] lg:w-[75%] aspect-[16/9] md:aspect-[21/9] lg:aspect-[24/9] min-h-[280px] md:min-h-[420px] lg:min-h-[480px] mx-auto pointer-events-none opacity-0" />
 
                 <div className="absolute top-2 bottom-2 left-0 right-0 flex justify-center items-center">
                     {articles.map((article, idx) => {
@@ -82,7 +82,7 @@ export default function HeroCarousel({ articles }: HeroCarouselProps) {
                                 initial={false}
                                 animate={{ x: xOffset, scale, opacity, zIndex }}
                                 transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}
-                                className="absolute w-[85%] md:w-[80%] lg:w-[75%] h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-gray-900 cursor-pointer"
+                                className="absolute w-full md:w-[80%] lg:w-[75%] h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-gray-900 cursor-pointer"
                                 onClick={() => {
                                     if (isPrev) prevSlide();
                                     if (isNext) nextSlide();

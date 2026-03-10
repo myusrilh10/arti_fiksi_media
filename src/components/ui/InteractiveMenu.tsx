@@ -23,7 +23,12 @@ export default function InteractiveMenu() {
                         src={item.img}
                         alt="Background"
                         fill
-                        className={`object-cover select-none pointer-events-none transition-all duration-1000 ${hoveredIndex === idx ? 'opacity-60 scale-105' : 'opacity-0 scale-100'} md:opacity-0 md:group-hover:opacity-0 ${hoveredIndex === idx && 'md:opacity-60'} ${idx === 0 ? 'opacity-40 md:opacity-0' : ''}`}
+                        className={`object-cover select-none pointer-events-none transition-all duration-1000 ${hoveredIndex === idx
+                                ? 'opacity-60 scale-105'
+                                : idx === 0
+                                    ? 'opacity-30 md:opacity-0 scale-100'
+                                    : 'opacity-0 scale-100'
+                            }`}
                         priority
                     />
                 ))}

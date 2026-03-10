@@ -26,11 +26,16 @@ export default async function Home() {
     ? featuredArticles.slice(0, 3)
     : articles.slice(0, 3);
 
-  // One featured article per main category
-  const lensaLokalArticle = articles.find((a: Article) => a.mainCategory === "Lensa Lokal");
-  const lifestyleArticle = articles.find((a: Article) => a.mainCategory === "Lifestyle");
-  const publicInterestArticle = articles.find((a: Article) => a.mainCategory === "Public Interest")
-    ?? articles.find((a: Article) => a.mainCategory === "News"); // fallback for "News" category
+  // Latest article per main category (articles already sorted by publishedAt:desc from API)
+  const matchCategory = (article: Article, keyword: string) => {
+    const cat = (article.mainCategory ?? article.category ?? '').toLowerCase();
+    return cat.includes(keyword.toLowerCase());
+  };
+  const lensaLokalArticle = articles.find((a: Article) => matchCategory(a, 'lensa lokal'));
+  const lifestyleArticle = articles.find((a: Article) => matchCategory(a, 'lifestyle'));
+  const publicInterestArticle =
+    articles.find((a: Article) => matchCategory(a, 'public interest')) ??
+    articles.find((a: Article) => matchCategory(a, 'news'));
 
   // Trending — sort by views first, then is_trending/isFeatured, then latest
   const trendingArticles = [...articles].sort((a, b) => {
@@ -78,46 +83,46 @@ export default async function Home() {
           <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#203627]/20">
 
             {/* Lensa Lokal */}
-            <div className="space-y-6 md:pr-8 py-8 md:py-0">
+            <div className="flex flex-col gap-6 md:pr-8 py-8 md:py-0">
               <Link href="/categories/lensa-lokal" className="block group">
-                <div className="flex items-center gap-3 mb-6 pb-3 border-b border-[#203627]/15">
+                <div className="flex items-center gap-3 mb-2 pb-3 border-b border-[#203627]/15">
                   <span className="w-1 h-6 bg-lemon-lime flex-shrink-0" />
                   <h2 className="font-black font-montserrat-black text-xl uppercase tracking-[0.08em] text-[#203627] group-hover:text-[#203627]/60 transition-colors">
                     Lensa Lokal
                   </h2>
                 </div>
               </Link>
-              <div className="space-y-8">
+              <div className="flex-1">
                 {lensaLokalArticle && <ArticleCard article={lensaLokalArticle} />}
               </div>
             </div>
 
             {/* Lifestyle */}
-            <div className="space-y-6 md:px-8 py-8 md:py-0">
+            <div className="flex flex-col gap-6 md:px-8 py-8 md:py-0">
               <Link href="/categories/lifestyle" className="block group">
-                <div className="flex items-center gap-3 mb-6 pb-3 border-b border-[#203627]/15">
+                <div className="flex items-center gap-3 mb-2 pb-3 border-b border-[#203627]/15">
                   <span className="w-1 h-6 bg-lemon-lime flex-shrink-0" />
                   <h2 className="font-black font-montserrat-black text-xl uppercase tracking-[0.08em] text-[#203627] group-hover:text-[#203627]/60 transition-colors">
                     Lifestyle
                   </h2>
                 </div>
               </Link>
-              <div className="space-y-8">
+              <div className="flex-1">
                 {lifestyleArticle && <ArticleCard article={lifestyleArticle} />}
               </div>
             </div>
 
             {/* Public Interest / News */}
-            <div className="space-y-6 md:pl-8 py-8 md:py-0">
+            <div className="flex flex-col gap-6 md:pl-8 py-8 md:py-0">
               <Link href="/categories/public-interest" className="block group">
-                <div className="flex items-center gap-3 mb-6 pb-3 border-b border-[#203627]/15">
+                <div className="flex items-center gap-3 mb-2 pb-3 border-b border-[#203627]/15">
                   <span className="w-1 h-6 bg-lemon-lime flex-shrink-0" />
                   <h2 className="font-black font-montserrat-black text-xl uppercase tracking-[0.08em] text-[#203627] group-hover:text-[#203627]/60 transition-colors">
                     Public Interest
                   </h2>
                 </div>
               </Link>
-              <div className="space-y-8">
+              <div className="flex-1">
                 {publicInterestArticle && <ArticleCard article={publicInterestArticle} />}
               </div>
             </div>

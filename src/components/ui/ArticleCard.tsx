@@ -27,7 +27,7 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+                className="h-full flex flex-col transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
             >
                 <div className={`relative overflow-hidden w-full ${featured ? 'aspect-[21/9]' : 'aspect-[4/3]'} rounded-t-xl`}>
                     {article.imageUrl ? (
@@ -65,7 +65,7 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
                     </div>
 
                     {/* Title */}
-                    <h3 className={`font-playfair text-[#203627] font-bold leading-tight mb-3 group-hover:text-white transition-colors duration-300 ${featured ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'}`}>
+                    <h3 className={`font-playfair text-[#203627] font-bold leading-tight mb-3 group-hover:text-white transition-colors duration-300 ${featured ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl line-clamp-2'}`}>
                         {article.title}
                     </h3>
 

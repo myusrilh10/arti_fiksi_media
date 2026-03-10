@@ -150,7 +150,7 @@ export default async function Home() {
                     <span className="text-[2.5rem] font-black font-montserrat-black text-gray-200 group-hover:text-lemon-lime transition-colors duration-200 tabular-nums leading-none select-none">
                       {String(idx + 1).padStart(2, '0')}
                     </span>
-                    <div className="relative w-20 h-20 md:w-24 md:h-24 flex-shrink-0 rounded-lg overflow-hidden hidden sm:block">
+                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex-shrink-0 rounded-lg overflow-hidden">
                       <Image
                         src={article.imageUrl}
                         alt={article.title}

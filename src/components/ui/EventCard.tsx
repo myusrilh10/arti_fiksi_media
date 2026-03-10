@@ -14,9 +14,10 @@ export default function EventCard({ event }: EventCardProps) {
     return (
         <Link href={`/events/${event.slug}`} className="group block h-full">
             <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ duration: 0.4 }}
                 className="flex flex-col h-full"
             >
                 <div className="relative overflow-hidden w-full aspect-[4/3] group-hover:shadow-xl transition-all duration-500 rounded-t-xl">

@@ -24,10 +24,11 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
     return (
         <Link href={`/articles/${article.slug}`} className="group block h-full">
             <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="h-full flex flex-col transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ duration: 0.4 }}
+                className="h-full flex flex-col transition-shadow duration-300 md:hover:-translate-y-1 md:hover:shadow-lg"
             >
                 <div className={`relative overflow-hidden w-full ${featured ? 'aspect-[21/9]' : 'aspect-[4/3]'} rounded-t-xl`}>
                     {article.imageUrl ? (

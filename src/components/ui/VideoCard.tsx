@@ -14,10 +14,11 @@ export default function VideoCard({ video }: VideoCardProps) {
     return (
         <Link href={`/videos/${video.slug}`} className="group block h-full cursor-pointer">
             <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="flex flex-col h-full transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ duration: 0.4 }}
+                className="flex flex-col h-full transition-shadow duration-300 md:hover:-translate-y-1 md:hover:shadow-lg"
             >
                 <div className="relative overflow-hidden w-full aspect-video rounded-t-xl">
                     <motion.div

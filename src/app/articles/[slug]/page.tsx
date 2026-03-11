@@ -4,8 +4,8 @@ import AdBanner from "@/components/ui/AdBanner";
 import ArticleCard from "@/components/ui/ArticleCard";
 import { notFound } from "next/navigation";
 
-import { getArticleBySlug, getArticles } from "@/lib/api";
-import { Article } from "@/lib/data";
+import { getArticleBySlug, getArticles, getAdvertisements } from "@/lib/api";
+import { Article, Advertisement } from "@/lib/data";
 
 // Strapi rich-text is an array of block nodes. This renders them as plain HTML.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -50,9 +50,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
 
-    const [article, allArticles] = await Promise.all([
+    const [article, allArticles, advertisements] = await Promise.all([
         getArticleBySlug(slug),
         getArticles(),
+        getAdvertisements(),
     ]);
 
     if (!article) return notFound();
@@ -82,6 +83,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             "name": article.author,
         }]
     };
+
+    const mediumRectangleAd = advertisements.find((ad: Advertisement) => ad.position === 'medium-rectangle');
+    const leaderboardAd = advertisements.find((ad: Advertisement) => ad.position === 'leaderboard');
 
     return (
         <div className="container mx-auto px-4 py-8 md:px-6">
@@ -133,13 +137,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                         )}
                     </article>
 
-                    <AdBanner size="medium-rectangle" className="md:hidden my-8" />
+                    <AdBanner size="medium-rectangle" className="lg:hidden" ad={mediumRectangleAd} />
                 </div>
 
                 {/* Sidebar */}
                 <aside className="lg:col-span-1 space-y-8">
                     {/* Ad */}
-                    <AdBanner size="medium-rectangle" className="hidden md:flex mx-auto" />
+                    <AdBanner size="medium-rectangle" className="mx-auto" ad={mediumRectangleAd} />
 
                     {/* Related Articles */}
                     <div>
@@ -153,7 +157,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 </aside>
             </div>
 
-            <AdBanner size="leaderboard" className="mt-12 hidden md:flex" />
+            <AdBanner
+                size="leaderboard"
+                className="mt-12"
+                ad={advertisements.find((ad: Advertisement) => ad.position === 'bottom')}
+            />
         </div>
     );
 }

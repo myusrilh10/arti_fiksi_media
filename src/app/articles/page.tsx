@@ -1,8 +1,8 @@
 import Link from "next/link";
 import ArticleCard from "@/components/ui/ArticleCard";
 import AdBanner from "@/components/ui/AdBanner";
-import { getPaginatedArticles } from "@/lib/api";
-import { Article } from "@/lib/data";
+import { getPaginatedArticles, getAdvertisements } from "@/lib/api";
+import { Article, Advertisement } from "@/lib/data";
 
 export const metadata = {
     title: "Latest Articles | Arti Fiksi Media",
@@ -12,7 +12,11 @@ export const metadata = {
 export default async function ArticlesIndexPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
     const searchParamsData = await searchParams;
     const currentPage = Number(searchParamsData.page) || 1;
-    const { articles, meta } = await getPaginatedArticles(currentPage, 12);
+    const [{ articles, meta }, advertisements] = await Promise.all([
+        getPaginatedArticles(currentPage, 12),
+        getAdvertisements()
+    ]);
+    const bottomAd = advertisements.find((ad: Advertisement) => ad.position === 'bottom') || advertisements[0];
 
     return (
         <div className="min-h-screen bg-white">
@@ -77,11 +81,8 @@ export default async function ArticlesIndexPage({ searchParams }: { searchParams
                         )}
                     </div>
                 )}
-
-                <div className="mt-24">
-                    <AdBanner size="leaderboard" className="hidden md:flex" />
-                    <AdBanner size="medium-rectangle" className="md:hidden" />
-                </div>
+                {/* Bottom Ad */}
+                <AdBanner size="leaderboard" className="mt-16" />
             </div>
         </div>
     );

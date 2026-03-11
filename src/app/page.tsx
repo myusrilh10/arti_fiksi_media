@@ -66,9 +66,7 @@ export default async function Home() {
     <div className="py-6 md:py-8">
 
       {/* Top Ad Banner */}
-      <div className="container mx-auto px-4 md:px-6 mb-8">
-        <AdBanner size="large-leaderboard" ad={topAd} />
-      </div>
+      <AdBanner size="large-leaderboard" className="container mx-auto px-4 md:px-6 mb-8" ad={topAd} />
 
       {/* Hero Carousel — Full Width */}
       <section className="mb-12 w-full">

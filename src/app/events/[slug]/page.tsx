@@ -16,6 +16,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {
         title: `${event.title} | Arti Fiksi Media`,
         description: event.description,
+        openGraph: {
+            images: [{ url: event.imageUrl }],
+        },
     };
 }
 

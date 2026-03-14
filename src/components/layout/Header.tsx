@@ -105,42 +105,25 @@ export default function Header() {
                             />
                         </form>
 
-                        <nav className="flex flex-col gap-3">
-                            <Link
-                                href="/"
-                                className="text-sm font-black font-montserrat-black uppercase tracking-widest p-2 hover:bg-lemon-lime hover:text-black rounded-md"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
-                                Home
-                            </Link>
-
-                            <div className="px-2 space-y-4">
-                                <Link href="/categories/lensa-lokal" className="block text-sm font-black font-montserrat-black uppercase tracking-widest text-gray-800 hover:text-lemon-lime" onClick={() => setIsMenuOpen(false)}>Lensa Lokal</Link>
-                                <Link href="/categories/lifestyle" className="block text-sm font-black font-montserrat-black uppercase tracking-widest text-gray-800 hover:text-lemon-lime" onClick={() => setIsMenuOpen(false)}>Lifestyle</Link>
-                                <Link href="/categories/public-interest" className="block text-sm font-black font-montserrat-black uppercase tracking-widest text-gray-800 hover:text-lemon-lime" onClick={() => setIsMenuOpen(false)}>Public Interest</Link>
-                            </div>
-
-                            <Link
-                                href="/events"
-                                className="text-sm font-black font-montserrat-black uppercase tracking-widest p-2 hover:bg-lemon-lime hover:text-black rounded-md"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
-                                Events
-                            </Link>
-                            <Link
-                                href="/videos"
-                                className="text-sm font-black font-montserrat-black uppercase tracking-widest p-2 hover:bg-lemon-lime hover:text-black rounded-md"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
-                                Videos
-                            </Link>
-                            <Link
-                                href="/profile"
-                                className="text-sm font-black font-montserrat-black uppercase tracking-widest p-2 hover:bg-lemon-lime hover:text-black rounded-md"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
-                                About
-                            </Link>
+                        <nav className="flex flex-col gap-1">
+                            {[
+                                { href: '/', label: 'Home' },
+                                { href: '/categories/lensa-lokal', label: 'Lensa Lokal' },
+                                { href: '/categories/lifestyle', label: 'Lifestyle' },
+                                { href: '/categories/public-interest', label: 'Public Interest' },
+                                { href: '/events', label: 'Events' },
+                                { href: '/videos', label: 'Videos' },
+                                { href: '/profile', label: 'About' },
+                            ].map((item) => (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className="block p-3 text-sm font-black font-montserrat-black uppercase tracking-widest text-gray-800 hover:bg-lemon-lime hover:text-black rounded-md transition-colors"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    {item.label}
+                                </Link>
+                            ))}
                         </nav>
                     </div>
                 </div>

@@ -33,8 +33,33 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
-  title: "Arti Fiksi Media",
+  title: {
+    default: "Arti Fiksi Media",
+    template: "%s | Arti Fiksi Media",
+  },
   description: "Platform media terkini untuk konten kreatif dan inspiratif.",
+  openGraph: {
+    title: "Arti Fiksi Media",
+    description: "Platform media terkini untuk konten kreatif dan inspiratif.",
+    url: "/",
+    siteName: "Arti Fiksi Media",
+    images: [
+      {
+        url: "/images/tech.png", // A default image you may already have
+        width: 1200,
+        height: 630,
+        alt: "Arti Fiksi Media Cover",
+      },
+    ],
+    locale: "id_ID",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Arti Fiksi Media",
+    description: "Platform media terkini untuk konten kreatif dan inspiratif.",
+    images: ["/images/tech.png"],
+  },
 };
 
 export default function RootLayout({

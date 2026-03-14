@@ -19,9 +19,15 @@ export default function AdBanner({ size = 'medium-rectangle', className = '', ad
 
     return (
         <div className={`flex justify-center my-6 ${className}`}>
-            <a href={ad.linkUrl} target="_blank" rel="noopener noreferrer" className={`${dimensions} ${mobileDimensions} relative block rounded-sm overflow-hidden`}>
-                <Image src={ad.imageUrl} alt="Advertisement" fill className="object-cover" />
-            </a>
+            {ad.linkUrl && ad.linkUrl !== '#' ? (
+                <a href={ad.linkUrl} target="_blank" rel="noopener noreferrer" className={`${dimensions} ${mobileDimensions} relative block rounded-sm overflow-hidden`}>
+                    <Image src={ad.imageUrl} alt="Advertisement" fill className="object-cover" />
+                </a>
+            ) : (
+                <div className={`${dimensions} ${mobileDimensions} relative block rounded-sm overflow-hidden`}>
+                    <Image src={ad.imageUrl} alt="Advertisement" fill className="object-cover" />
+                </div>
+            )}
         </div>
     );
 }

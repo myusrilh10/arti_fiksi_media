@@ -52,9 +52,8 @@ export default function Footer() {
                     <div className="space-y-4">
                         <h3 className="text-sm font-black text-[#e7fe41] uppercase tracking-wider font-montserrat-black drop-shadow-sm">Legal</h3>
                         <ul className="space-y-2 text-sm text-gray-300">
-                            <li><Link href="#" className="hover:text-[#e7fe41] transition-colors">Privacy Policy</Link></li>
-                            <li><Link href="#" className="hover:text-[#e7fe41] transition-colors">Terms of Service</Link></li>
-                            <li><Link href="#" className="hover:text-[#e7fe41] transition-colors">Advertise</Link></li>
+                            <li><Link href="/pedoman-media-siber" className="hover:text-[#e7fe41] transition-colors">Pedoman Media Siber</Link></li>
+                            <li><Link href="/advertisement" className="hover:text-[#e7fe41] transition-colors">Advertise</Link></li>
                         </ul>
                     </div>
 

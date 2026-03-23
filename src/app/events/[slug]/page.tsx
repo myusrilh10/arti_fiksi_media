@@ -130,9 +130,9 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                             <p className="text-white/70 text-sm mb-6">
                                 Punya acara seru yang ingin dipublikasikan di Arti Fiksi Media? Hubungi tim editorial kami sekarang.
                             </p>
-                            <Link href="/contact" className="inline-block border-2 border-[#e7fe41] text-[#e7fe41] px-6 py-3 rounded-full font-bold hover:bg-[#e7fe41] hover:text-[#203627] transition-all">
+                            <a href="mailto:artifiksimedia@gmail.com" className="inline-block border-2 border-[#e7fe41] text-[#e7fe41] px-6 py-3 rounded-full font-bold hover:bg-[#e7fe41] hover:text-[#203627] transition-all">
                                 Hubungi Kami
-                            </Link>
+                            </a>
                         </div>
 
                         <AdBanner size="medium-rectangle" className="mx-auto" />

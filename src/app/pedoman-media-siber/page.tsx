@@ -11,7 +11,7 @@ export default function PedomanMediaSiberPage() {
           Pedoman Media Siber
         </h1>
 
-        <div className="prose prose-lg max-w-none text-gray-800 mt-8 space-y-6">
+        <div className="prose prose-lg max-w-none text-gray-800 mt-8 space-y-6 text-justify">
           {/* 
             TODO: Isi pedoman media siber di sini
             Anda dapat menggunakan tag HTML seperti <p>, <h2>, <ul>, <li> dll untuk memformat struktur teks.

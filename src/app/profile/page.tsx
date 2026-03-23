@@ -39,8 +39,8 @@ export default function ProfilePage() {
 
                 {/* 1. Deskripsi Singkat */}
                 <section className="bg-white p-10 md:p-16 lg:p-24 shadow-2xl max-w-5xl mx-auto relative mt-8 border-t-8 border-[#203627]">
-                    <div className="text-left max-w-3xl mx-auto">
-                        <span className="text-gray-400 font-bold font-montserrat-black uppercase tracking-[0.3em] text-xs mb-6 block">Tentang Kami</span>
+                    <div className="text-justify max-w-3xl mx-auto">
+                        <span className="text-gray-400 font-bold font-montserrat-black uppercase tracking-[0.3em] text-xs mb-6 block text-left">Tentang Kami</span>
                         <h2 className="text-3xl md:text-5xl font-playfair font-bold mb-10 text-[#203627] leading-tight">
                             Arti Fiksi Media
                         </h2>
@@ -83,7 +83,7 @@ export default function ProfilePage() {
                                     </div>
                                     <h3 className="text-2xl font-bold font-sans text-[#203627]">Visi</h3>
                                 </div>
-                                <p className="text-gray-500 font-medium leading-relaxed text-lg">
+                                <p className="text-gray-500 font-medium leading-relaxed text-lg text-justify">
                                     Menjadi perusahaan media dan agensi kreatif yang progresif dan berpengaruh dalam membangun komunikasi yang bermakna, etis, dan relevan di era digital.
                                 </p>
                             </div>
@@ -101,19 +101,19 @@ export default function ProfilePage() {
                             <ul className="space-y-4 list-none">
                                 <li className="flex items-start gap-4">
                                     <span className="w-2 h-2 rounded-full bg-[#e7fe41] mt-2.5 flex-shrink-0"></span>
-                                    <span className="text-gray-500 leading-relaxed"><strong className="text-gray-800 font-bold">Menghasilkan karya media</strong> dan konten kreatif yang berbasis riset dan narasi kuat.</span>
+                                    <span className="text-gray-500 leading-relaxed text-justify w-full"><strong className="text-gray-800 font-bold">Menghasilkan karya media</strong> dan konten kreatif yang berbasis riset dan narasi kuat.</span>
                                 </li>
                                 <li className="flex items-start gap-4">
                                     <span className="w-2 h-2 rounded-full bg-[#e7fe41] mt-2.5 flex-shrink-0"></span>
-                                    <span className="text-gray-500 leading-relaxed"><strong className="text-gray-800 font-bold">Membantu klien</strong> membangun identitas, citra, dan pesan yang autentik.</span>
+                                    <span className="text-gray-500 leading-relaxed text-justify w-full"><strong className="text-gray-800 font-bold">Membantu klien</strong> membangun identitas, citra, dan pesan yang autentik.</span>
                                 </li>
                                 <li className="flex items-start gap-4">
                                     <span className="w-2 h-2 rounded-full bg-[#e7fe41] mt-2.5 flex-shrink-0"></span>
-                                    <span className="text-gray-500 leading-relaxed"><strong className="text-gray-800 font-bold">Mengembangkan strategi</strong> komunikasi yang adaptif terhadap perubahan sosial.</span>
+                                    <span className="text-gray-500 leading-relaxed text-justify w-full"><strong className="text-gray-800 font-bold">Mengembangkan strategi</strong> komunikasi yang adaptif terhadap perubahan sosial.</span>
                                 </li>
                                 <li className="flex items-start gap-4">
                                     <span className="w-2 h-2 rounded-full bg-[#e7fe41] mt-2.5 flex-shrink-0"></span>
-                                    <span className="text-gray-500 leading-relaxed"><strong className="text-gray-800 font-bold">Menjadi mitra kreatif</strong> yang kolaboratif dan berorientasi dampak.</span>
+                                    <span className="text-gray-500 leading-relaxed text-justify w-full"><strong className="text-gray-800 font-bold">Menjadi mitra kreatif</strong> yang kolaboratif dan berorientasi dampak.</span>
                                 </li>
                             </ul>
                         </div>
@@ -160,7 +160,7 @@ export default function ProfilePage() {
                                 <h3 className="text-xl font-bold font-sans text-[#203627] mb-4">
                                     {item.title}
                                 </h3>
-                                <p className="text-gray-500 font-medium leading-relaxed text-sm">
+                                <p className="text-gray-500 font-medium leading-relaxed text-sm text-justify w-full">
                                     {item.desc}
                                 </p>
                             </div>

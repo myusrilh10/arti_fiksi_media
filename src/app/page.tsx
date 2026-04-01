@@ -5,6 +5,7 @@ import { Calendar, MapPin, TrendingUp, ArrowRight } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import ArticleCard from "@/components/ui/ArticleCard";
 import AdBanner from "@/components/ui/AdBanner";
+import BottomAdBanner from "@/components/ui/BottomAdBanner";
 import HeroCarousel from "@/components/ui/HeroCarousel";
 import VideoCard from "@/components/ui/VideoCard";
 
@@ -247,7 +248,7 @@ export default async function Home() {
         )}
 
         {/* Bottom Ad */}
-        <AdBanner size="large-leaderboard" className="hidden lg:flex mt-4 mb-4" ad={bottomAd} />
+        <BottomAdBanner className="mt-4 mb-4" ad={bottomAd} />
 
       </div>
     </div>

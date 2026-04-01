@@ -68,10 +68,13 @@ function normalizeArticle(item: any): Article {
         excerpt: item.excerpt ?? '',
         content: item.content ?? null,
         author: item.Author ?? item.author ?? 'Unknown',
-        date: item.publishedAt
-            ? new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
-            : new Date(item.createdAt ?? new Date()).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
+        date: item.publish_date
+            ? new Date(item.publish_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+            : item.publishedAt
+                ? new Date(item.publishedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+                : new Date(item.createdAt ?? new Date()).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
         imageUrl: getStrapiMedia(item.cover_image?.url ?? item.coverImage?.url ?? item.image?.url ?? item.cover_image?.formats?.large?.url ?? item.image?.formats?.large?.url ?? null),
+        imageCaption: item.image_caption ?? item.imageCaption ?? null,
         mainCategory: item.category?.category ?? item.Category?.category ?? item.category?.Name ?? item.category?.name ?? item.Category?.Name ?? item.Category?.name ?? 'Uncategorized',
         category: item.category?.category ?? item.Category?.category ?? item.category?.Name ?? item.category?.name ?? item.Category?.Name ?? item.Category?.name ?? 'Uncategorized',
         isTrending: item.is_trending ?? item.isTrending ?? false,

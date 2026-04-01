@@ -8,6 +8,7 @@ export interface Article {
   author: string;
   date: string;
   imageUrl: string;
+  imageCaption?: string | null;
   slug: string;
   content?: string;
   mainCategory: string;

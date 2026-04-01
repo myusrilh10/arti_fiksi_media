@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import AdBanner from "@/components/ui/AdBanner";
+import BottomAdBanner from "@/components/ui/BottomAdBanner";
 import InteractiveMenu from "@/components/ui/InteractiveMenu";
 
 export const metadata = {
@@ -54,11 +55,6 @@ export default function ProfilePage() {
                         </div>
                     </div>
                 </section>
-
-                {/* Ad Break */}
-                <div className="my-16">
-                    <AdBanner size="leaderboard" className="hidden md:flex justify-center" />
-                </div>
 
                 {/* 2. Visi dan Misi */}
                 <section className="py-16 md:py-24 max-w-6xl mx-auto px-4 md:px-6 relative">
@@ -160,7 +156,7 @@ export default function ProfilePage() {
                                 <h3 className="text-xl font-bold font-sans text-[#203627] mb-4">
                                     {item.title}
                                 </h3>
-                                <p className="text-gray-500 font-medium leading-relaxed text-sm text-justify w-full">
+                                <p className="text-gray-500 font-medium leading-relaxed text-sm">
                                     {item.desc}
                                 </p>
                             </div>
@@ -187,6 +183,6 @@ export default function ProfilePage() {
                     Contact Us
                 </a>
             </section>
-        </div>
+        </div >
     );
 }

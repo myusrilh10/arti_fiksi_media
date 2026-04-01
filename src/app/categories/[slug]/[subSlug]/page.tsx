@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ARTICLES, CATEGORY_MAPPING } from '@/lib/data';
 import ArticleCard from '@/components/ui/ArticleCard';
 import SectionHeader from '@/components/ui/SectionHeader';
+import BottomAdBanner from '@/components/ui/BottomAdBanner';
 import { motion } from 'framer-motion';
 
 const containerVariants = {
@@ -94,8 +95,8 @@ export default function SubCategoryPage() {
                                     key={sub}
                                     href={`/categories/${slug}/${slugify(sub)}`}
                                     className={`text-xs md:text-sm font-bold font-montserrat-regular uppercase tracking-wider transition-colors ${isActive
-                                            ? 'text-[#203627] underline decoration-2 decoration-lemon-lime underline-offset-4'
-                                            : 'text-gray-500 hover:text-lemon-lime'
+                                        ? 'text-[#203627] underline decoration-2 decoration-lemon-lime underline-offset-4'
+                                        : 'text-gray-500 hover:text-lemon-lime'
                                         }`}
                                 >
                                     {sub}
@@ -136,6 +137,8 @@ export default function SubCategoryPage() {
                         <p className="text-gray-500">No articles found in this sub-category yet.</p>
                     </div>
                 )}
+
+                <BottomAdBanner className="mt-16" />
             </div>
         </div>
     );

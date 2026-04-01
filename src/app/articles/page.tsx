@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ArticleCard from "@/components/ui/ArticleCard";
 import AdBanner from "@/components/ui/AdBanner";
+import BottomAdBanner from "@/components/ui/BottomAdBanner";
 import { getPaginatedArticles, getAdvertisements } from "@/lib/api";
 import { Article, Advertisement } from "@/lib/data";
 
@@ -82,7 +83,7 @@ export default async function ArticlesIndexPage({ searchParams }: { searchParams
                     </div>
                 )}
                 {/* Bottom Ad */}
-                <AdBanner size="leaderboard" className="mt-16" />
+                <BottomAdBanner className="mt-16" ad={bottomAd} />
             </div>
         </div>
     );

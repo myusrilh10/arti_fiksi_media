@@ -4,6 +4,7 @@ import Link from "next/link";
 import SectionHeader from "@/components/ui/SectionHeader";
 import EventCard from "@/components/ui/EventCard";
 import AdBanner from "@/components/ui/AdBanner";
+import BottomAdBanner from "@/components/ui/BottomAdBanner";
 import { notFound } from "next/navigation";
 import { getEventBySlug, getEvents } from "@/lib/api";
 import { Event } from "@/lib/data";
@@ -150,9 +151,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                     </aside>
                 </div>
 
-                <div className="mt-20">
-                    <AdBanner size="leaderboard" className="hidden md:flex" />
-                </div>
+                <BottomAdBanner className="mt-20" />
             </div>
         </div>
     );

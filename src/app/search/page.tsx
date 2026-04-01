@@ -2,6 +2,7 @@ import { getArticles } from "@/lib/api";
 import { Article } from "@/lib/data";
 import ArticleCard from "@/components/ui/ArticleCard";
 import SectionHeader from "@/components/ui/SectionHeader";
+import BottomAdBanner from "@/components/ui/BottomAdBanner";
 
 export default async function SearchPage({
     searchParams,
@@ -42,6 +43,8 @@ export default async function SearchPage({
                     </p>
                 </div>
             )}
+
+            <BottomAdBanner className="mt-16" />
         </div>
     );
 }

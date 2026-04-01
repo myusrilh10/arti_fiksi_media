@@ -1,6 +1,7 @@
 import Image from "next/image";
 import SectionHeader from "@/components/ui/SectionHeader";
 import AdBanner from "@/components/ui/AdBanner";
+import BottomAdBanner from "@/components/ui/BottomAdBanner";
 import ArticleCard from "@/components/ui/ArticleCard";
 import { notFound } from "next/navigation";
 
@@ -126,6 +127,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                             className="object-cover"
                             priority
                         />
+                        {article.imageCaption && (
+                            <div className="absolute bottom-2 right-2 bg-black/60 text-white/90 text-xs px-3 py-1.5 rounded shadow-sm backdrop-blur-sm">
+                                {article.imageCaption}
+                            </div>
+                        )}
                     </div>
 
                     {/* Article Body */}
@@ -136,15 +142,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                             <p className="text-gray-400 italic">Konten belum tersedia.</p>
                         )}
                     </article>
-
-                    <AdBanner size="medium-rectangle" className="lg:hidden" ad={mediumRectangleAd} />
                 </div>
 
                 {/* Sidebar */}
                 <aside className="lg:col-span-1 space-y-8">
-                    {/* Ad */}
-                    <AdBanner size="medium-rectangle" className="mx-auto" ad={mediumRectangleAd} />
-
                     {/* Related Articles */}
                     <div>
                         <SectionHeader title="Artikel Terkait" className="mb-4" />
@@ -157,8 +158,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 </aside>
             </div>
 
-            <AdBanner
-                size="leaderboard"
+            <BottomAdBanner
                 className="mt-12"
                 ad={advertisements.find((ad: Advertisement) => ad.position === 'bottom')}
             />

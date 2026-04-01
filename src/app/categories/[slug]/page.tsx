@@ -2,6 +2,7 @@ import { getPaginatedArticles } from '@/lib/api';
 import { Article } from '@/lib/data';
 import Link from 'next/link';
 import ArticleCard from '@/components/ui/ArticleCard';
+import BottomAdBanner from '@/components/ui/BottomAdBanner';
 import { motion } from 'framer-motion';
 
 const containerVariants = {
@@ -108,6 +109,8 @@ export default async function CategoryPage({ params, searchParams }: { params: P
                         </Link>
                     </div>
                 )}
+
+                <BottomAdBanner className="mt-16" />
             </div>
         </div>
     );

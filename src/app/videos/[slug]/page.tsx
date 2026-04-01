@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Clock, CalendarDays, Play } from "lucide-react";
 import AdBanner from "@/components/ui/AdBanner";
+import BottomAdBanner from "@/components/ui/BottomAdBanner";
 import VideoCard from "@/components/ui/VideoCard";
 import { getVideoBySlug, getVideos } from "@/lib/api";
 import { Video } from "@/lib/data";
@@ -129,6 +130,8 @@ export default async function VideoDetailPage({ params: paramsPromise }: { param
                         </div>
                     )}
                 </div>
+
+                <BottomAdBanner className="mt-16" />
             </main>
         </div>
     );

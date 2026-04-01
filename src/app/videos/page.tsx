@@ -1,6 +1,7 @@
 import Link from "next/link";
 import VideoCard from "@/components/ui/VideoCard";
 import AdBanner from "@/components/ui/AdBanner";
+import BottomAdBanner from "@/components/ui/BottomAdBanner";
 import { getPaginatedVideos } from "@/lib/api";
 import { Video } from "@/lib/data";
 
@@ -78,10 +79,7 @@ export default async function VideosPage({ searchParams }: { searchParams: Promi
                     </div>
                 )}
 
-                <div className="mt-24">
-                    <AdBanner size="leaderboard" className="hidden md:flex" />
-                    <AdBanner size="medium-rectangle" className="md:hidden" />
-                </div>
+                <BottomAdBanner className="mt-24" />
             </div>
         </div>
     );

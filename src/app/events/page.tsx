@@ -1,5 +1,6 @@
 import EventCard from "@/components/ui/EventCard";
 import AdBanner from "@/components/ui/AdBanner";
+import BottomAdBanner from "@/components/ui/BottomAdBanner";
 import { getEvents } from "@/lib/api";
 import { Event } from "@/lib/data";
 
@@ -38,10 +39,7 @@ export default async function EventsPage() {
                     </div>
                 )}
 
-                <div className="mt-24">
-                    <AdBanner size="leaderboard" className="hidden md:flex" />
-                    <AdBanner size="medium-rectangle" className="md:hidden" />
-                </div>
+                <BottomAdBanner className="mt-24" />
             </div>
         </div>
     );

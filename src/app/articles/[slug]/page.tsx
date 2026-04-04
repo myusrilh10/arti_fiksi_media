@@ -119,18 +119,20 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                     </div>
 
                     {/* Cover Image */}
-                    <div className="aspect-video w-full rounded-lg overflow-hidden mb-8 relative bg-gray-100">
-                        <Image
-                            src={article.imageUrl}
-                            alt={article.title}
-                            fill
-                            className="object-cover"
-                            priority
-                        />
+                    <div className="mb-8">
+                        <div className="aspect-video w-full rounded-lg overflow-hidden relative bg-gray-100">
+                            <Image
+                                src={article.imageUrl}
+                                alt={article.title}
+                                fill
+                                className="object-cover"
+                                priority
+                            />
+                        </div>
                         {article.imageCaption && (
-                            <div className="absolute bottom-2 right-2 bg-black/60 text-white/90 text-xs px-3 py-1.5 rounded shadow-sm backdrop-blur-sm">
+                            <p className="text-right text-xs text-gray-500 italic mt-2">
                                 {article.imageCaption}
-                            </div>
+                            </p>
                         )}
                     </div>
 
